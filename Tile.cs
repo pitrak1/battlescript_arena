@@ -1,16 +1,20 @@
 using Godot;
-using System;
+using System.Collections.Generic;
 
 public partial class Tile : Sprite2D
 {
-    // Called when the node enters the scene tree for the first time.
-    public override void _Ready()
-    {
-    }
+    private SortedDictionary<TileType, Texture2D> textureMap = new SortedDictionary<TileType, Texture2D> {
+        {TileType.Low, GD.Load<Texture2D>("res://assets/low.png")},
+        {TileType.Middle, GD.Load<Texture2D>("res://assets/middle.png")},
+        {TileType.High, GD.Load<Texture2D>("res://assets/high.png")},
+        {TileType.Rock, GD.Load<Texture2D>("res://assets/rock.png")},
+        {TileType.Tree, GD.Load<Texture2D>("res://assets/tree.png")},
+        {TileType.Water, GD.Load<Texture2D>("res://assets/water.png")}
+    };
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(double delta)
+    public void SetType(TileType type)
     {
+        this.Texture = textureMap[type];
     }
 
     public void _on_static_body_2d_input_event(Node viewport, InputEvent inputEvent, int shape_idx)

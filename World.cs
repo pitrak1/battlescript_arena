@@ -1,7 +1,7 @@
 using Godot;
 using System.Collections.Generic;
 
-enum TileType
+public enum TileType
 {
     High,
     Middle,
@@ -25,14 +25,7 @@ public partial class World : Node
         { null,     null,   null,   TileType.Low,   TileType.Low,   TileType.Middle,    TileType.High,  null,   null}
     };
 
-    private SortedDictionary<TileType, Texture2D> textureMap = new SortedDictionary<TileType, Texture2D> {
-        {TileType.Low, GD.Load<Texture2D>("res://assets/low.png")},
-        {TileType.Middle, GD.Load<Texture2D>("res://assets/middle.png")},
-        {TileType.High, GD.Load<Texture2D>("res://assets/high.png")},
-        {TileType.Rock, GD.Load<Texture2D>("res://assets/rock.png")},
-        {TileType.Tree, GD.Load<Texture2D>("res://assets/tree.png")},
-        {TileType.Water, GD.Load<Texture2D>("res://assets/water.png")}
-    };
+    private PackedScene tileScene = GD.Load<PackedScene>("res://Tile.tscn");
 
     public void Setup()
     {
@@ -46,8 +39,8 @@ public partial class World : Node
                 TileType? type = testLevel[i, j];
                 if (type is null) continue;
 
-                Sprite2D tile = new Sprite2D();
-                tile.Texture = textureMap[(TileType)type];
+                Tile tile = tileScene.Instantiate<Tile>();
+                tile.SetType((TileType)type);
                 tile.Position = new Vector2((i - (j * 0.5f)) * 64, j * 43) + offset;
                 AddChild(tile);
             }

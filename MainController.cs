@@ -12,6 +12,9 @@ public partial class MainController : Node
         world = (World)GetNode("World");
         world.Setup();
 
+        var preloader = new ResourcePreloader();
+        preloader.AddResource("low", GD.Load<Texture2D>("res://assets/low.png"));
+
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
