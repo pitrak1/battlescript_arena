@@ -1,11 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://oeoa1h8ty1dv"]
+[gd_scene load_steps=4 format=3 uid="uid://oeoa1h8ty1dv"]
 
-[ext_resource type="Texture2D" uid="uid://cpl3yeti1gjmk" path="res://assets/high.png" id="1_416is"]
+[ext_resource type="Texture2D" uid="uid://cjaxyth860cbh" path="res://assets/low.png" id="1_eeccl"]
 [ext_resource type="Script" path="res://Tile.cs" id="2_wivql"]
+[ext_resource type="Texture2D" uid="uid://b5cxdmcglwjj8" path="res://assets/highlight.png" id="3_hixdu"]
 
 [node name="Sprite2D" type="Sprite2D"]
 position = Vector2(100, 100)
-texture = ExtResource("1_416is")
+texture = ExtResource("1_eeccl")
 script = ExtResource("2_wivql")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
@@ -13,5 +14,9 @@ input_pickable = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 polygon = PackedVector2Array(0, -10, 31, 4, 31, 32, 0, 47, -31, 32, -31, 4)
+
+[node name="HighlightSprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_hixdu")
 
 [connection signal="input_event" from="StaticBody2D" to="." method="_on_static_body_2d_input_event"]

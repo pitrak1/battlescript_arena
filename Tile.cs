@@ -9,20 +9,31 @@ public partial class Tile : Sprite2D
         {TileType.High, GD.Load<Texture2D>("res://assets/high.png")},
         {TileType.Rock, GD.Load<Texture2D>("res://assets/rock.png")},
         {TileType.Tree, GD.Load<Texture2D>("res://assets/tree.png")},
-        {TileType.Water, GD.Load<Texture2D>("res://assets/water.png")}
+        {TileType.Water, GD.Load<Texture2D>("res://assets/water.png")},
+        {TileType.None, null}
     };
 
-    public void SetType(TileType type)
+    private Vector2 offset = new Vector2(400, 200);
+
+    public Vector2 coordinates;
+
+    public void Setup(TileType type, Vector2 coords)
     {
         this.Texture = textureMap[type];
+        this.coordinates = coords;
+        this.Position = new Vector2((coords.X - (coords.Y * 0.5f)) * 64, coords.Y * 43) + offset;
+    }
+
+    public void Highlight(bool isHighlighted)
+    {
+        GetNode<Sprite2D>("HighlightSprite").Visible = isHighlighted;
     }
 
     public void _on_static_body_2d_input_event(Node viewport, InputEvent inputEvent, int shape_idx)
     {
         if (Input.IsActionJustPressed("LMB"))
         {
-            GD.Print("GOTHERE");
+            GetParent<World>().HandleClick(coordinates);
         }
-
     }
 }
