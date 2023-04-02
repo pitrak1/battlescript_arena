@@ -16,6 +16,7 @@ public partial class Tile : Sprite2D
     private Vector2 offset = new Vector2(400, 200);
 
     public Vector2 coordinates;
+    private Actor actor;
 
     public void Setup(TileType type, Vector2 coords)
     {
@@ -29,11 +30,19 @@ public partial class Tile : Sprite2D
         GetNode<Sprite2D>("HighlightSprite").Visible = isHighlighted;
     }
 
+    public void PlaceActor(Actor actor)
+    {
+        actor.Place(this.coordinates);
+        actor.Position = new Vector2(0, 0);
+        AddChild(actor);
+        this.actor = actor;
+    }
+
     public void _on_static_body_2d_input_event(Node viewport, InputEvent inputEvent, int shape_idx)
     {
         if (Input.IsActionJustPressed("LMB"))
         {
-            GetParent<World>().HandleClick(coordinates);
+            GetParent<World>().GetParent<Main>().HandleTileClick(coordinates);
         }
     }
 }

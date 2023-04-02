@@ -6,15 +6,21 @@ public enum ActorType
     Wolf
 }
 
-public partial class Actor : Node
+public partial class Actor : Sprite2D
 {
     private SortedDictionary<ActorType, Texture2D> textureMap = new SortedDictionary<ActorType, Texture2D> {
-        {ActorType.Wolf, GD.Load<Texture2D>("res://assets/wolf.png")},
+        {ActorType.Wolf, GD.Load<Texture2D>("res://assets/wolf.jpeg")},
     };
 
-    public Vector2 coordinates;
+    private Vector2 coordinates;
 
-    public void Setup(TileType type, Vector2 coords)
+    public void Setup(ActorType type)
     {
+        this.Texture = textureMap[type];
+    }
+
+    public void Place(Vector2 coords)
+    {
+        this.coordinates = coords;
     }
 }

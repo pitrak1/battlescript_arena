@@ -27,15 +27,13 @@ public partial class World : Node
     };
 
     private Tile[,] tiles = new Tile[9, 9];
+    private List<Actor> actors = new List<Actor>();
 
     private PackedScene tileScene = GD.Load<PackedScene>("res://Tile.tscn");
+    private PackedScene actorScene = GD.Load<PackedScene>("res://Actor.tscn");
 
-    private Vector2 highlightedCoords;
-
-    public void HandleClick(Vector2 coords)
+    public void HighlightCoordinates(Vector2 coords)
     {
-        this.highlightedCoords = coords;
-
         for (int y = 0; y < 9; y++)
         {
             for (int x = 0; x < 9; x++)
@@ -48,9 +46,6 @@ public partial class World : Node
 
     public void Setup()
     {
-        Texture2D lowTexture = GD.Load<Texture2D>("res://assets/low.png");
-        Vector2 offset = new Vector2(400, 200);
-
         for (int y = 0; y < 9; y++)
         {
             for (int x = 0; x < 9; x++)
@@ -62,5 +57,8 @@ public partial class World : Node
                 tiles[x, y] = tile;
             }
         }
+
+        Actor actor = actorScene.Instantiate<Actor>();
+        tiles[3, 3].PlaceActor(actor);
     }
 }

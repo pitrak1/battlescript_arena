@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Tile.cs" id="2_wivql"]
 [ext_resource type="Texture2D" uid="uid://b5cxdmcglwjj8" path="res://assets/highlight.png" id="3_hixdu"]
 
-[node name="Sprite2D" type="Sprite2D"]
+[node name="Tile" type="Sprite2D"]
 position = Vector2(100, 100)
 texture = ExtResource("1_eeccl")
 script = ExtResource("2_wivql")
