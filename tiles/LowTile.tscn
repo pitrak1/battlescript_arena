@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5slah7tcfsey"]
+
+[ext_resource type="PackedScene" uid="uid://oeoa1h8ty1dv" path="res://Tile.tscn" id="1_05u4e"]
+[ext_resource type="Script" path="res://tiles/LowTile.cs" id="2_4k0h1"]
+
+[node name="Tile" instance=ExtResource("1_05u4e")]
+script = ExtResource("2_4k0h1")

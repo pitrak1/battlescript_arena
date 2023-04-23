@@ -30,7 +30,16 @@ public partial class World : Node
     private List<Actor> actors = new List<Actor>();
     private Actor currentActor;
 
-    private PackedScene tileScene = GD.Load<PackedScene>("res://Tile.tscn");
+
+    private Dictionary<TileType, PackedScene> tileScenes = new Dictionary<TileType, PackedScene> {
+        {TileType.Low, GD.Load<PackedScene>("res://tiles/LowTile.tscn")},
+        {TileType.Middle, GD.Load<PackedScene>("res://tiles/MiddleTile.tscn")},
+        {TileType.High, GD.Load<PackedScene>("res://tiles/HighTile.tscn")},
+        {TileType.Tree, GD.Load<PackedScene>("res://tiles/TreeTile.tscn")},
+        {TileType.Rock, GD.Load<PackedScene>("res://tiles/RockTile.tscn")},
+        {TileType.Water, GD.Load<PackedScene>("res://tiles/WaterTile.tscn")},
+        {TileType.None, GD.Load<PackedScene>("res://tiles/EmptyTile.tscn")},
+    };
     private PackedScene wolfActorScene = GD.Load<PackedScene>("res://actors/WolfActor.tscn");
 
     public void HighlightCoordinates(Vector2 coords)
@@ -52,8 +61,8 @@ public partial class World : Node
             for (int x = 0; x < 9; x++)
             {
                 TileType type = testLevel[x, y];
-                Tile tile = tileScene.Instantiate<Tile>();
-                tile.Setup(type, new Vector2(x, y));
+                Tile tile = tileScenes[type].Instantiate<Tile>();
+                tile.Setup(new Vector2(x, y));
                 AddChild(tile);
                 tiles[x, y] = tile;
             }
