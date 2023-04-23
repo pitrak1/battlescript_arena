@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Action : Node
+public abstract partial class Action : Node
 {
     public string Key;
     public int UsesPerTurn;
@@ -33,8 +33,5 @@ public partial class Action : Node
     }
 
 
-    public virtual bool Execute(Actor source, World world, Vector2 target)
-    {
-        return true;
-    }
+    public abstract bool Execute(Actor source, World world, Vector2 target);
 }

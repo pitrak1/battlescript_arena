@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0muajrhqvxtc"]
+
+[ext_resource type="PackedScene" uid="uid://cmtrwoqvh3w2c" path="res://Actor.tscn" id="1_tx3x2"]
+[ext_resource type="Script" path="res://actors/WolfActor.cs" id="2_mnktu"]
+
+[node name="Actor" instance=ExtResource("1_tx3x2")]
+script = ExtResource("2_mnktu")

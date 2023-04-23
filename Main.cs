@@ -6,6 +6,8 @@ public partial class Main : Node
     private World world;
     private Vector2 highlightedCoords;
 
+    private string pendingInputAction;
+
     public override void _Ready()
     {
         world = (World)GetNode("World");
@@ -18,7 +20,7 @@ public partial class Main : Node
 
         if (Input.IsActionJustPressed("Q"))
         {
-            world.ExecuteAction("Q", new Vector2(5, 5));
+            pendingInputAction = "Q";
         }
     }
 
@@ -26,5 +28,11 @@ public partial class Main : Node
     {
         this.highlightedCoords = coords;
         world.HighlightCoordinates(coords);
+
+        if (pendingInputAction != null)
+        {
+            world.ExecuteAction(pendingInputAction, coords);
+            pendingInputAction = null;
+        }
     }
 }
