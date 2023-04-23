@@ -38,6 +38,14 @@ public partial class Tile : Sprite2D
         this.actor = actor;
     }
 
+    public Actor RemoveActor()
+    {
+        Actor actor = this.actor;
+        this.actor = null;
+        RemoveChild(actor);
+        return actor;
+    }
+
     public void _on_static_body_2d_input_event(Node viewport, InputEvent inputEvent, int shape_idx)
     {
         if (Input.IsActionJustPressed("LMB"))

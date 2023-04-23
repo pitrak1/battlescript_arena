@@ -12,6 +12,16 @@ public partial class Main : Node
         world.Setup();
     }
 
+    public override void _Input(InputEvent @event)
+    {
+        base._Input(@event);
+
+        if (Input.IsActionJustPressed("Q"))
+        {
+            world.ExecuteAction("Q", new Vector2(5, 5));
+        }
+    }
+
     public void HandleTileClick(Vector2 coords)
     {
         this.highlightedCoords = coords;

@@ -28,6 +28,7 @@ public partial class World : Node
 
     private Tile[,] tiles = new Tile[9, 9];
     private List<Actor> actors = new List<Actor>();
+    private Actor currentActor;
 
     private PackedScene tileScene = GD.Load<PackedScene>("res://Tile.tscn");
     private PackedScene actorScene = GD.Load<PackedScene>("res://Actor.tscn");
@@ -59,6 +60,19 @@ public partial class World : Node
         }
 
         Actor actor = actorScene.Instantiate<Actor>();
+        actor.Setup(ActorType.Wolf);
         tiles[3, 3].PlaceActor(actor);
+        currentActor = actor;
+        currentActor.AddAction(new MoveAction("move", 1, 0, "Q"));
+    }
+
+    public Tile GetTile(Vector2 coordinates)
+    {
+        return tiles[(int)coordinates.X, (int)coordinates.Y];
+    }
+
+    public void ExecuteAction(string inputAction, Vector2 target)
+    {
+        currentActor.ExecuteAction(inputAction, currentActor, this, target);
     }
 }
