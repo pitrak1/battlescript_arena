@@ -40,7 +40,8 @@ public partial class World : Node
         {TileType.Water, GD.Load<PackedScene>("res://tiles/WaterTile.tscn")},
         {TileType.None, GD.Load<PackedScene>("res://tiles/EmptyTile.tscn")},
     };
-    private PackedScene wolfActorScene = GD.Load<PackedScene>("res://actors/WolfActor.tscn");
+    // private PackedScene wolfActorScene = GD.Load<PackedScene>("res://actors/WolfActor.tscn");
+    private PackedScene actorScene = GD.Load<PackedScene>("res://Actor.tscn");
 
     public void HighlightCoordinates(Vector2 coords)
     {
@@ -68,10 +69,10 @@ public partial class World : Node
             }
         }
 
-        WolfActor actor = wolfActorScene.Instantiate<WolfActor>();
-        actor.Setup();
-        tiles[3, 3].PlaceActor(actor);
-        currentActor = actor;
+        Actor wolfActor = actorScene.Instantiate<Actor>();
+        wolfActor.SetType(ActorType.Wolf);
+        tiles[3, 3].PlaceActor(wolfActor);
+        currentActor = wolfActor;
         currentActor.AddAction(new MoveAction("move", 1, 0, "Q"));
     }
 

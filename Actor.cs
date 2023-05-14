@@ -1,15 +1,29 @@
 using Godot;
 using System.Collections.Generic;
 
+public enum ActorType
+{
+    Wolf
+}
+
+
+
 public partial class Actor : Sprite2D
 {
     public string Key;
     public Vector2 Coordinates { get; set; }
-    private List<Action> actions;
+    private List<Action> actions = new List<Action>();
 
-    public virtual void Setup()
+    private ActorType type;
+
+    private Dictionary<ActorType, Texture2D> spriteMap = new Dictionary<ActorType, Texture2D> {
+        {ActorType.Wolf, GD.Load<Texture2D>("res://assets/wolf.jpeg")},
+    };
+
+    public virtual void SetType(ActorType type)
     {
-        this.actions = new List<Action>();
+        this.type = type;
+        this.Texture = spriteMap[type];
     }
 
     public void Place(Vector2 coords)
