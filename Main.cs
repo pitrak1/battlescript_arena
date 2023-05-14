@@ -1,12 +1,22 @@
 using Godot;
 using System;
 
+public enum ActionSelectStates
+{
+    None,
+    ActorSelected,
+    AbilitySelected,
+    Execution,
+}
+
 public partial class Main : Node
 {
     private World world;
-    private Vector2 highlightedCoords;
 
-    private string pendingInputAction;
+    private ActionSelectStates actionSelectState = ActionSelectStates.None;
+    private Vector2 selectedCoords;
+    private Actor selectedActor;
+    private string selectedAction;
 
     public override void _Ready()
     {
@@ -18,21 +28,38 @@ public partial class Main : Node
     {
         base._Input(@event);
 
-        if (Input.IsActionJustPressed("Q"))
+        if (actionSelectState == ActionSelectStates.ActorSelected)
         {
-            pendingInputAction = "Q";
+            if (Input.IsActionJustPressed("Q"))
+            {
+                actionSelectState = ActionSelectStates.AbilitySelected;
+                selectedAction = "Q";
+            }
         }
+
     }
 
     public void HandleTileClick(Vector2 coords)
     {
-        this.highlightedCoords = coords;
-        world.HighlightCoordinates(coords);
-
-        if (pendingInputAction != null)
+        Actor clickedActor = world.HandleTileClick(coords);
+        if (actionSelectState == ActionSelectStates.None || actionSelectState == ActionSelectStates.ActorSelected)
         {
-            world.ExecuteAction(pendingInputAction, coords);
-            pendingInputAction = null;
+            this.selectedCoords = coords;
+            selectedActor = clickedActor;
+            if (selectedActor != null)
+            {
+                actionSelectState = ActionSelectStates.ActorSelected;
+            }
+            else
+            {
+                actionSelectState = ActionSelectStates.None;
+            }
+        }
+        else if (actionSelectState == ActionSelectStates.AbilitySelected)
+        {
+            actionSelectState = ActionSelectStates.ActorSelected;
+            world.ExecuteAction(selectedAction, coords);
+            selectedAction = null;
         }
     }
 }

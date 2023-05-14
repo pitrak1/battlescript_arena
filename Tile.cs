@@ -19,6 +19,11 @@ public partial class Tile : Sprite2D
         GetNode<Sprite2D>("HighlightSprite").Visible = isHighlighted;
     }
 
+    public Actor GetActor()
+    {
+        return actor;
+    }
+
     public void PlaceActor(Actor actor)
     {
         actor.Place(this.coordinates);

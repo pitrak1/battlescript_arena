@@ -43,16 +43,16 @@ public partial class World : Node
     // private PackedScene wolfActorScene = GD.Load<PackedScene>("res://actors/WolfActor.tscn");
     private PackedScene actorScene = GD.Load<PackedScene>("res://Actor.tscn");
 
-    public void HighlightCoordinates(Vector2 coords)
+    public Actor HandleTileClick(Vector2 coords)
     {
         for (int y = 0; y < 9; y++)
         {
             for (int x = 0; x < 9; x++)
             {
-                var child = tiles[x, y];
-                child.Highlight(coords == new Vector2(x, y));
+                tiles[x, y].Highlight(coords == new Vector2(x, y));
             }
         }
+        return tiles[(int)coords.X, (int)coords.Y].GetActor();
     }
 
     public void Setup()
