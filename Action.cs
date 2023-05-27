@@ -4,6 +4,7 @@ using System;
 public abstract partial class Action : Node
 {
     public string Key;
+    public string DisplayName;
     public int UsesPerTurn;
     public int Cooldown;
 
@@ -12,9 +13,10 @@ public abstract partial class Action : Node
 
     public string InputAction;
 
-    public Action(string key, int usesPerTurn, int cooldown, string inputAction)
+    public Action(string key, string displayName, int usesPerTurn, int cooldown, string inputAction)
     {
         Key = key;
+        DisplayName = displayName;
         UsesPerTurn = usesPerTurn;
         Cooldown = cooldown;
         InputAction = inputAction;

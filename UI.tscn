@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=3 uid="uid://dca1xdnd24ob7"]
+
+[ext_resource type="PackedScene" uid="uid://baxt821rd1t1v" path="res://ui/ActionButton.tscn" id="1_v41vt"]
+[ext_resource type="Script" path="res://UI.cs" id="1_yk7o7"]
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yk7o7")
+
+[node name="ActionButton1" parent="." instance=ExtResource("1_v41vt")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.079
+anchor_bottom = 0.0
+offset_left = 91.008
+offset_bottom = 648.0
+
+[node name="ActionButton2" parent="." instance=ExtResource("1_v41vt")]
+layout_mode = 1
+anchors_preset = 10
+anchor_bottom = 0.0
+offset_bottom = 648.0
+grow_vertical = 1
+
+[node name="ActionButton3" parent="." instance=ExtResource("1_v41vt")]
+layout_mode = 1
+anchors_preset = 10
+anchor_bottom = 0.0
+offset_bottom = 648.0
+grow_vertical = 1
+
+[node name="ActionButton4" parent="." instance=ExtResource("1_v41vt")]
+layout_mode = 1
+anchors_preset = 10
+anchor_bottom = 0.0
+offset_bottom = 648.0
+grow_vertical = 1
+
+[node name="ActionButton5" parent="." instance=ExtResource("1_v41vt")]
+layout_mode = 1
+anchors_preset = 10
+anchor_bottom = 0.0
+offset_bottom = 648.0
+grow_vertical = 1
+
+[node name="ActionButton6" parent="." instance=ExtResource("1_v41vt")]
+layout_mode = 1
+anchors_preset = 10
+anchor_bottom = 0.0
+offset_bottom = 648.0
+grow_vertical = 1

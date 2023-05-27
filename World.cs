@@ -73,7 +73,7 @@ public partial class World : Node
         wolfActor.SetType(ActorType.Wolf);
         tiles[3, 3].PlaceActor(wolfActor);
         currentActor = wolfActor;
-        currentActor.AddAction(new MoveAction("move", 1, 0, "Q"));
+        currentActor.AddAction(new MoveAction("move", "Move", 1, 0, "Q"));
     }
 
     public Tile GetTile(Vector2 coordinates)

@@ -11,6 +11,7 @@ public enum ActorType
 public partial class Actor : Sprite2D
 {
     public string Key;
+    public string DisplayName;
     public Vector2 Coordinates { get; set; }
     private List<Action> actions = new List<Action>();
 
@@ -40,5 +41,10 @@ public partial class Actor : Sprite2D
     {
         var action = actions.Find(x => x.InputAction == inputAction);
         return action.Execute(source, world, target);
+    }
+
+    public List<Action> GetActions()
+    {
+        return actions;
     }
 }

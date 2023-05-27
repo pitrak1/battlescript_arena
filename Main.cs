@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public enum ActionSelectStates
 {
@@ -12,6 +13,7 @@ public enum ActionSelectStates
 public partial class Main : Node
 {
     private World world;
+    private UI ui;
 
     private ActionSelectStates actionSelectState = ActionSelectStates.None;
     private Vector2 selectedCoords;
@@ -22,6 +24,8 @@ public partial class Main : Node
     {
         world = (World)GetNode("World");
         world.Setup();
+
+        ui = GetNode<UI>("UI");
     }
 
     public override void _Input(InputEvent @event)
@@ -39,6 +43,16 @@ public partial class Main : Node
 
     }
 
+    public void HandleActionButtonClick(string key)
+    {
+        if (actionSelectState == ActionSelectStates.ActorSelected)
+        {
+            actionSelectState = ActionSelectStates.AbilitySelected;
+            selectedAction = key;
+        }
+
+    }
+
     public void HandleTileClick(Vector2 coords)
     {
         Actor clickedActor = world.HandleTileClick(coords);
@@ -49,10 +63,13 @@ public partial class Main : Node
             if (selectedActor != null)
             {
                 actionSelectState = ActionSelectStates.ActorSelected;
+                ui.SetActions(selectedActor.GetActions());
+
             }
             else
             {
                 actionSelectState = ActionSelectStates.None;
+                ui.ClearActions();
             }
         }
         else if (actionSelectState == ActionSelectStates.AbilitySelected)
