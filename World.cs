@@ -74,6 +74,8 @@ public partial class World : Node
         tiles[3, 3].PlaceActor(wolfActor);
         currentActor = wolfActor;
         currentActor.AddAction(new MoveAction("move", "Move", 1, 0, "Q"));
+        currentActor.AddAction(new HurtSelfAction("hurtSelf", "Hurt Self", 1, 0, "W"));
+        currentActor.SetMaxHealth(15);
     }
 
     public Tile GetTile(Vector2 coordinates)

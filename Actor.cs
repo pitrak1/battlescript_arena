@@ -17,9 +17,25 @@ public partial class Actor : Sprite2D
 
     private ActorType type;
 
+    private int maxHealth;
+    private int currentHealth;
+
     private Dictionary<ActorType, Texture2D> spriteMap = new Dictionary<ActorType, Texture2D> {
         {ActorType.Wolf, GD.Load<Texture2D>("res://assets/wolf.jpeg")},
     };
+
+    public void SetMaxHealth(int maxHealth)
+    {
+        this.maxHealth = maxHealth;
+        this.currentHealth = maxHealth;
+        GetNode<Label>("LifeLabel").Text = $"{currentHealth}/{maxHealth}";
+    }
+
+    public void AlterHealth(int healthDiff)
+    {
+        this.currentHealth += healthDiff;
+        GetNode<Label>("LifeLabel").Text = $"{currentHealth}/{maxHealth}";
+    }
 
     public virtual void SetType(ActorType type)
     {

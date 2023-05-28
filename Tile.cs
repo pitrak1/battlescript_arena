@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public partial class Tile : Sprite2D
 {
-    private Vector2 offset = new Vector2(400, 200);
+    private Vector2 offset = new Vector2(400, 160);
 
     public Vector2 coordinates;
     private Actor actor;

@@ -39,6 +39,11 @@ public partial class Main : Node
                 actionSelectState = ActionSelectStates.AbilitySelected;
                 selectedAction = "Q";
             }
+            else if (Input.IsActionJustPressed("W"))
+            {
+                actionSelectState = ActionSelectStates.AbilitySelected;
+                selectedAction = "W";
+            }
         }
 
     }

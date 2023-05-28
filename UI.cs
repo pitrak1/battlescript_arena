@@ -9,7 +9,7 @@ public partial class UI : Control
     {
         this.ClearActions();
         Vector2 viewportSize = GetNode<Control>("ActionButton1").GetViewportRect().Size;
-        basePosition = new Vector2(viewportSize.X / 2 - 40, 20);
+        basePosition = new Vector2(viewportSize.X / 2 - 40, 0);
     }
 
     public void SetActions(List<Action> actions)
