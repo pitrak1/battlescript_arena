@@ -1,17 +1,6 @@
 using Godot;
 using System.Collections.Generic;
 
-public enum TileType
-{
-    High,
-    Middle,
-    Low,
-    Water,
-    Rock,
-    Tree,
-    None
-}
-
 public partial class World : Node
 {
     private TileType[,] testLevel = new TileType[9, 9] {
@@ -29,19 +18,8 @@ public partial class World : Node
     private Tile[,] tiles = new Tile[9, 9];
     private List<Actor> actors = new List<Actor>();
     private Actor currentActor;
-
-
-    private Dictionary<TileType, PackedScene> tileScenes = new Dictionary<TileType, PackedScene> {
-        {TileType.Low, GD.Load<PackedScene>("res://tiles/LowTile.tscn")},
-        {TileType.Middle, GD.Load<PackedScene>("res://tiles/MiddleTile.tscn")},
-        {TileType.High, GD.Load<PackedScene>("res://tiles/HighTile.tscn")},
-        {TileType.Tree, GD.Load<PackedScene>("res://tiles/TreeTile.tscn")},
-        {TileType.Rock, GD.Load<PackedScene>("res://tiles/RockTile.tscn")},
-        {TileType.Water, GD.Load<PackedScene>("res://tiles/WaterTile.tscn")},
-        {TileType.None, GD.Load<PackedScene>("res://tiles/EmptyTile.tscn")},
-    };
-    // private PackedScene wolfActorScene = GD.Load<PackedScene>("res://actors/WolfActor.tscn");
     private PackedScene actorScene = GD.Load<PackedScene>("res://Actor.tscn");
+    private PackedScene tileScene = GD.Load<PackedScene>("res://Tile.tscn");
 
     public Actor HandleTileClick(Vector2 coords)
     {
@@ -62,8 +40,9 @@ public partial class World : Node
             for (int x = 0; x < 9; x++)
             {
                 TileType type = testLevel[x, y];
-                Tile tile = tileScenes[type].Instantiate<Tile>();
-                tile.Setup(new Vector2(x, y));
+                TileConfig tileConfig = TilesetConfig.GetConfig(type);
+                Tile tile = tileScene.Instantiate<Tile>();
+                tile.Setup(new Vector2(x, y), tileConfig.Texture);
                 AddChild(tile);
                 tiles[x, y] = tile;
             }

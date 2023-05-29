@@ -8,10 +8,18 @@ public partial class Tile : Sprite2D
     public Vector2 coordinates;
     private Actor actor;
 
-    public virtual void Setup(Vector2 coords)
+    public virtual void Setup(Vector2 coords, Texture2D texture)
     {
         this.coordinates = coords;
         this.Position = new Vector2((coords.X - (coords.Y * 0.5f)) * 64, coords.Y * 43) + offset;
+        if (texture != null)
+        {
+            this.Texture = texture;
+        }
+        else
+        {
+            this.Visible = false;
+        }
     }
 
     public void Highlight(bool isHighlighted)
