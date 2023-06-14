@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Main.cs" id="1_7t4oc"]
 [ext_resource type="Script" path="res://World.cs" id="2_mp0fl"]
-[ext_resource type="PackedScene" uid="uid://dca1xdnd24ob7" path="res://UI.tscn" id="3_3noof"]
+[ext_resource type="PackedScene" uid="uid://b1cuy4s7ta75d" path="res://UI.tscn" id="3_3noof"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_7t4oc")

@@ -40,7 +40,7 @@ public partial class World : Node
             for (int x = 0; x < 9; x++)
             {
                 TileType type = testLevel[x, y];
-                TileConfig tileConfig = TilesetConfig.GetConfig(type);
+                TileConfig tileConfig = new TileConfig(type);
                 Tile tile = tileScene.Instantiate<Tile>();
                 tile.Setup(new Vector2(x, y), tileConfig.Texture);
                 AddChild(tile);
@@ -52,8 +52,8 @@ public partial class World : Node
         wolfActor.SetType(ActorType.Wolf);
         tiles[3, 3].PlaceActor(wolfActor);
         currentActor = wolfActor;
-        currentActor.AddAction(new MoveAction("move", "Move", 1, 0, "Q"));
-        currentActor.AddAction(new HurtSelfAction("hurtSelf", "Hurt Self", 1, 0, "W"));
+        currentActor.AddAbility(new MoveAbility("move", "Move", 1, 0, "Q"));
+        currentActor.AddAbility(new HurtSelfAbility("hurtSelf", "Hurt Self", 1, 0, "W"));
         currentActor.SetMaxHealth(15);
     }
 
@@ -62,8 +62,8 @@ public partial class World : Node
         return tiles[(int)coordinates.X, (int)coordinates.Y];
     }
 
-    public void ExecuteAction(string inputAction, Vector2 target)
+    public void ExecuteAbility(string inputAction, Vector2 target)
     {
-        currentActor.ExecuteAction(inputAction, currentActor, this, target);
+        currentActor.ExecuteAbility(inputAction, currentActor, this, target);
     }
 }

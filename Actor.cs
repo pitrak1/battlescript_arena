@@ -13,7 +13,7 @@ public partial class Actor : Sprite2D
     public string Key;
     public string DisplayName;
     public Vector2 Coordinates { get; set; }
-    private List<Action> actions = new List<Action>();
+    private List<Ability> abilities = new List<Ability>();
 
     private ActorType type;
 
@@ -48,19 +48,19 @@ public partial class Actor : Sprite2D
         this.Coordinates = coords;
     }
 
-    public void AddAction(Action action)
+    public void AddAbility(Ability ability)
     {
-        actions.Add(action);
+        abilities.Add(ability);
     }
 
-    public bool ExecuteAction(string inputAction, Actor source, World world, Vector2 target)
+    public bool ExecuteAbility(string inputAction, Actor source, World world, Vector2 target)
     {
-        var action = actions.Find(x => x.InputAction == inputAction);
-        return action.Execute(source, world, target);
+        var ability = abilities.Find(x => x.InputAction == inputAction);
+        return ability.Execute(source, world, target);
     }
 
-    public List<Action> GetActions()
+    public List<Ability> GetAbilities()
     {
-        return actions;
+        return abilities;
     }
 }

@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public abstract partial class Action : Node
+public abstract partial class Ability : Node
 {
     public string Key;
     public string DisplayName;
@@ -13,7 +13,7 @@ public abstract partial class Action : Node
 
     public string InputAction;
 
-    public Action(string key, string displayName, int usesPerTurn, int cooldown, string inputAction)
+    public Ability(string key, string displayName, int usesPerTurn, int cooldown, string inputAction)
     {
         Key = key;
         DisplayName = displayName;

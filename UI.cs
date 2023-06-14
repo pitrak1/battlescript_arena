@@ -7,41 +7,41 @@ public partial class UI : Control
     private Vector2 basePosition;
     public override void _Ready()
     {
-        this.ClearActions();
-        Vector2 viewportSize = GetNode<Control>("ActionButton1").GetViewportRect().Size;
+        this.ClearAbilities();
+        Vector2 viewportSize = GetNode<Control>("AbilityButton1").GetViewportRect().Size;
         basePosition = new Vector2(viewportSize.X / 2 - 40, 0);
     }
 
-    public void SetActions(List<Action> actions)
+    public void SetAbilities(List<Ability> abilities)
     {
         for (int i = 0; i < 6; i++)
         {
-            ActionButton actionButton = GetNode<ActionButton>("ActionButton" + (i + 1));
-            if (i < actions.Count)
+            AbilityButton abilityButton = GetNode<AbilityButton>("AbilityButton" + (i + 1));
+            if (i < abilities.Count)
             {
-                int xOffset = ((actions.Count - 1) * -50) + 100 * i;
-                actionButton.Position = basePosition + new Vector2(xOffset, 0);
-                actionButton.Setup(actions[i]);
-                actionButton.Show();
+                int xOffset = ((abilities.Count - 1) * -50) + 100 * i;
+                abilityButton.Position = basePosition + new Vector2(xOffset, 0);
+                abilityButton.Setup(abilities[i]);
+                abilityButton.Show();
             }
             else
             {
-                actionButton.Hide();
+                abilityButton.Hide();
             }
         }
     }
 
-    public void ClearActions()
+    public void ClearAbilities()
     {
         for (int i = 0; i < 6; i++)
         {
-            Control actionButton = GetNode<Control>("ActionButton" + (i + 1));
-            actionButton.Hide();
+            Control abilityButton = GetNode<Control>("AbilityButton" + (i + 1));
+            abilityButton.Hide();
         }
     }
 
-    public void HandleActionButtonClick(string inputAction)
+    public void HandleAbilityButtonClick(string inputAction)
     {
-        GetParent<Main>().HandleActionButtonClick(inputAction);
+        GetParent<Main>().HandleAbilityButtonClick(inputAction);
     }
 }

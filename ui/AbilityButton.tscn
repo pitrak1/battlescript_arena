@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://baxt821rd1t1v"]
+[gd_scene load_steps=2 format=3 uid="uid://d1g0bnd6eajo8"]
 
-[ext_resource type="Script" path="res://ui/ActionButton.cs" id="1_61cok"]
+[ext_resource type="Script" path="res://ui/AbilityButton.cs" id="1_qk4ms"]
 
 [node name="ActionButton" type="Control"]
 layout_mode = 3
@@ -9,7 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_61cok")
+script = ExtResource("1_qk4ms")
 
 [node name="Button" type="Button" parent="."]
 custom_minimum_size = Vector2(80, 80)
