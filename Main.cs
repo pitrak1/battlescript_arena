@@ -23,7 +23,7 @@ public partial class Main : Node
         battleStateMachine = new BattleStateMachine(HandleExecuteAbility, HandleSetAbilities);
     }
 
-    private void HandleExecuteAbility(Vector2 coords, Actor actor, string action)
+    private void HandleExecuteAbility(List<Vector2> coords, Actor actor, string action)
     {
         world.ExecuteAbility(action, coords);
     }

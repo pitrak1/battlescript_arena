@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public abstract partial class Ability : Node
 {
@@ -12,14 +13,16 @@ public abstract partial class Ability : Node
     public int CurrentCooldown;
 
     public string InputAction;
+    public int NumberOfTargets;
 
-    public Ability(string key, string displayName, int usesPerTurn, int cooldown, string inputAction)
+    public Ability(string key, string displayName, int usesPerTurn, int cooldown, string inputAction, int numberOfTargets = 1)
     {
         Key = key;
         DisplayName = displayName;
         UsesPerTurn = usesPerTurn;
         Cooldown = cooldown;
         InputAction = inputAction;
+        NumberOfTargets = numberOfTargets;
         Reset();
     }
 
@@ -35,5 +38,5 @@ public abstract partial class Ability : Node
     }
 
 
-    public abstract bool Execute(Actor source, World world, Vector2 target);
+    public abstract bool Execute(Actor source, World world, List<Vector2> target);
 }

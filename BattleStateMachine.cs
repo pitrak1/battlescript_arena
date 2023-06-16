@@ -14,14 +14,14 @@ public enum AbilitySelectStates
 public class BattleStateMachine
 {
     public AbilitySelectStates AbilitySelectState { get; private set; } = AbilitySelectStates.None;
-    public Vector2 SelectedCoords { get; private set; }
+    public List<Vector2> SelectedCoords { get; private set; } = new List<Vector2>();
     public Actor SelectedActor { get; private set; }
     public string SelectedAbility { get; private set; }
     private Action<Actor> setActionsCallback;
 
-    private Action<Vector2, Actor, string> actionExecuteCallback;
+    private Action<List<Vector2>, Actor, string> actionExecuteCallback;
 
-    public BattleStateMachine(Action<Vector2, Actor, string> actionExecuteCallback, Action<Actor> setActionsCallback)
+    public BattleStateMachine(Action<List<Vector2>, Actor, string> actionExecuteCallback, Action<Actor> setActionsCallback)
     {
         this.actionExecuteCallback = actionExecuteCallback;
         this.setActionsCallback = setActionsCallback;
@@ -36,15 +36,16 @@ public class BattleStateMachine
             {
                 AbilitySelectState = AbilitySelectStates.AbilitySelected;
                 SelectedAbility = actionPressed;
+                evaluateNumberOfTargets();
             }
         }
     }
 
     public void HandleTileClick(Vector2 coords, Actor selectedActor)
     {
+
         if (AbilitySelectState == AbilitySelectStates.None || AbilitySelectState == AbilitySelectStates.ActorSelected)
         {
-            SelectedCoords = coords;
             SelectedActor = selectedActor;
 
             if (selectedActor != null)
@@ -60,8 +61,20 @@ public class BattleStateMachine
         }
         else if (AbilitySelectState == AbilitySelectStates.AbilitySelected)
         {
+            SelectedCoords.Add(coords);
+            evaluateNumberOfTargets();
+        }
+    }
+
+    private void evaluateNumberOfTargets()
+    {
+        int expectedTargetCount = SelectedActor.GetAbilities().Find(ab => ab.InputAction == SelectedAbility).NumberOfTargets;
+        if (SelectedCoords.Count >= expectedTargetCount)
+        {
+            actionExecuteCallback(SelectedCoords, SelectedActor, SelectedAbility);
+            SelectedCoords = new List<Vector2>();
+            SelectedAbility = null;
             AbilitySelectState = AbilitySelectStates.ActorSelected;
-            actionExecuteCallback(coords, SelectedActor, SelectedAbility);
         }
     }
 }
