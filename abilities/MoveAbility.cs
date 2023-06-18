@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public partial class MoveAbility : Ability
 {
-    public MoveAbility(string key, string displayName, int usesPerTurn, int cooldown, string inputAction) : base(key, displayName, usesPerTurn, cooldown, inputAction, 1) { }
+    public MoveAbility(string inputAction) : base(inputAction, "move", "Move", 2, 0, 1) { }
 
     public override bool Execute(Actor source, World world, List<Vector2> target)
     {

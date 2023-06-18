@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://b1cuy4s7ta75d"]
+[gd_scene load_steps=3 format=3 uid="uid://c8cwdck5odpsg"]
 
-[ext_resource type="PackedScene" uid="uid://d1g0bnd6eajo8" path="res://ui/AbilityButton.tscn" id="1_v41vt"]
-[ext_resource type="Script" path="res://UI.cs" id="1_yk7o7"]
+[ext_resource type="Script" path="res://ui/UI.cs" id="1_610lv"]
+[ext_resource type="PackedScene" uid="uid://d1g0bnd6eajo8" path="res://ui/AbilityButton.tscn" id="2_pys1y"]
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -10,9 +10,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_yk7o7")
+script = ExtResource("1_610lv")
 
-[node name="AbilityButton1" parent="." instance=ExtResource("1_v41vt")]
+[node name="AbilityButton1" parent="." instance=ExtResource("2_pys1y")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.079
@@ -20,35 +20,35 @@ anchor_bottom = 0.0
 offset_left = 91.008
 offset_bottom = 648.0
 
-[node name="AbilityButton2" parent="." instance=ExtResource("1_v41vt")]
+[node name="AbilityButton2" parent="." instance=ExtResource("2_pys1y")]
 layout_mode = 1
 anchors_preset = 10
 anchor_bottom = 0.0
 offset_bottom = 648.0
 grow_vertical = 1
 
-[node name="AbilityButton3" parent="." instance=ExtResource("1_v41vt")]
+[node name="AbilityButton3" parent="." instance=ExtResource("2_pys1y")]
 layout_mode = 1
 anchors_preset = 10
 anchor_bottom = 0.0
 offset_bottom = 648.0
 grow_vertical = 1
 
-[node name="AbilityButton4" parent="." instance=ExtResource("1_v41vt")]
+[node name="AbilityButton4" parent="." instance=ExtResource("2_pys1y")]
 layout_mode = 1
 anchors_preset = 10
 anchor_bottom = 0.0
 offset_bottom = 648.0
 grow_vertical = 1
 
-[node name="AbilityButton5" parent="." instance=ExtResource("1_v41vt")]
+[node name="AbilityButton5" parent="." instance=ExtResource("2_pys1y")]
 layout_mode = 1
 anchors_preset = 10
 anchor_bottom = 0.0
 offset_bottom = 648.0
 grow_vertical = 1
 
-[node name="AbilityButton6" parent="." instance=ExtResource("1_v41vt")]
+[node name="AbilityButton6" parent="." instance=ExtResource("2_pys1y")]
 layout_mode = 1
 anchors_preset = 10
 anchor_bottom = 0.0

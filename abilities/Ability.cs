@@ -11,17 +11,17 @@ public abstract partial class Ability : Node
 
     public int CurrentUsesPerTurn;
     public int CurrentCooldown;
-
     public string InputAction;
+
     public int NumberOfTargets;
 
-    public Ability(string key, string displayName, int usesPerTurn, int cooldown, string inputAction, int numberOfTargets = 1)
+    public Ability(string inputAction, string key, string displayName, int usesPerTurn, int cooldown, int numberOfTargets = 1)
     {
+        InputAction = inputAction;
         Key = key;
         DisplayName = displayName;
         UsesPerTurn = usesPerTurn;
         Cooldown = cooldown;
-        InputAction = inputAction;
         NumberOfTargets = numberOfTargets;
         Reset();
     }

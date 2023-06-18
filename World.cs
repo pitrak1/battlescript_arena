@@ -18,8 +18,8 @@ public partial class World : Node
     private Tile[,] tiles = new Tile[9, 9];
     private List<Actor> actors = new List<Actor>();
     private Actor currentActor;
-    private PackedScene actorScene = GD.Load<PackedScene>("res://Actor.tscn");
-    private PackedScene tileScene = GD.Load<PackedScene>("res://Tile.tscn");
+    private PackedScene actorScene = GD.Load<PackedScene>("res://actors/Actor.tscn");
+    private PackedScene tileScene = GD.Load<PackedScene>("res://tiles/Tile.tscn");
 
     public Actor HandleTileClick(Vector2 coords)
     {
@@ -52,8 +52,8 @@ public partial class World : Node
         wolfActor.SetType(ActorType.Wolf);
         tiles[3, 3].PlaceActor(wolfActor);
         currentActor = wolfActor;
-        currentActor.AddAbility(new MoveAbility("move", "Move", 1, 0, "Q"));
-        currentActor.AddAbility(new HurtSelfAbility("hurtSelf", "Hurt Self", 1, 0, "W"));
+        currentActor.AddAbility(new MoveAbility("Q"));
+        currentActor.AddAbility(new HurtSelfAbility("W"));
         currentActor.SetMaxHealth(15);
     }
 
