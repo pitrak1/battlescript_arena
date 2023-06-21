@@ -14,64 +14,74 @@ script = ExtResource("1_6n27n")
 
 [node name="Actor1" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 548.0
+offset_left = 352.0
 offset_top = 20.0
-offset_right = 604.0
+offset_right = 408.0
 offset_bottom = 76.0
 texture = ExtResource("2_olw7n")
 
 [node name="Actor2" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 548.0
+offset_left = 408.0
 offset_top = 20.0
-offset_right = 604.0
+offset_right = 464.0
 offset_bottom = 76.0
 texture = ExtResource("2_olw7n")
 
 [node name="Actor3" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 548.0
+offset_left = 464.0
 offset_top = 20.0
-offset_right = 604.0
+offset_right = 520.0
 offset_bottom = 76.0
 texture = ExtResource("2_olw7n")
 
 [node name="Actor4" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 548.0
+offset_left = 520.0
 offset_top = 20.0
-offset_right = 604.0
+offset_right = 576.0
 offset_bottom = 76.0
 texture = ExtResource("2_olw7n")
 
 [node name="Actor5" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 548.0
+offset_left = 576.0
 offset_top = 20.0
-offset_right = 604.0
+offset_right = 632.0
 offset_bottom = 76.0
 texture = ExtResource("2_olw7n")
 
 [node name="Actor6" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 548.0
+offset_left = 632.0
 offset_top = 20.0
-offset_right = 604.0
+offset_right = 688.0
 offset_bottom = 76.0
 texture = ExtResource("2_olw7n")
 
 [node name="Actor7" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 548.0
+offset_left = 688.0
 offset_top = 20.0
-offset_right = 604.0
+offset_right = 744.0
 offset_bottom = 76.0
 texture = ExtResource("2_olw7n")
 
 [node name="Actor8" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 548.0
+offset_left = 744.0
 offset_top = 20.0
-offset_right = 604.0
+offset_right = 800.0
 offset_bottom = 76.0
 texture = ExtResource("2_olw7n")
+
+[node name="NextLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 352.0
+offset_top = 80.0
+offset_right = 408.0
+offset_bottom = 106.0
+text = "Next
+"
+horizontal_alignment = 1

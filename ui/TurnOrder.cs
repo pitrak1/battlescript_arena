@@ -8,8 +8,6 @@ public partial class TurnOrder : Control
     public override void _Ready()
     {
         this.ClearTurnOrder();
-        Vector2 viewportSize = GetNode<Control>("Actor1").GetViewportRect().Size;
-        basePosition = new Vector2(viewportSize.X / 2 - 40, 0);
     }
 
     public void SetTurnOrder(List<Actor> actors)
@@ -19,8 +17,6 @@ public partial class TurnOrder : Control
             TextureRect actorImage = GetNode<TextureRect>("Actor" + (i + 1));
             if (i < actors.Count)
             {
-                int xOffset = ((actors.Count - 1) * -50) + 100 * i;
-                actorImage.Position = basePosition + new Vector2(xOffset, 0);
                 actorImage.Texture = actors[i].Texture;
                 actorImage.Show();
             }
