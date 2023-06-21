@@ -51,7 +51,7 @@ public partial class Main : Node
 
     private void HandleExecuteAbility(List<Vector2> coords, Actor actor, string action)
     {
-        world.ExecuteAbility(action, coords);
+        world.ExecuteAbility(actor, action, coords);
     }
 
     private void HandleSetAbilities(Actor actor)
