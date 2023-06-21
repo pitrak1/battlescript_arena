@@ -16,9 +16,7 @@ public partial class World : Node
     };
 
     private Tile[,] tiles = new Tile[9, 9];
-    private List<Actor> actors = new List<Actor>();
     private Actor currentActor;
-    private PackedScene actorScene = GD.Load<PackedScene>("res://actors/Actor.tscn");
     private PackedScene tileScene = GD.Load<PackedScene>("res://tiles/Tile.tscn");
 
     public Actor HandleTileClick(Vector2 coords)
@@ -47,14 +45,11 @@ public partial class World : Node
                 tiles[x, y] = tile;
             }
         }
+    }
 
-        Actor wolfActor = actorScene.Instantiate<Actor>();
-        wolfActor.SetType(ActorType.Wolf);
-        tiles[3, 3].PlaceActor(wolfActor);
-        currentActor = wolfActor;
-        currentActor.AddAbility(new MoveAbility("Q"));
-        currentActor.AddAbility(new HurtSelfAbility("W"));
-        currentActor.SetMaxHealth(15);
+    public void PlaceActor(Actor actor, Vector2 coordinates)
+    {
+        tiles[(int)coordinates.X, (int)coordinates.Y].PlaceActor(actor);
     }
 
     public Tile GetTile(Vector2 coordinates)

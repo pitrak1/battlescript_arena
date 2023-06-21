@@ -1,0 +1,77 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwm17v7roenip"]
+
+[ext_resource type="Script" path="res://ui/TurnOrder.cs" id="1_6n27n"]
+[ext_resource type="Texture2D" uid="uid://ny1vlg54gvcp" path="res://assets/wolf.jpeg" id="2_olw7n"]
+
+[node name="TurnOrder" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6n27n")
+
+[node name="Actor1" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 548.0
+offset_top = 20.0
+offset_right = 604.0
+offset_bottom = 76.0
+texture = ExtResource("2_olw7n")
+
+[node name="Actor2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 548.0
+offset_top = 20.0
+offset_right = 604.0
+offset_bottom = 76.0
+texture = ExtResource("2_olw7n")
+
+[node name="Actor3" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 548.0
+offset_top = 20.0
+offset_right = 604.0
+offset_bottom = 76.0
+texture = ExtResource("2_olw7n")
+
+[node name="Actor4" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 548.0
+offset_top = 20.0
+offset_right = 604.0
+offset_bottom = 76.0
+texture = ExtResource("2_olw7n")
+
+[node name="Actor5" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 548.0
+offset_top = 20.0
+offset_right = 604.0
+offset_bottom = 76.0
+texture = ExtResource("2_olw7n")
+
+[node name="Actor6" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 548.0
+offset_top = 20.0
+offset_right = 604.0
+offset_bottom = 76.0
+texture = ExtResource("2_olw7n")
+
+[node name="Actor7" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 548.0
+offset_top = 20.0
+offset_right = 604.0
+offset_bottom = 76.0
+texture = ExtResource("2_olw7n")
+
+[node name="Actor8" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 548.0
+offset_top = 20.0
+offset_right = 604.0
+offset_bottom = 76.0
+texture = ExtResource("2_olw7n")

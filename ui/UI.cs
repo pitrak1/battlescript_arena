@@ -44,4 +44,14 @@ public partial class UI : Control
     {
         GetParent<Main>().HandleAbilityButtonClick(inputAction);
     }
+
+    public void SetTurnOrder(List<Actor> actors)
+    {
+        GetNode<TurnOrder>("TurnOrder").SetTurnOrder(actors);
+    }
+
+    public void ClearTurnOrder()
+    {
+        GetNode<TurnOrder>("TurnOrder").ClearTurnOrder();
+    }
 }

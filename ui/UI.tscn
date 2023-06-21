@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://c8cwdck5odpsg"]
+[gd_scene load_steps=4 format=3 uid="uid://c8cwdck5odpsg"]
 
 [ext_resource type="Script" path="res://ui/UI.cs" id="1_610lv"]
 [ext_resource type="PackedScene" uid="uid://d1g0bnd6eajo8" path="res://ui/AbilityButton.tscn" id="2_pys1y"]
+[ext_resource type="PackedScene" uid="uid://cwm17v7roenip" path="res://ui/TurnOrder.tscn" id="3_ywldb"]
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -54,3 +55,6 @@ anchors_preset = 10
 anchor_bottom = 0.0
 offset_bottom = 648.0
 grow_vertical = 1
+
+[node name="TurnOrder" parent="." instance=ExtResource("3_ywldb")]
+layout_mode = 1
