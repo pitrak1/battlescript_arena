@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://d027d3p5qf1ew"]
+
+[ext_resource type="PackedScene" uid="uid://ci23r2e80ugfb" path="res://tiles/Tile.tscn" id="1_4o8wo"]
+[ext_resource type="Script" path="res://tiles/WaterTile.cs" id="2_ony5t"]
+
+[node name="Tile" instance=ExtResource("1_4o8wo")]
+script = ExtResource("2_ony5t")

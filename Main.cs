@@ -28,8 +28,7 @@ public partial class Main : Node
         turnOrderManager = new TurnOrderManager();
 
 
-        Actor wolfActor = actorScene.Instantiate<Actor>();
-        wolfActor.SetType(ActorType.Wolf);
+        Actor wolfActor = ActorConfig.ActorSceneMap[ActorTypes.Wolf].Instantiate<Actor>();
         world.PlaceActor(wolfActor, new Vector2(3, 3));
         wolfActor.AddAbility(new MoveAbility("Q"));
         wolfActor.AddAbility(new HurtSelfAbility("W"));
@@ -37,8 +36,7 @@ public partial class Main : Node
         actors.Add(wolfActor);
 
 
-        Actor turtleActor = actorScene.Instantiate<Actor>();
-        turtleActor.SetType(ActorType.Turtle);
+        Actor turtleActor = ActorConfig.ActorSceneMap[ActorTypes.Turtle].Instantiate<Actor>();
         world.PlaceActor(turtleActor, new Vector2(6, 5));
         turtleActor.AddAbility(new MoveAbility("Q"));
         turtleActor.AddAbility(new HurtSelfAbility("W"));
