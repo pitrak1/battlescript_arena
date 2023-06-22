@@ -8,6 +8,12 @@ public partial class TurnOrder : Control
     public override void _Ready()
     {
         this.ClearTurnOrder();
+        GetNode<Button>("EndTurnButton").Pressed += this.OnEndTurnButtonPressed;
+    }
+
+    public void OnEndTurnButtonPressed()
+    {
+        GetParent<UI>().HandleEndTurnButtonClick();
     }
 
     public void SetTurnOrder(List<Actor> actors)

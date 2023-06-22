@@ -85,3 +85,11 @@ offset_bottom = 106.0
 text = "Next
 "
 horizontal_alignment = 1
+
+[node name="EndTurnButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 408.0
+offset_top = 110.0
+offset_right = 744.0
+offset_bottom = 150.0
+text = "End Turn"

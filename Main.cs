@@ -16,7 +16,6 @@ public partial class Main : Node
 
     private List<Actor> actors = new List<Actor>();
 
-    private PackedScene actorScene = GD.Load<PackedScene>("res://actors/Actor.tscn");
     public override void _Ready()
     {
         world = (World)GetNode("World");
@@ -25,8 +24,6 @@ public partial class Main : Node
         ui = GetNode<UI>("UI");
 
         battleStateMachine = new BattleStateMachine(HandleExecuteAbility, HandleSetAbilities);
-        turnOrderManager = new TurnOrderManager();
-
 
         Actor wolfActor = ActorConfig.ActorSceneMap[ActorTypes.Wolf].Instantiate<Actor>();
         world.PlaceActor(wolfActor, new Vector2(3, 3));
@@ -43,7 +40,8 @@ public partial class Main : Node
         turtleActor.SetMaxHealth(20);
         actors.Add(turtleActor);
 
-        List<Actor> turnOrder = turnOrderManager.GetTurnOrder(new List<Actor> { wolfActor, turtleActor });
+        turnOrderManager = new TurnOrderManager(actors);
+        List<Actor> turnOrder = turnOrderManager.GetDisplayTurnOrder();
         ui.SetTurnOrder(turnOrder);
     }
 
@@ -81,6 +79,12 @@ public partial class Main : Node
     public void HandleAbilityButtonClick(string key)
     {
         battleStateMachine.HandleInput(key);
+    }
+
+    public void HandleEndTurnButtonClick()
+    {
+        turnOrderManager.EndTurn();
+        ui.SetTurnOrder(turnOrderManager.GetDisplayTurnOrder());
     }
 
     public void HandleTileClick(Vector2 coords)

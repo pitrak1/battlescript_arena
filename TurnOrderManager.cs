@@ -6,26 +6,44 @@ using System.Linq;
 
 public partial class TurnOrderManager
 {
-    public List<Actor> GetTurnOrder(List<Actor> actors)
-    {
-        List<(Actor, int)> speedValues = new List<(Actor, int)>();
+    private List<Actor> actors;
+    private int currentSpeedValue = 0;
+    private int currentTurnOrderIndex = 0;
+    private List<Actor> turnOrder = new List<Actor>();
 
-        actors.ForEach((actor) =>
+    public TurnOrderManager(List<Actor> actors)
+    {
+        this.actors = actors;
+        CalculateTurnOrder();
+    }
+
+    public void EndTurn()
+    {
+        currentSpeedValue += turnOrder[currentTurnOrderIndex].Speed;
+        currentTurnOrderIndex++;
+    }
+
+    public void CalculateTurnOrder()
+    {
+        Dictionary<Actor, int> speedValues = new Dictionary<Actor, int>();
+
+        int lowestSpeed = actors.MinBy(actor => actor.Speed).Speed;
+
+        actors.ForEach(actor =>
         {
-            for (int i = 0; i < 10; i++)
-            {
-                speedValues.Add((actor, actor.Speed * (i + 1)));
-            }
+            speedValues[actor] = actor.Speed;
         });
 
-        speedValues = speedValues.ToArray().OrderBy(tuple => tuple.Item2).ToList();
-
-        List<Actor> finalOrder = new List<Actor>();
-        for (int i = 0; i < 8; i++)
+        while (turnOrder.Count < 100)
         {
-            finalOrder.Add(speedValues[i].Item1);
+            Actor nextActor = speedValues.MinBy(kvp => kvp.Value).Key;
+            turnOrder.Add(nextActor);
+            speedValues[nextActor] = speedValues[nextActor] + nextActor.Speed;
         }
+    }
 
-        return finalOrder;
+    public List<Actor> GetDisplayTurnOrder()
+    {
+        return turnOrder.ToArray().Skip(currentTurnOrderIndex).Take(8).ToList();
     }
 }
