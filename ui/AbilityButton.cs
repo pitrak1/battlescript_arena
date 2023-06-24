@@ -18,6 +18,6 @@ public partial class AbilityButton : Control
 
     public void OnButtonPressed()
     {
-        GetParent<UI>().HandleAbilityButtonClick(ability.InputAction);
+        GetParent<AbilityButtons>().HandleAbilityButtonClick(ability.InputAction);
     }
 }

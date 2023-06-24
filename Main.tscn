@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://do0tfk1s46awv"]
+[gd_scene load_steps=5 format=3 uid="uid://do0tfk1s46awv"]
 
 [ext_resource type="Script" path="res://Main.cs" id="1_7t4oc"]
 [ext_resource type="Script" path="res://World.cs" id="2_mp0fl"]
-[ext_resource type="PackedScene" uid="uid://c8cwdck5odpsg" path="res://ui/UI.tscn" id="3_3noof"]
+[ext_resource type="PackedScene" uid="uid://4s10metpdngg" path="res://ui/AbilityButtons.tscn" id="3_vjj52"]
+[ext_resource type="PackedScene" uid="uid://cwm17v7roenip" path="res://ui/TurnOrder.tscn" id="4_5w4k0"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_7t4oc")
@@ -10,4 +11,6 @@ script = ExtResource("1_7t4oc")
 [node name="World" type="Node2D" parent="."]
 script = ExtResource("2_mp0fl")
 
-[node name="UI" parent="." instance=ExtResource("3_3noof")]
+[node name="AbilityButtons" parent="." instance=ExtResource("3_vjj52")]
+
+[node name="TurnOrder" parent="." instance=ExtResource("4_5w4k0")]

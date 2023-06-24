@@ -13,7 +13,7 @@ public partial class TurnOrder : Control
 
     public void OnEndTurnButtonPressed()
     {
-        GetParent<UI>().HandleEndTurnButtonClick();
+        GetParent<Main>().HandleEndTurnButtonClick();
     }
 
     public void SetTurnOrder(List<Actor> actors)

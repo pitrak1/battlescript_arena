@@ -5,7 +5,8 @@ using System.Collections.Generic;
 public partial class Main : Node
 {
     private World world;
-    private UI ui;
+    private AbilityButtons abilityButtons;
+    private TurnOrder turnOrder;
 
     private BattleStateMachine battleStateMachine;
     private TurnOrderManager turnOrderManager;
@@ -21,7 +22,8 @@ public partial class Main : Node
         world = (World)GetNode("World");
         world.Setup();
 
-        ui = GetNode<UI>("UI");
+        abilityButtons = GetNode<AbilityButtons>("AbilityButtons");
+        this.turnOrder = GetNode<TurnOrder>("TurnOrder");
 
         battleStateMachine = new BattleStateMachine(HandleExecuteAbility, HandleSetAbilities);
 
@@ -41,8 +43,8 @@ public partial class Main : Node
         actors.Add(turtleActor);
 
         turnOrderManager = new TurnOrderManager(actors);
-        List<Actor> turnOrder = turnOrderManager.GetDisplayTurnOrder();
-        ui.SetTurnOrder(turnOrder);
+        List<Actor> currentTurnOrder = turnOrderManager.GetDisplayTurnOrder();
+        this.turnOrder.SetTurnOrder(currentTurnOrder);
     }
 
     private void HandleExecuteAbility(List<Vector2> coords, Actor actor, string action)
@@ -54,11 +56,11 @@ public partial class Main : Node
     {
         if (actor == null)
         {
-            ui.ClearAbilities();
+            abilityButtons.ClearAbilities();
         }
         else
         {
-            ui.SetAbilities(actor.GetAbilities());
+            abilityButtons.SetAbilities(actor.GetAbilities());
         }
     }
 
@@ -84,7 +86,7 @@ public partial class Main : Node
     public void HandleEndTurnButtonClick()
     {
         turnOrderManager.EndTurn();
-        ui.SetTurnOrder(turnOrderManager.GetDisplayTurnOrder());
+        turnOrder.SetTurnOrder(turnOrderManager.GetDisplayTurnOrder());
     }
 
     public void HandleTileClick(Vector2 coords)

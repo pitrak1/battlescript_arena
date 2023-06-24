@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class UI : Control
+public partial class AbilityButtons : Control
 {
     private Vector2 basePosition;
     public override void _Ready()
