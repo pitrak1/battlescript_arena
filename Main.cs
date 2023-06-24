@@ -9,7 +9,6 @@ public partial class Main : Node
     private TurnOrder turnOrder;
 
     private BattleStateMachine battleStateMachine;
-    private TurnOrderManager turnOrderManager;
 
     private Vector2 selectedCoords;
     private Actor selectedActor;
@@ -42,9 +41,7 @@ public partial class Main : Node
         turtleActor.SetMaxHealth(20);
         actors.Add(turtleActor);
 
-        turnOrderManager = new TurnOrderManager(actors);
-        List<Actor> currentTurnOrder = turnOrderManager.GetDisplayTurnOrder();
-        this.turnOrder.SetTurnOrder(currentTurnOrder);
+        turnOrder.Setup(actors);
     }
 
     private void HandleExecuteAbility(List<Vector2> coords, Actor actor, string action)
@@ -81,12 +78,6 @@ public partial class Main : Node
     public void HandleAbilityButtonClick(string key)
     {
         battleStateMachine.HandleInput(key);
-    }
-
-    public void HandleEndTurnButtonClick()
-    {
-        turnOrderManager.EndTurn();
-        turnOrder.SetTurnOrder(turnOrderManager.GetDisplayTurnOrder());
     }
 
     public void HandleTileClick(Vector2 coords)

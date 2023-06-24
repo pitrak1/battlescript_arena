@@ -45,11 +45,6 @@ public partial class AbilityButtons : Control
         GetParent<Main>().HandleAbilityButtonClick(inputAction);
     }
 
-    public void HandleEndTurnButtonClick()
-    {
-        GetParent<Main>().HandleEndTurnButtonClick();
-    }
-
     public void SetTurnOrder(List<Actor> actors)
     {
         GetNode<TurnOrder>("TurnOrder").SetTurnOrder(actors);

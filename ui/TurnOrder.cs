@@ -1,19 +1,33 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class TurnOrder : Control
 {
-    private Vector2 basePosition;
+    private List<Actor> actors;
+    private int currentSpeedValue = 0;
+    private int currentTurnOrderIndex = 0;
+    private List<Actor> turnOrder = new List<Actor>();
+
     public override void _Ready()
     {
-        this.ClearTurnOrder();
         GetNode<Button>("EndTurnButton").Pressed += this.OnEndTurnButtonPressed;
+    }
+
+    public void Setup(List<Actor> actors)
+    {
+        this.actors = actors;
+        this.calculateTurnOrder();
+        this.SetTurnOrder(this.getDisplayTurnOrder());
     }
 
     public void OnEndTurnButtonPressed()
     {
-        GetParent<Main>().HandleEndTurnButtonClick();
+        currentSpeedValue += turnOrder[currentTurnOrderIndex].Speed;
+        currentTurnOrderIndex++;
+        this.calculateTurnOrder();
+        this.SetTurnOrder(this.getDisplayTurnOrder());
     }
 
     public void SetTurnOrder(List<Actor> actors)
@@ -40,5 +54,29 @@ public partial class TurnOrder : Control
             Control actorImage = GetNode<Control>("Actor" + (i + 1));
             actorImage.Hide();
         }
+    }
+
+    private void calculateTurnOrder()
+    {
+        Dictionary<Actor, int> speedValues = new Dictionary<Actor, int>();
+
+        int lowestSpeed = actors.MinBy(actor => actor.Speed).Speed;
+
+        actors.ForEach(actor =>
+        {
+            speedValues[actor] = actor.Speed;
+        });
+
+        while (turnOrder.Count < 100)
+        {
+            Actor nextActor = speedValues.MinBy(kvp => kvp.Value).Key;
+            turnOrder.Add(nextActor);
+            speedValues[nextActor] = speedValues[nextActor] + nextActor.Speed;
+        }
+    }
+
+    private List<Actor> getDisplayTurnOrder()
+    {
+        return turnOrder.ToArray().Skip(currentTurnOrderIndex).Take(8).ToList();
     }
 }
