@@ -18,6 +18,7 @@ public class BattleStateMachine
     public Actor SelectedActor { get; private set; }
     public string SelectedAbility { get; private set; }
     private Action<Actor> setActionsCallback;
+    private Actor currentActor;
 
     private Action<List<Vector2>, Actor, string> actionExecuteCallback;
 
@@ -48,7 +49,7 @@ public class BattleStateMachine
         {
             SelectedActor = selectedActor;
 
-            if (selectedActor != null)
+            if (selectedActor != null && selectedActor == currentActor)
             {
                 AbilitySelectState = AbilitySelectStates.ActorSelected;
                 setActionsCallback(selectedActor);
@@ -63,6 +64,22 @@ public class BattleStateMachine
         {
             SelectedCoords.Add(coords);
             evaluateNumberOfTargets();
+        }
+    }
+
+    public void SetCurrentActor(Actor actor)
+    {
+        currentActor = actor;
+
+        if (SelectedActor != null && SelectedActor == currentActor)
+        {
+            AbilitySelectState = AbilitySelectStates.ActorSelected;
+            setActionsCallback(SelectedActor);
+        }
+        else
+        {
+            AbilitySelectState = AbilitySelectStates.None;
+            setActionsCallback(null);
         }
     }
 

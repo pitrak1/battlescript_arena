@@ -14,6 +14,8 @@ public partial class Main : Node
     private Actor selectedActor;
     private string selectedAction;
 
+    private Actor currentActor;
+
     private List<Actor> actors = new List<Actor>();
 
     public override void _Ready()
@@ -41,7 +43,7 @@ public partial class Main : Node
         turtleActor.SetMaxHealth(20);
         actors.Add(turtleActor);
 
-        turnOrder.Setup(actors);
+        turnOrder.Setup(actors, HandleSetCurrentActor);
     }
 
     private void HandleExecuteAbility(List<Vector2> coords, Actor actor, string action)
@@ -59,6 +61,12 @@ public partial class Main : Node
         {
             abilityButtons.SetAbilities(actor.GetAbilities());
         }
+    }
+
+    private void HandleSetCurrentActor(Actor actor)
+    {
+        currentActor = actor;
+        battleStateMachine.SetCurrentActor(actor);
     }
 
     public override void _Input(InputEvent @event)
