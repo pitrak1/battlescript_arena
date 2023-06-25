@@ -26,7 +26,7 @@ public partial class Main : Node
         abilityButtons = GetNode<AbilityButtons>("AbilityButtons");
         this.turnOrder = GetNode<TurnOrder>("TurnOrder");
 
-        battleStateMachine = new BattleStateMachine(HandleExecuteAbility, HandleSetAbilities);
+        battleStateMachine = new BattleStateMachine(HandleExecuteAbility, HandleSetAbilities, HandleAbilityReady);
 
         Actor wolfActor = ActorConfig.ActorSceneMap[ActorTypes.Wolf].Instantiate<Actor>();
         world.PlaceActor(wolfActor, new Vector2(3, 3));
@@ -46,9 +46,16 @@ public partial class Main : Node
         turnOrder.Setup(actors, HandleSetCurrentActor);
     }
 
+    private void HandleAbilityReady(string action)
+    {
+        Dictionary<string, int> keyMap = new Dictionary<string, int>() { { "Q", 0 }, { "W", 1 } };
+        abilityButtons.ShowConfirmButton(keyMap[action]);
+    }
+
     private void HandleExecuteAbility(List<Vector2> coords, Actor actor, string action)
     {
         world.ExecuteAbility(actor, action, coords);
+        abilityButtons.HideConfirmButtons();
     }
 
     private void HandleSetAbilities(Actor actor)
@@ -86,6 +93,11 @@ public partial class Main : Node
     public void HandleAbilityButtonClick(string key)
     {
         battleStateMachine.HandleInput(key);
+    }
+
+    public void HandleAbilityConfirmButtonClick(string key)
+    {
+        battleStateMachine.HandleConfirm(key);
     }
 
     public void HandleTileClick(Vector2 coords)

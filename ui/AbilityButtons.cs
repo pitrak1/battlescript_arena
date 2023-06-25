@@ -40,9 +40,20 @@ public partial class AbilityButtons : Control
         }
     }
 
+    public void ShowConfirmButton(int index)
+    {
+        AbilityButton abilityButton = GetNode<AbilityButton>("AbilityButton" + (index + 1));
+        abilityButton.ShowConfirmButton();
+    }
+
     public void HandleAbilityButtonClick(string inputAction)
     {
         GetParent<Main>().HandleAbilityButtonClick(inputAction);
+    }
+
+    public void HandleAbilityConfirmButtonClick(string inputAction)
+    {
+        GetParent<Main>().HandleAbilityConfirmButtonClick(inputAction);
     }
 
     public void SetTurnOrder(List<Actor> actors)
@@ -53,5 +64,14 @@ public partial class AbilityButtons : Control
     public void ClearTurnOrder()
     {
         GetNode<TurnOrder>("TurnOrder").ClearTurnOrder();
+    }
+
+    public void HideConfirmButtons()
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            AbilityButton abilityButton = GetNode<AbilityButton>("AbilityButton" + (i + 1));
+            abilityButton.HideConfirmButton();
+        }
     }
 }
