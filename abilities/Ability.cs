@@ -38,5 +38,5 @@ public abstract partial class Ability : Node
     }
 
 
-    public abstract bool Execute(Actor source, World world, List<Vector2> target);
+    public abstract bool Execute(Actor source, World world, List<Vector2> target, Spectrum spectrum);
 }

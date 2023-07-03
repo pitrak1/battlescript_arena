@@ -18,10 +18,14 @@ public partial class Main : Node
 
     private List<Actor> actors = new List<Actor>();
 
+    private Spectrum spectrum;
+
     public override void _Ready()
     {
         world = (World)GetNode("World");
         world.Setup();
+
+        spectrum = GetNode<Spectrum>("Spectrum");
 
         abilityButtons = GetNode<AbilityButtons>("AbilityButtons");
         this.turnOrder = GetNode<TurnOrder>("TurnOrder");
@@ -32,6 +36,7 @@ public partial class Main : Node
         world.PlaceActor(wolfActor, new Vector2(3, 3));
         wolfActor.AddAbility(new MoveAbility("Q"));
         wolfActor.AddAbility(new HurtSelfAbility("W"));
+        wolfActor.AddAbility(new InvokeEarthAbility("E"));
         wolfActor.SetMaxHealth(15);
         actors.Add(wolfActor);
 
@@ -40,6 +45,7 @@ public partial class Main : Node
         world.PlaceActor(turtleActor, new Vector2(6, 5));
         turtleActor.AddAbility(new MoveAbility("Q"));
         turtleActor.AddAbility(new HurtSelfAbility("W"));
+        turtleActor.AddAbility(new ThrowDirtAbility("E"));
         turtleActor.SetMaxHealth(20);
         actors.Add(turtleActor);
 
@@ -48,13 +54,13 @@ public partial class Main : Node
 
     private void HandleAbilityReady(string action)
     {
-        Dictionary<string, int> keyMap = new Dictionary<string, int>() { { "Q", 0 }, { "W", 1 } };
+        Dictionary<string, int> keyMap = new Dictionary<string, int>() { { "Q", 0 }, { "W", 1 }, { "E", 2 } };
         abilityButtons.ShowConfirmButton(keyMap[action]);
     }
 
     private void HandleExecuteAbility(List<Vector2> coords, Actor actor, string action)
     {
-        world.ExecuteAbility(actor, action, coords);
+        world.ExecuteAbility(actor, action, coords, spectrum);
         abilityButtons.HideConfirmButtons();
     }
 
@@ -80,7 +86,7 @@ public partial class Main : Node
     {
         base._Input(@event);
 
-        string[] validKeys = { "Q", "W" };
+        string[] validKeys = { "Q", "W", "E" };
         foreach (string key in validKeys)
         {
             if (Input.IsActionJustPressed(key))

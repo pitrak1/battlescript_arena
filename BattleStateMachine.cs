@@ -34,7 +34,7 @@ public class BattleStateMachine
     {
         if (AbilitySelectState == AbilitySelectStates.ActorSelected)
         {
-            string[] validKeys = { "Q", "W" };
+            string[] validKeys = { "Q", "W", "E" };
             if (validKeys.Contains(actionPressed))
             {
                 AbilitySelectState = AbilitySelectStates.AbilitySelected;
@@ -52,7 +52,7 @@ public class BattleStateMachine
     {
         if (AbilitySelectState == AbilitySelectStates.Confirm)
         {
-            string[] validKeys = { "Q", "W" };
+            string[] validKeys = { "Q", "W", "E" };
             if (validKeys.Contains(actionPressed))
             {
                 actionExecuteCallback(SelectedCoords, SelectedActor, SelectedAbility);

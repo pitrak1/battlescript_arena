@@ -55,8 +55,8 @@ public partial class World : Node
         return tiles[(int)coordinates.X, (int)coordinates.Y];
     }
 
-    public void ExecuteAbility(Actor selectedActor, string inputAction, List<Vector2> target)
+    public void ExecuteAbility(Actor selectedActor, string inputAction, List<Vector2> target, Spectrum spectrum)
     {
-        selectedActor.ExecuteAbility(inputAction, selectedActor, this, target);
+        selectedActor.ExecuteAbility(inputAction, selectedActor, this, target, spectrum);
     }
 }

@@ -34,10 +34,10 @@ public partial class Actor : Sprite2D
         abilities.Add(ability);
     }
 
-    public bool ExecuteAbility(string inputAction, Actor source, World world, List<Vector2> target)
+    public bool ExecuteAbility(string inputAction, Actor source, World world, List<Vector2> target, Spectrum spectrum)
     {
         var ability = abilities.Find(x => x.InputAction == inputAction);
-        return ability.Execute(source, world, target);
+        return ability.Execute(source, world, target, spectrum);
     }
 
     public List<Ability> GetAbilities()

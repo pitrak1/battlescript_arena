@@ -6,7 +6,7 @@ public partial class ExampleAbility : Ability
 {
     public ExampleAbility(string inputAction) : base(inputAction, "example", "Example", 1, 0, 1) { }
 
-    public override bool Execute(Actor source, World world, List<Vector2> target)
+    public override bool Execute(Actor source, World world, List<Vector2> target, Spectrum spectrum)
     {
         return true;
     }
