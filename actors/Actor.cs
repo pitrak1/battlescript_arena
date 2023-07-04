@@ -34,6 +34,14 @@ public partial class Actor : Sprite2D
         abilities.Add(ability);
     }
 
+    public void EndTurn()
+    {
+        abilities.ForEach(ability =>
+        {
+            ability.EndTurn();
+        });
+    }
+
     public bool ExecuteAbility(string inputAction, Actor source, World world, List<Vector2> target, Spectrum spectrum)
     {
         var ability = abilities.Find(x => x.InputAction == inputAction);

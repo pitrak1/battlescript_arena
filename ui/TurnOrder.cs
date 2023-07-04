@@ -28,6 +28,7 @@ public partial class TurnOrder : Control
 
     public void OnEndTurnButtonPressed()
     {
+        turnOrder[currentTurnOrderIndex].EndTurn();
         currentSpeedValue += turnOrder[currentTurnOrderIndex].Speed;
         currentTurnOrderIndex++;
         this.calculateTurnOrder();

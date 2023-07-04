@@ -34,19 +34,11 @@ public partial class Main : Node
 
         Actor wolfActor = ActorConfig.ActorSceneMap[ActorTypes.Wolf].Instantiate<Actor>();
         world.PlaceActor(wolfActor, new Vector2(3, 3));
-        wolfActor.AddAbility(new MoveAbility("Q"));
-        wolfActor.AddAbility(new HurtSelfAbility("W"));
-        wolfActor.AddAbility(new InvokeEarthAbility("E"));
-        wolfActor.SetMaxHealth(15);
         actors.Add(wolfActor);
 
 
         Actor turtleActor = ActorConfig.ActorSceneMap[ActorTypes.Turtle].Instantiate<Actor>();
         world.PlaceActor(turtleActor, new Vector2(6, 5));
-        turtleActor.AddAbility(new MoveAbility("Q"));
-        turtleActor.AddAbility(new HurtSelfAbility("W"));
-        turtleActor.AddAbility(new ThrowDirtAbility("E"));
-        turtleActor.SetMaxHealth(20);
         actors.Add(turtleActor);
 
         turnOrder.Setup(actors, HandleSetCurrentActor);
