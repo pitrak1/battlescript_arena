@@ -40,9 +40,10 @@ public partial class Main : Node
         turnOrder.Setup(actors, HandleSetCurrentActor);
     }
 
-    private void HandleSetCurrentActor(Actor actor)
+    private void HandleSetCurrentActor(Actor previous, Actor current)
     {
-        currentActor = actor;
+        actors.ForEach(actor => actor.EndTurn(previous));
+        currentActor = current;
         updateAbilityButtons();
     }
 

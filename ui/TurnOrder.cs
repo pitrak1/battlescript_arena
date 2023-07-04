@@ -10,30 +10,30 @@ public partial class TurnOrder : Control
     private int currentTurnOrderIndex = 0;
     private List<Actor> turnOrder = new List<Actor>();
 
-    private Action<Actor> currentActorCallback;
+    private Action<Actor, Actor> currentActorCallback;
 
     public override void _Ready()
     {
         GetNode<Button>("EndTurnButton").Pressed += this.OnEndTurnButtonPressed;
     }
 
-    public void Setup(List<Actor> actors, Action<Actor> actorCallback)
+    public void Setup(List<Actor> actors, Action<Actor, Actor> actorCallback)
     {
         this.actors = actors;
         this.currentActorCallback = actorCallback;
         this.calculateTurnOrder();
         this.SetTurnOrder(this.getDisplayTurnOrder());
-        currentActorCallback(turnOrder[currentTurnOrderIndex]);
+        currentActorCallback(null, turnOrder[currentTurnOrderIndex]);
     }
 
     public void OnEndTurnButtonPressed()
     {
-        turnOrder[currentTurnOrderIndex].EndTurn();
+        // turnOrder[currentTurnOrderIndex].EndTurn();
         currentSpeedValue += turnOrder[currentTurnOrderIndex].Speed;
         currentTurnOrderIndex++;
         this.calculateTurnOrder();
         this.SetTurnOrder(this.getDisplayTurnOrder());
-        currentActorCallback(turnOrder[currentTurnOrderIndex]);
+        currentActorCallback(turnOrder[currentTurnOrderIndex - 1], turnOrder[currentTurnOrderIndex]);
     }
 
     public void SetTurnOrder(List<Actor> actors)

@@ -8,6 +8,7 @@ public partial class Actor : Sprite2D
     public Vector2 Coordinates { get; set; }
     public int Speed;
     private List<Ability> abilities = new List<Ability>();
+    public List<Effect> Effects = new List<Effect>();
     private int maxHealth;
     private int currentHealth;
 
@@ -34,11 +35,16 @@ public partial class Actor : Sprite2D
         abilities.Add(ability);
     }
 
-    public void EndTurn()
+    public void EndTurn(Actor actor)
     {
         abilities.ForEach(ability =>
         {
             ability.EndTurn();
+        });
+
+        Effects.ForEach(effect =>
+        {
+            effect.EndTurn();
         });
     }
 

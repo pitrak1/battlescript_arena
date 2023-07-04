@@ -12,7 +12,9 @@ public partial class ThrowDirtAbility : Ability
         Tile endTile = world.GetTile(target[0]);
         if (spectrum.GetElementPower(Elements.Earth) > 1)
         {
-            endTile.GetActor().AlterHealth(-2);
+            Actor endActor = endTile.GetActor();
+            endActor.AlterHealth(-2);
+            endActor.Effects.Add(new BleedEffect(endActor));
             return true;
         }
         else
