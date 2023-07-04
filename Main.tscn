@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://World.cs" id="2_mp0fl"]
 [ext_resource type="PackedScene" uid="uid://4s10metpdngg" path="res://ui/AbilityButtons.tscn" id="3_vjj52"]
 [ext_resource type="PackedScene" uid="uid://cwm17v7roenip" path="res://ui/TurnOrder.tscn" id="4_5w4k0"]
-[ext_resource type="PackedScene" uid="uid://dh3oeow2x1t4k" path="res://Spectrum.tscn" id="5_qtbb2"]
+[ext_resource type="PackedScene" path="res://Spectrum.tscn" id="5_qtbb2"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_7t4oc")

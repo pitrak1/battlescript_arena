@@ -11,24 +11,12 @@ public enum AbilitySelectStates
     Confirm,
 }
 
-public class BattleStateMachine
+public partial class Main : Node
 {
     public AbilitySelectStates AbilitySelectState { get; private set; } = AbilitySelectStates.None;
     public List<Vector2> SelectedCoords { get; private set; } = new List<Vector2>();
     public Actor SelectedActor { get; private set; }
     public string SelectedAbility { get; private set; }
-    private Action<Actor> setActionsCallback;
-    private Action<string> abilityReadyCallback;
-    private Actor currentActor;
-
-    private Action<List<Vector2>, Actor, string> actionExecuteCallback;
-
-    public BattleStateMachine(Action<List<Vector2>, Actor, string> actionExecuteCallback, Action<Actor> setActionsCallback, Action<string> abilityReadyCallback)
-    {
-        this.actionExecuteCallback = actionExecuteCallback;
-        this.setActionsCallback = setActionsCallback;
-        this.abilityReadyCallback = abilityReadyCallback;
-    }
 
     public void HandleInput(string actionPressed)
     {
@@ -55,7 +43,8 @@ public class BattleStateMachine
             string[] validKeys = { "Q", "W", "E" };
             if (validKeys.Contains(actionPressed))
             {
-                actionExecuteCallback(SelectedCoords, SelectedActor, SelectedAbility);
+                world.ExecuteAbility(SelectedActor, SelectedAbility, SelectedCoords, spectrum);
+                abilityButtons.HideConfirmButtons();
                 SelectedCoords = new List<Vector2>();
                 SelectedAbility = null;
                 AbilitySelectState = AbilitySelectStates.ActorSelected;
@@ -65,21 +54,10 @@ public class BattleStateMachine
 
     public void HandleTileClick(Vector2 coords, Actor selectedActor)
     {
-
         if (AbilitySelectState == AbilitySelectStates.None || AbilitySelectState == AbilitySelectStates.ActorSelected)
         {
             SelectedActor = selectedActor;
-
-            if (selectedActor != null && selectedActor == currentActor)
-            {
-                AbilitySelectState = AbilitySelectStates.ActorSelected;
-                setActionsCallback(selectedActor);
-            }
-            else
-            {
-                AbilitySelectState = AbilitySelectStates.None;
-                setActionsCallback(null);
-            }
+            updateAbilityButtons();
         }
         else if (AbilitySelectState == AbilitySelectStates.AbilitySelected)
         {
@@ -88,19 +66,17 @@ public class BattleStateMachine
         }
     }
 
-    public void SetCurrentActor(Actor actor)
+    private void updateAbilityButtons()
     {
-        currentActor = actor;
-
         if (SelectedActor != null && SelectedActor == currentActor)
         {
             AbilitySelectState = AbilitySelectStates.ActorSelected;
-            setActionsCallback(SelectedActor);
+            abilityButtons.SetAbilities(SelectedActor.GetAbilities());
         }
         else
         {
             AbilitySelectState = AbilitySelectStates.None;
-            setActionsCallback(null);
+            abilityButtons.ClearAbilities();
         }
     }
 
@@ -110,7 +86,8 @@ public class BattleStateMachine
         if (SelectedCoords.Count >= expectedTargetCount)
         {
             AbilitySelectState = AbilitySelectStates.Confirm;
-            this.abilityReadyCallback(SelectedAbility);
+            Dictionary<string, int> keyMap = new Dictionary<string, int>() { { "Q", 0 }, { "W", 1 }, { "E", 2 } };
+            abilityButtons.ShowConfirmButton(keyMap[SelectedAbility]);
         }
     }
 }

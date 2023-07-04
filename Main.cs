@@ -8,8 +8,6 @@ public partial class Main : Node
     private AbilityButtons abilityButtons;
     private TurnOrder turnOrder;
 
-    private BattleStateMachine battleStateMachine;
-
     private Vector2 selectedCoords;
     private Actor selectedActor;
     private string selectedAction;
@@ -30,8 +28,6 @@ public partial class Main : Node
         abilityButtons = GetNode<AbilityButtons>("AbilityButtons");
         this.turnOrder = GetNode<TurnOrder>("TurnOrder");
 
-        battleStateMachine = new BattleStateMachine(HandleExecuteAbility, HandleSetAbilities, HandleAbilityReady);
-
         Actor wolfActor = ActorConfig.ActorSceneMap[ActorTypes.Wolf].Instantiate<Actor>();
         world.PlaceActor(wolfActor, new Vector2(3, 3));
         actors.Add(wolfActor);
@@ -44,34 +40,10 @@ public partial class Main : Node
         turnOrder.Setup(actors, HandleSetCurrentActor);
     }
 
-    private void HandleAbilityReady(string action)
-    {
-        Dictionary<string, int> keyMap = new Dictionary<string, int>() { { "Q", 0 }, { "W", 1 }, { "E", 2 } };
-        abilityButtons.ShowConfirmButton(keyMap[action]);
-    }
-
-    private void HandleExecuteAbility(List<Vector2> coords, Actor actor, string action)
-    {
-        world.ExecuteAbility(actor, action, coords, spectrum);
-        abilityButtons.HideConfirmButtons();
-    }
-
-    private void HandleSetAbilities(Actor actor)
-    {
-        if (actor == null)
-        {
-            abilityButtons.ClearAbilities();
-        }
-        else
-        {
-            abilityButtons.SetAbilities(actor.GetAbilities());
-        }
-    }
-
     private void HandleSetCurrentActor(Actor actor)
     {
         currentActor = actor;
-        battleStateMachine.SetCurrentActor(actor);
+        updateAbilityButtons();
     }
 
     public override void _Input(InputEvent @event)
@@ -83,24 +55,24 @@ public partial class Main : Node
         {
             if (Input.IsActionJustPressed(key))
             {
-                battleStateMachine.HandleInput(key);
+                HandleInput(key);
             }
         }
     }
 
     public void HandleAbilityButtonClick(string key)
     {
-        battleStateMachine.HandleInput(key);
+        HandleInput(key);
     }
 
     public void HandleAbilityConfirmButtonClick(string key)
     {
-        battleStateMachine.HandleConfirm(key);
+        HandleConfirm(key);
     }
 
     public void HandleTileClick(Vector2 coords)
     {
         Actor selectedActor = world.HandleTileClick(coords);
-        battleStateMachine.HandleTileClick(coords, selectedActor);
+        HandleTileClick(coords, selectedActor);
     }
 }
