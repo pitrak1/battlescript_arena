@@ -6,10 +6,10 @@ public partial class InvokeEarthAbility : Ability
 {
     public InvokeEarthAbility(string inputAction) : base(inputAction, "invokeEarth", "Invoke Earth", 1, 1, 0) { }
 
-    public override bool ExecuteAction(Actor source, World world, List<Vector2> target, Spectrum spectrum)
+    public override bool ExecuteAction(Actor source, World world, List<Vector2> target, ElementalSpectra spectra)
     {
-        GD.Print(spectrum.GetElementPower(Elements.Earth));
-        spectrum.IncreaseElement(Elements.Earth);
+        GD.Print(spectra.GetElementPower(Elements.Earth));
+        spectra.IncreaseElement(Elements.Earth);
         return true;
     }
 }

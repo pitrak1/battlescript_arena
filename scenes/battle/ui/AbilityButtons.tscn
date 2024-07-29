@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://4s10metpdngg"]
+[gd_scene load_steps=3 format=3 uid="uid://combf73twe3qr"]
 
 [ext_resource type="Script" path="res://scenes/battle/ui/AbilityButtons.cs" id="1_aqp2l"]
 [ext_resource type="PackedScene" uid="uid://d1g0bnd6eajo8" path="res://scenes/battle/ui/AbilityButton.tscn" id="2_161c1"]

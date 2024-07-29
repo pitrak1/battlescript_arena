@@ -60,3 +60,8 @@ res://scenes/battle/abilities/InvokeEarthAbility.cs
 res://scenes/battle/abilities/MoveAbility.cs
 res://scenes/battle/effects/ExampleEffect.cs
 res://scenes/battle/Actor.cs
+res://scenes/battle/ui/TurnOrder.tscn
+res://scenes/battle/ui/AbilityButtons.tscn
+res://scenes/battle/ui/Spectrum.tscn
+res://scenes/battle/ui/ElementalSpectra.cs
+res://scenes/battle/ui/AbilityButton.tscn

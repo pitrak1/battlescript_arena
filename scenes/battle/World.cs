@@ -65,16 +65,21 @@ public partial class World : Node2D
     {
         Actor actor = actorScene.Instantiate<Actor>();
         actor.Setup(actorType, coordinates);
-        tiles[(int)coordinates.X, (int)coordinates.Y].SetActor(actor);
+        getTileAtCoordinates(coordinates).CurrentActor = actor;
         actors.Add(actor);
         return actor;
     }
 
     public Actor RemoveActor(Actor actor)
     {
-        tiles[(int)actor.Coordinates.X, (int)actor.Coordinates.Y].ClearActor();
+        getTileAtCoordinates(actor.Coordinates).CurrentActor = null;
         actors.Remove(actor);
         return actor;
+    }
+
+    private Tile getTileAtCoordinates(Vector2 coordinates)
+    {
+        return tiles[(int)coordinates.X, (int)coordinates.Y];
     }
 
     // public Tile GetTile(Vector2 coordinates)

@@ -15,7 +15,7 @@ public partial class BleedEffect : Effect
         CurrentDuration = Mathf.Max(CurrentDuration - 1, 0);
     }
 
-    public override bool AbilityExecuted(Actor source, World world, List<Vector2> target, Spectrum spectrum)
+    public override bool AbilityExecuted(Actor source, World world, List<Vector2> target, ElementalSpectra spectra)
     {
         return true;
     }

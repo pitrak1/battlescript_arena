@@ -9,7 +9,7 @@ public enum Elements
     Water
 }
 
-public partial class Spectrum : Control
+public partial class ElementalSpectra : Control
 {
     List<TextureRect> windEarthGauge;
     int currentWindEarthValue;

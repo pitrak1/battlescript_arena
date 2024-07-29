@@ -17,4 +17,9 @@ public partial class BattleManager : Node2D
 	{
 		world.HighlightTile(coordinates);
 	}
+
+	public void _OnEndTurnButtonClicked()
+	{
+		GD.Print("SODFMSDF");
+	}
 }

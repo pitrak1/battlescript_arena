@@ -14,7 +14,12 @@ public partial class TurnOrder : Control
 
     public override void _Ready()
     {
-        GetNode<Button>("EndTurnButton").Pressed += this.OnEndTurnButtonPressed;
+        GetNode<Button>("EndTurnButton").Pressed += this.onEndTurnButtonClicked;
+    }
+
+    private void onEndTurnButtonClicked()
+    {
+        GetTree().CallGroup("InputReceivers", "_OnEndTurnButtonClicked");
     }
 
     public void Setup(List<Actor> actors, Action<Actor, Actor> actorCallback)

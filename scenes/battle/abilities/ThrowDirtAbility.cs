@@ -6,11 +6,11 @@ public partial class ThrowDirtAbility : Ability
 {
     public ThrowDirtAbility(string inputAction) : base(inputAction, "throwDirt", "Throw Dirt", 2, 0, 1) { }
 
-    public override bool ExecuteAction(Actor source, World world, List<Vector2> target, Spectrum spectrum)
+    public override bool ExecuteAction(Actor source, World world, List<Vector2> target, ElementalSpectra spectra)
     {
         // Tile startTile = world.GetTile(source.Coordinates);
         // Tile endTile = world.GetTile(target[0]);
-        // if (spectrum.GetElementPower(Elements.Earth) > 1)
+        // if (ElementalSpectra.GetElementPower(Elements.Earth) > 1)
         // {
         //     Actor endActor = endTile.GetActor();
         //     endActor.AlterHealth(-2);

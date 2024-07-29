@@ -17,7 +17,25 @@ public partial class Tile : Sprite2D
     private Vector2 offset = new Vector2(400, 160);
 
     public Vector2 coordinates;
-    private Actor actor;
+    private Actor currentActor;
+    public Actor CurrentActor
+    {
+        get { return currentActor; }
+        set
+        {
+            if (currentActor is not null)
+            {
+                RemoveChild(currentActor);
+            }
+
+            if (value is not null)
+            {
+                AddChild(value);
+            }
+
+            currentActor = value;
+        }
+    }
 
     private TileTypes type;
 
@@ -55,19 +73,5 @@ public partial class Tile : Sprite2D
     public void Highlight(bool isHighlighted)
     {
         GetNode<Sprite2D>("HighlightSprite").Visible = isHighlighted;
-    }
-
-    public void SetActor(Actor actor)
-    {
-        AddChild(actor);
-        this.actor = actor;
-    }
-
-    public Actor ClearActor()
-    {
-        Actor actor = this.actor;
-        this.actor = null;
-        RemoveChild(actor);
-        return actor;
     }
 }

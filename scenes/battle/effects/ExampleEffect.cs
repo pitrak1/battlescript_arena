@@ -6,7 +6,7 @@ public partial class ExampleEffect : Effect
 {
     public ExampleEffect(Actor actor) : base("example", "Example", 3, actor) { }
 
-    public override bool AbilityExecuted(Actor source, World world, List<Vector2> target, Spectrum spectrum)
+    public override bool AbilityExecuted(Actor source, World world, List<Vector2> target, ElementalSpectra spectra)
     {
         return true;
     }

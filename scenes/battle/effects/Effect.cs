@@ -31,7 +31,7 @@ public abstract partial class Effect : Node
         CurrentDuration = Duration;
     }
 
-    public virtual bool AbilityExecuted(Actor source, World world, List<Vector2> target, Spectrum spectrum)
+    public virtual bool AbilityExecuted(Actor source, World world, List<Vector2> target, ElementalSpectra spectra)
     {
         return true;
     }
