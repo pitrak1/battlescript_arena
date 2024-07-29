@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=3 uid="uid://4s10metpdngg"]
+
+[ext_resource type="Script" path="res://scenes/battle/ui/AbilityButtons.cs" id="1_aqp2l"]
+[ext_resource type="PackedScene" uid="uid://d1g0bnd6eajo8" path="res://scenes/battle/ui/AbilityButton.tscn" id="2_161c1"]
+
+[node name="AbilityButtons" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aqp2l")
+
+[node name="AbilityButton1" parent="." instance=ExtResource("2_161c1")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.079
+anchor_bottom = 0.0
+offset_left = 91.008
+offset_bottom = 648.0
+
+[node name="AbilityButton2" parent="." instance=ExtResource("2_161c1")]
+layout_mode = 1
+anchors_preset = 10
+anchor_bottom = 0.0
+offset_bottom = 648.0
+grow_vertical = 1
+
+[node name="AbilityButton3" parent="." instance=ExtResource("2_161c1")]
+layout_mode = 1
+anchors_preset = 10
+anchor_bottom = 0.0
+offset_bottom = 648.0
+grow_vertical = 1
+
+[node name="AbilityButton4" parent="." instance=ExtResource("2_161c1")]
+layout_mode = 1
+anchors_preset = 10
+anchor_bottom = 0.0
+offset_bottom = 648.0
+grow_vertical = 1
+
+[node name="AbilityButton5" parent="." instance=ExtResource("2_161c1")]
+layout_mode = 1
+anchors_preset = 10
+anchor_bottom = 0.0
+offset_bottom = 648.0
+grow_vertical = 1
+
+[node name="AbilityButton6" parent="." instance=ExtResource("2_161c1")]
+layout_mode = 1
+anchors_preset = 10
+anchor_bottom = 0.0
+offset_bottom = 648.0
+grow_vertical = 1

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cv5iqlevfqt37"]
+
+[ext_resource type="Script" path="res://scenes/battle/BattleManager.cs" id="1_ru8bg"]
+[ext_resource type="Script" path="res://scenes/battle/World.cs" id="2_61mb2"]
+[ext_resource type="Script" path="res://scenes/battle/BattleInterface.cs" id="3_fimkn"]
+
+[node name="BattleManager" type="Node2D" groups=["InputReceivers"]]
+script = ExtResource("1_ru8bg")
+
+[node name="World" type="Node2D" parent="."]
+script = ExtResource("2_61mb2")
+
+[node name="BattleInterface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_fimkn")

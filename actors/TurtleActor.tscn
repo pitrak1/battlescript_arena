@@ -1,7 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://dftsbxi3wp6p3"]
-
-[ext_resource type="PackedScene" uid="uid://blq7xcq26gcfu" path="res://actors/Actor.tscn" id="1_eqgfs"]
-[ext_resource type="Script" path="res://actors/TurtleActor.cs" id="2_ujarv"]
-
-[node name="Actor" instance=ExtResource("1_eqgfs")]
-script = ExtResource("2_ujarv")
