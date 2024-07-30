@@ -1,8 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://cv5iqlevfqt37"]
+[gd_scene load_steps=11 format=3 uid="uid://cv5iqlevfqt37"]
 
 [ext_resource type="Script" path="res://scenes/battle/BattleManager.cs" id="1_ru8bg"]
 [ext_resource type="Script" path="res://scenes/battle/World.cs" id="2_61mb2"]
-[ext_resource type="Script" path="res://scenes/battle/BattleInterface.cs" id="3_fimkn"]
 [ext_resource type="Script" path="res://scenes/battle/ui/TurnOrder.cs" id="4_t8sky"]
 [ext_resource type="Texture2D" uid="uid://ny1vlg54gvcp" path="res://assets/wolf.jpeg" id="5_ij6sd"]
 [ext_resource type="Script" path="res://scenes/battle/ui/ElementalSpectra.cs" id="6_nfy0g"]
@@ -18,76 +17,79 @@ script = ExtResource("1_ru8bg")
 [node name="World" type="Node2D" parent="."]
 script = ExtResource("2_61mb2")
 
-[node name="BattleInterface" type="Control" parent="."]
+[node name="TurnOrder" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("3_fimkn")
-
-[node name="TurnOrder" type="Control" parent="BattleInterface"]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("4_t8sky")
 
-[node name="Actor1" type="TextureRect" parent="BattleInterface/TurnOrder"]
+[node name="Actor1" type="TextureRect" parent="TurnOrder"]
+layout_mode = 0
 offset_left = 352.0
 offset_top = 20.0
 offset_right = 408.0
 offset_bottom = 76.0
 texture = ExtResource("5_ij6sd")
 
-[node name="Actor2" type="TextureRect" parent="BattleInterface/TurnOrder"]
+[node name="Actor2" type="TextureRect" parent="TurnOrder"]
+layout_mode = 0
 offset_left = 408.0
 offset_top = 20.0
 offset_right = 464.0
 offset_bottom = 76.0
 texture = ExtResource("5_ij6sd")
 
-[node name="Actor3" type="TextureRect" parent="BattleInterface/TurnOrder"]
+[node name="Actor3" type="TextureRect" parent="TurnOrder"]
+layout_mode = 0
 offset_left = 464.0
 offset_top = 20.0
 offset_right = 520.0
 offset_bottom = 76.0
 texture = ExtResource("5_ij6sd")
 
-[node name="Actor4" type="TextureRect" parent="BattleInterface/TurnOrder"]
+[node name="Actor4" type="TextureRect" parent="TurnOrder"]
+layout_mode = 0
 offset_left = 520.0
 offset_top = 20.0
 offset_right = 576.0
 offset_bottom = 76.0
 texture = ExtResource("5_ij6sd")
 
-[node name="Actor5" type="TextureRect" parent="BattleInterface/TurnOrder"]
+[node name="Actor5" type="TextureRect" parent="TurnOrder"]
+layout_mode = 0
 offset_left = 576.0
 offset_top = 20.0
 offset_right = 632.0
 offset_bottom = 76.0
 texture = ExtResource("5_ij6sd")
 
-[node name="Actor6" type="TextureRect" parent="BattleInterface/TurnOrder"]
+[node name="Actor6" type="TextureRect" parent="TurnOrder"]
+layout_mode = 0
 offset_left = 632.0
 offset_top = 20.0
 offset_right = 688.0
 offset_bottom = 76.0
 texture = ExtResource("5_ij6sd")
 
-[node name="Actor7" type="TextureRect" parent="BattleInterface/TurnOrder"]
+[node name="Actor7" type="TextureRect" parent="TurnOrder"]
+layout_mode = 0
 offset_left = 688.0
 offset_top = 20.0
 offset_right = 744.0
 offset_bottom = 76.0
 texture = ExtResource("5_ij6sd")
 
-[node name="Actor8" type="TextureRect" parent="BattleInterface/TurnOrder"]
+[node name="Actor8" type="TextureRect" parent="TurnOrder"]
+layout_mode = 0
 offset_left = 744.0
 offset_top = 20.0
 offset_right = 800.0
 offset_bottom = 76.0
 texture = ExtResource("5_ij6sd")
 
-[node name="NextLabel" type="Label" parent="BattleInterface/TurnOrder"]
+[node name="NextLabel" type="Label" parent="TurnOrder"]
+layout_mode = 0
 offset_left = 352.0
 offset_top = 80.0
 offset_right = 408.0
@@ -96,26 +98,30 @@ text = "Next
 "
 horizontal_alignment = 1
 
-[node name="EndTurnButton" type="Button" parent="BattleInterface/TurnOrder"]
+[node name="EndTurnButton" type="Button" parent="TurnOrder"]
+layout_mode = 0
 offset_left = 408.0
 offset_top = 110.0
 offset_right = 744.0
 offset_bottom = 150.0
 text = "End Turn"
 
-[node name="ElementalSpectra" type="Control" parent="BattleInterface"]
+[node name="ElementalSpectra" type="Control" parent="."]
+layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("6_nfy0g")
 
-[node name="Background" type="TextureRect" parent="BattleInterface/ElementalSpectra"]
+[node name="Background" type="TextureRect" parent="ElementalSpectra"]
+layout_mode = 0
 offset_right = 300.0
 offset_bottom = 120.0
 texture = ExtResource("7_vqwmy")
 expand_mode = 1
 
-[node name="WindHighlight" type="TextureRect" parent="BattleInterface/ElementalSpectra"]
+[node name="WindHighlight" type="TextureRect" parent="ElementalSpectra"]
+layout_mode = 0
 offset_left = 2.0
 offset_top = 4.0
 offset_right = 57.0
@@ -123,7 +129,8 @@ offset_bottom = 59.0
 texture = ExtResource("8_fhllv")
 expand_mode = 1
 
-[node name="WindTick2" type="TextureRect" parent="BattleInterface/ElementalSpectra"]
+[node name="WindTick2" type="TextureRect" parent="ElementalSpectra"]
+layout_mode = 0
 offset_left = 50.0
 offset_top = 12.0
 offset_right = 90.0
@@ -131,7 +138,8 @@ offset_bottom = 52.0
 texture = ExtResource("9_vtbxv")
 expand_mode = 1
 
-[node name="WindTick1" type="TextureRect" parent="BattleInterface/ElementalSpectra"]
+[node name="WindTick1" type="TextureRect" parent="ElementalSpectra"]
+layout_mode = 0
 offset_left = 90.0
 offset_top = 12.0
 offset_right = 130.0
@@ -139,7 +147,8 @@ offset_bottom = 52.0
 texture = ExtResource("9_vtbxv")
 expand_mode = 1
 
-[node name="WindEarthNeutralTick" type="TextureRect" parent="BattleInterface/ElementalSpectra"]
+[node name="WindEarthNeutralTick" type="TextureRect" parent="ElementalSpectra"]
+layout_mode = 0
 offset_left = 130.0
 offset_top = 12.0
 offset_right = 170.0
@@ -147,7 +156,8 @@ offset_bottom = 52.0
 texture = ExtResource("9_vtbxv")
 expand_mode = 1
 
-[node name="EarthTick1" type="TextureRect" parent="BattleInterface/ElementalSpectra"]
+[node name="EarthTick1" type="TextureRect" parent="ElementalSpectra"]
+layout_mode = 0
 offset_left = 170.0
 offset_top = 12.0
 offset_right = 210.0
@@ -155,7 +165,8 @@ offset_bottom = 52.0
 texture = ExtResource("9_vtbxv")
 expand_mode = 1
 
-[node name="EarthTick2" type="TextureRect" parent="BattleInterface/ElementalSpectra"]
+[node name="EarthTick2" type="TextureRect" parent="ElementalSpectra"]
+layout_mode = 0
 offset_left = 210.0
 offset_top = 12.0
 offset_right = 250.0
@@ -163,7 +174,8 @@ offset_bottom = 52.0
 texture = ExtResource("9_vtbxv")
 expand_mode = 1
 
-[node name="EarthHighlight" type="TextureRect" parent="BattleInterface/ElementalSpectra"]
+[node name="EarthHighlight" type="TextureRect" parent="ElementalSpectra"]
+layout_mode = 0
 offset_left = 242.0
 offset_top = 4.0
 offset_right = 297.0
@@ -171,7 +183,8 @@ offset_bottom = 59.0
 texture = ExtResource("8_fhllv")
 expand_mode = 1
 
-[node name="FireHighlight" type="TextureRect" parent="BattleInterface/ElementalSpectra"]
+[node name="FireHighlight" type="TextureRect" parent="ElementalSpectra"]
+layout_mode = 0
 offset_left = 2.0
 offset_top = 62.0
 offset_right = 57.0
@@ -179,7 +192,8 @@ offset_bottom = 117.0
 texture = ExtResource("8_fhllv")
 expand_mode = 1
 
-[node name="FireTick2" type="TextureRect" parent="BattleInterface/ElementalSpectra"]
+[node name="FireTick2" type="TextureRect" parent="ElementalSpectra"]
+layout_mode = 0
 offset_left = 50.0
 offset_top = 70.0
 offset_right = 90.0
@@ -187,7 +201,8 @@ offset_bottom = 110.0
 texture = ExtResource("9_vtbxv")
 expand_mode = 1
 
-[node name="FireTick1" type="TextureRect" parent="BattleInterface/ElementalSpectra"]
+[node name="FireTick1" type="TextureRect" parent="ElementalSpectra"]
+layout_mode = 0
 offset_left = 90.0
 offset_top = 70.0
 offset_right = 130.0
@@ -195,7 +210,8 @@ offset_bottom = 110.0
 texture = ExtResource("9_vtbxv")
 expand_mode = 1
 
-[node name="FireWaterNeutralTick" type="TextureRect" parent="BattleInterface/ElementalSpectra"]
+[node name="FireWaterNeutralTick" type="TextureRect" parent="ElementalSpectra"]
+layout_mode = 0
 offset_left = 130.0
 offset_top = 70.0
 offset_right = 170.0
@@ -203,7 +219,8 @@ offset_bottom = 110.0
 texture = ExtResource("9_vtbxv")
 expand_mode = 1
 
-[node name="WaterTick1" type="TextureRect" parent="BattleInterface/ElementalSpectra"]
+[node name="WaterTick1" type="TextureRect" parent="ElementalSpectra"]
+layout_mode = 0
 offset_left = 170.0
 offset_top = 70.0
 offset_right = 210.0
@@ -211,7 +228,8 @@ offset_bottom = 110.0
 texture = ExtResource("9_vtbxv")
 expand_mode = 1
 
-[node name="WaterTick2" type="TextureRect" parent="BattleInterface/ElementalSpectra"]
+[node name="WaterTick2" type="TextureRect" parent="ElementalSpectra"]
+layout_mode = 0
 offset_left = 210.0
 offset_top = 70.0
 offset_right = 250.0
@@ -219,7 +237,8 @@ offset_bottom = 110.0
 texture = ExtResource("9_vtbxv")
 expand_mode = 1
 
-[node name="WaterHighlight" type="TextureRect" parent="BattleInterface/ElementalSpectra"]
+[node name="WaterHighlight" type="TextureRect" parent="ElementalSpectra"]
+layout_mode = 0
 offset_left = 242.0
 offset_top = 62.0
 offset_right = 297.0
@@ -227,13 +246,15 @@ offset_bottom = 117.0
 texture = ExtResource("8_fhllv")
 expand_mode = 1
 
-[node name="AbilityButtons" type="Control" parent="BattleInterface"]
+[node name="AbilityButtons" type="Control" parent="."]
+layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("10_t10x1")
 
-[node name="AbilityButton1" parent="BattleInterface/AbilityButtons" instance=ExtResource("11_g7ogx")]
+[node name="AbilityButton1" parent="AbilityButtons" instance=ExtResource("11_g7ogx")]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.079
@@ -241,35 +262,40 @@ anchor_bottom = 0.0
 offset_left = 91.008
 offset_bottom = 648.0
 
-[node name="AbilityButton2" parent="BattleInterface/AbilityButtons" instance=ExtResource("11_g7ogx")]
+[node name="AbilityButton2" parent="AbilityButtons" instance=ExtResource("11_g7ogx")]
+visible = false
 layout_mode = 1
 anchors_preset = 10
 anchor_bottom = 0.0
 offset_bottom = 648.0
 grow_vertical = 1
 
-[node name="AbilityButton3" parent="BattleInterface/AbilityButtons" instance=ExtResource("11_g7ogx")]
+[node name="AbilityButton3" parent="AbilityButtons" instance=ExtResource("11_g7ogx")]
+visible = false
 layout_mode = 1
 anchors_preset = 10
 anchor_bottom = 0.0
 offset_bottom = 648.0
 grow_vertical = 1
 
-[node name="AbilityButton4" parent="BattleInterface/AbilityButtons" instance=ExtResource("11_g7ogx")]
+[node name="AbilityButton4" parent="AbilityButtons" instance=ExtResource("11_g7ogx")]
+visible = false
 layout_mode = 1
 anchors_preset = 10
 anchor_bottom = 0.0
 offset_bottom = 648.0
 grow_vertical = 1
 
-[node name="AbilityButton5" parent="BattleInterface/AbilityButtons" instance=ExtResource("11_g7ogx")]
+[node name="AbilityButton5" parent="AbilityButtons" instance=ExtResource("11_g7ogx")]
+visible = false
 layout_mode = 1
 anchors_preset = 10
 anchor_bottom = 0.0
 offset_bottom = 648.0
 grow_vertical = 1
 
-[node name="AbilityButton6" parent="BattleInterface/AbilityButtons" instance=ExtResource("11_g7ogx")]
+[node name="AbilityButton6" parent="AbilityButtons" instance=ExtResource("11_g7ogx")]
+visible = false
 layout_mode = 1
 anchors_preset = 10
 anchor_bottom = 0.0

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 
-public enum AbilitySelectStates
-{
-    None,
-    ActorSelected,
-    AbilitySelected,
-    Confirm,
-}
+// public enum AbilitySelectStates
+// {
+//     None,
+//     ActorSelected,
+//     AbilitySelected,
+//     Confirm,
+// }
 
 public partial class Main : Node
 {

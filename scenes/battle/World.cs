@@ -61,25 +61,35 @@ public partial class World : Node2D
         }
     }
 
+    public void ClearHighlightTile()
+    {
+        HighlightTile(new Vector2(10, 10));
+    }
+
     public Actor AddActor(ActorTypes actorType, Vector2 coordinates)
     {
         Actor actor = actorScene.Instantiate<Actor>();
         actor.Setup(actorType, coordinates);
-        getTileAtCoordinates(coordinates).CurrentActor = actor;
+        GetTileAtCoordinates(coordinates).CurrentActor = actor;
         actors.Add(actor);
         return actor;
     }
 
     public Actor RemoveActor(Actor actor)
     {
-        getTileAtCoordinates(actor.Coordinates).CurrentActor = null;
+        GetTileAtCoordinates(actor.Coordinates).CurrentActor = null;
         actors.Remove(actor);
         return actor;
     }
 
-    private Tile getTileAtCoordinates(Vector2 coordinates)
+    public Tile GetTileAtCoordinates(Vector2 coordinates)
     {
         return tiles[(int)coordinates.X, (int)coordinates.Y];
+    }
+
+    public Actor GetActorAtCoordinates(Vector2 coordinates)
+    {
+        return GetTileAtCoordinates(coordinates).CurrentActor;
     }
 
     // public Tile GetTile(Vector2 coordinates)

@@ -13,8 +13,8 @@ public partial class Actor : Sprite2D
     public string DisplayName;
     public Vector2 Coordinates;
     public int Speed;
-    private List<Ability> abilities = new List<Ability>();
-    public List<Effect> Effects = new List<Effect>();
+    public List<Ability> Abilities { get; private set; } = new List<Ability>();
+    public List<Effect> Effects { get; private set; } = new List<Effect>();
     private int maxHealth;
     public int MaxHealth
     {
@@ -39,10 +39,10 @@ public partial class Actor : Sprite2D
                 this.Speed = 15;
                 this.DisplayName = "Wolf";
 
-                abilities = new List<Ability>();
-                abilities.Add(new MoveAbility("Q"));
-                abilities.Add(new HurtSelfAbility("W"));
-                abilities.Add(new InvokeEarthAbility("E"));
+                Abilities = new List<Ability>();
+                Abilities.Add(new MoveAbility("Q"));
+                Abilities.Add(new HurtSelfAbility("W"));
+                Abilities.Add(new InvokeEarthAbility("E"));
 
                 MaxHealth = 15;
             }
@@ -52,10 +52,10 @@ public partial class Actor : Sprite2D
                 this.Speed = 20;
                 this.DisplayName = "Turtle";
 
-                abilities = new List<Ability>();
-                abilities.Add(new MoveAbility("Q"));
-                abilities.Add(new HurtSelfAbility("W"));
-                abilities.Add(new ThrowDirtAbility("E"));
+                Abilities = new List<Ability>();
+                Abilities.Add(new MoveAbility("Q"));
+                Abilities.Add(new HurtSelfAbility("W"));
+                Abilities.Add(new ThrowDirtAbility("E"));
 
                 MaxHealth = 20;
             }

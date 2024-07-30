@@ -19,7 +19,7 @@ public partial class TurnOrder : Control
 
     private void onEndTurnButtonClicked()
     {
-        GetTree().CallGroup("InputReceivers", "_OnEndTurnButtonClicked");
+        GetTree().CallGroup("InputReceivers", "_onEndTurnButtonClicked");
     }
 
     public void Setup(List<Actor> actors, Action<Actor, Actor> actorCallback)

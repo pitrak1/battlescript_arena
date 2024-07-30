@@ -66,7 +66,7 @@ public partial class Tile : Sprite2D
     {
         if (Input.IsActionJustPressed("LMB"))
         {
-            GetTree().CallGroup("InputReceivers", "_OnTileClicked", coordinates);
+            GetTree().CallGroup("InputReceivers", "_onTileClicked", coordinates);
         }
     }
 
