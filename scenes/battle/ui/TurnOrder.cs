@@ -5,12 +5,7 @@ using System.Linq;
 
 public partial class TurnOrder : Control
 {
-    private List<Actor> actors;
-    private int currentSpeedValue = 0;
-    private int currentTurnOrderIndex = 0;
     private List<Actor> turnOrder = new List<Actor>();
-
-    private Action<Actor, Actor> currentActorCallback;
 
     public override void _Ready()
     {
@@ -22,33 +17,33 @@ public partial class TurnOrder : Control
         GetTree().CallGroup("InputReceivers", "_onEndTurnButtonClicked");
     }
 
-    public void Setup(List<Actor> actors, Action<Actor, Actor> actorCallback)
-    {
-        this.actors = actors;
-        this.currentActorCallback = actorCallback;
-        this.calculateTurnOrder();
-        this.SetTurnOrder(this.getDisplayTurnOrder());
-        currentActorCallback(null, turnOrder[currentTurnOrderIndex]);
-    }
-
-    public void OnEndTurnButtonPressed()
-    {
-        // turnOrder[currentTurnOrderIndex].EndTurn();
-        currentSpeedValue += turnOrder[currentTurnOrderIndex].Speed;
-        currentTurnOrderIndex++;
-        this.calculateTurnOrder();
-        this.SetTurnOrder(this.getDisplayTurnOrder());
-        currentActorCallback(turnOrder[currentTurnOrderIndex - 1], turnOrder[currentTurnOrderIndex]);
-    }
-
     public void SetTurnOrder(List<Actor> actors)
+    {
+        Dictionary<Actor, int> speedValues = new Dictionary<Actor, int>();
+        int lowestSpeed = actors.MinBy(actor => actor.Speed).Speed;
+        actors.ForEach(actor => { speedValues[actor] = actor.Speed; });
+
+        // This works by having each actor have a speed value that tracks the current speed they've
+        // used.  To get the next actor, we just need to find the minimum speed value, add its
+        // actor to the turn order, and then add the speed of the actor to its speed value
+        while (turnOrder.Count < 100)
+        {
+            Actor nextActor = speedValues.MinBy(kvp => kvp.Value).Key;
+            turnOrder.Add(nextActor);
+            speedValues[nextActor] = speedValues[nextActor] + nextActor.Speed;
+        }
+
+        displayTurnOrder();
+    }
+
+    private void displayTurnOrder()
     {
         for (int i = 0; i < 8; i++)
         {
             TextureRect actorImage = GetNode<TextureRect>("Actor" + (i + 1));
-            if (i < actors.Count)
+            if (i < turnOrder.Count)
             {
-                actorImage.Texture = actors[i].Texture;
+                actorImage.Texture = turnOrder[i].Texture;
                 actorImage.Show();
             }
             else
@@ -58,36 +53,9 @@ public partial class TurnOrder : Control
         }
     }
 
-    public void ClearTurnOrder()
+    public void GoToNextActor()
     {
-        for (int i = 0; i < 8; i++)
-        {
-            Control actorImage = GetNode<Control>("Actor" + (i + 1));
-            actorImage.Hide();
-        }
-    }
-
-    private void calculateTurnOrder()
-    {
-        Dictionary<Actor, int> speedValues = new Dictionary<Actor, int>();
-
-        int lowestSpeed = actors.MinBy(actor => actor.Speed).Speed;
-
-        actors.ForEach(actor =>
-        {
-            speedValues[actor] = actor.Speed;
-        });
-
-        while (turnOrder.Count < 100)
-        {
-            Actor nextActor = speedValues.MinBy(kvp => kvp.Value).Key;
-            turnOrder.Add(nextActor);
-            speedValues[nextActor] = speedValues[nextActor] + nextActor.Speed;
-        }
-    }
-
-    private List<Actor> getDisplayTurnOrder()
-    {
-        return turnOrder.ToArray().Skip(currentTurnOrderIndex).Take(8).ToList();
+        turnOrder.RemoveAt(0);
+        displayTurnOrder();
     }
 }

@@ -17,7 +17,7 @@ public partial class World : Node2D
 
     private Tile[,] tiles = new Tile[9, 9];
 
-    private List<Actor> actors = new List<Actor>();
+    public List<Actor> Actors { get; private set; } = new List<Actor>();
 
     private PackedScene tileScene;
     private PackedScene actorScene;
@@ -43,6 +43,7 @@ public partial class World : Node2D
         }
 
         Actor wolf = AddActor(ActorTypes.Wolf, new Vector2(5, 5));
+        Actor turtle = AddActor(ActorTypes.Turtle, new Vector2(7, 7));
         // RemoveActor(wolf);
 
     }
@@ -71,14 +72,14 @@ public partial class World : Node2D
         Actor actor = actorScene.Instantiate<Actor>();
         actor.Setup(actorType, coordinates);
         GetTileAtCoordinates(coordinates).CurrentActor = actor;
-        actors.Add(actor);
+        Actors.Add(actor);
         return actor;
     }
 
     public Actor RemoveActor(Actor actor)
     {
         GetTileAtCoordinates(actor.Coordinates).CurrentActor = null;
-        actors.Remove(actor);
+        Actors.Remove(actor);
         return actor;
     }
 

@@ -28,6 +28,8 @@ public partial class BattleManager : Node2D
 		turnOrder = GetNode<TurnOrder>("TurnOrder");
 		elementalSpectra = GetNode<ElementalSpectra>("ElementalSpectra");
 		abilityButtons = GetNode<AbilityButtons>("AbilityButtons");
+
+		turnOrder.SetTurnOrder(world.Actors);
 	}
 
 	public override void _Input(InputEvent @event)
@@ -136,6 +138,6 @@ public partial class BattleManager : Node2D
 
 	private void _onEndTurnButtonClicked()
 	{
-		GD.Print("SODFMSDF");
+		turnOrder.GoToNextActor();
 	}
 }
