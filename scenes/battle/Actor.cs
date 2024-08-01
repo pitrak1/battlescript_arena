@@ -73,38 +73,4 @@ public partial class Actor : Sprite2D
         currentHealth += healthDiff;
         GetNode<Label>("LifeLabel").Text = $"{currentHealth}/{maxHealth}";
     }
-
-    // public void Place(Vector2 coords)
-    // {
-    //     this.Coordinates = coords;
-    // }
-
-    // public void AddAbility(Ability ability)
-    // {
-    //     abilities.Add(ability);
-    // }
-
-    // public void EndTurn(Actor actor)
-    // {
-    //     abilities.ForEach(ability =>
-    //     {
-    //         ability.EndTurn();
-    //     });
-
-    //     Effects.ForEach(effect =>
-    //     {
-    //         effect.EndTurn();
-    //     });
-    // }
-
-    // public bool ExecuteAbility(string inputAction, Actor source, World world, List<Vector2> target, Spectrum spectrum)
-    // {
-    //     var ability = abilities.Find(x => x.InputAction == inputAction);
-    //     return ability.Execute(source, world, target, spectrum);
-    // }
-
-    // public List<Ability> GetAbilities()
-    // {
-    //     return abilities;
-    // }
 }

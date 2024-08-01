@@ -50,21 +50,24 @@ public partial class World : Node2D
 
     public void HighlightTile(Vector2 coordinates)
     {
+        if (GetTileAtCoordinates(coordinates) is not null)
+        {
+            GetTileAtCoordinates(coordinates).Highlight(true);
+        }
+    }
+
+    public void ClearHighlights()
+    {
         for (int y = 0; y < 9; y++)
         {
             for (int x = 0; x < 9; x++)
             {
                 if (tiles[x, y] is not null)
                 {
-                    tiles[x, y].Highlight(coordinates == new Vector2(x, y));
+                    tiles[x, y].Highlight(false);
                 }
             }
         }
-    }
-
-    public void ClearHighlightTile()
-    {
-        HighlightTile(new Vector2(10, 10));
     }
 
     public Actor AddActor(ActorTypes actorType, Vector2 coordinates)
@@ -92,14 +95,4 @@ public partial class World : Node2D
     {
         return GetTileAtCoordinates(coordinates).CurrentActor;
     }
-
-    // public Tile GetTile(Vector2 coordinates)
-    // {
-    //     return tiles[(int)coordinates.X, (int)coordinates.Y];
-    // }
-
-    // public void ExecuteAbility(Actor selectedActor, string inputAction, List<Vector2> target, Spectrum spectrum)
-    // {
-    //     selectedActor.ExecuteAbility(inputAction, selectedActor, this, target, spectrum);
-    // }
 }

@@ -57,11 +57,6 @@ public partial class Tile : Sprite2D
         this.type = tileType;
     }
 
-    // This is simply to call the _OnTileClicked method in the BattleManager.
-    // There were several ways to do this, but this seemed the most elegant.
-    // We could have tunneled up the tree to the BattleManager node itself and emitted a signal,
-    // but it felt brittle.
-    // We also could be passing through the BattleManager node to here, but that seems really bad.
     public void _on_static_body_2d_input_event(Node viewport, InputEvent inputEvent, int shape_idx)
     {
         if (Input.IsActionJustPressed("LMB"))

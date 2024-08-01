@@ -54,7 +54,7 @@ public partial class BattleManager : Node2D
 			selectedAbility = null;
 
 			abilityButtons.HideConfirmButtons();
-			world.ClearHighlightTile();
+			world.ClearHighlights();
 			abilityButtons.ClearAbilities();
 		}
 	}
@@ -68,6 +68,7 @@ public partial class BattleManager : Node2D
 			abilitySelectState == AbilitySelectStates.ActorSelected
 		)
 		{
+			world.ClearHighlights();
 			world.HighlightTile(coordinates);
 			selectedActor = world.GetActorAtCoordinates(coordinates);
 
@@ -87,6 +88,7 @@ public partial class BattleManager : Node2D
 		{
 			// If an ability is selected, we're assuming we're targeting for that ability
 			selectedCoords.Add(coordinates);
+			world.HighlightTile(coordinates);
 			evaluateNumberOfTargets();
 		}
 	}
@@ -134,6 +136,9 @@ public partial class BattleManager : Node2D
 		abilityButtons.HideConfirmButtons();
 		selectedCoords = new List<Vector2>();
 		selectedAbility = null;
+
+		world.ClearHighlights();
+		world.HighlightTile(selectedActor.Coordinates);
 	}
 
 	private void _onEndTurnButtonClicked()
