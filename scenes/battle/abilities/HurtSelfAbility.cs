@@ -6,7 +6,7 @@ public partial class HurtSelfAbility : Ability
 {
     public HurtSelfAbility(string inputAction) : base(inputAction, "hurtSelf", "Hurt Self", 1, 1, 0) { }
 
-    public override bool ExecuteAction(Actor source, World world, List<Vector2> target, ElementalSpectra spectra)
+    public override bool ExecuteAction(Actor source, List<Vector2> targets, World world, TurnOrder turnOrder, ElementalSpectra spectra)
     {
         source.AlterHealth(-1);
         return true;

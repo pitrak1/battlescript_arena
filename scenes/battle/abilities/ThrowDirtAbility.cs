@@ -6,7 +6,7 @@ public partial class ThrowDirtAbility : Ability
 {
     public ThrowDirtAbility(string inputAction) : base(inputAction, "throwDirt", "Throw Dirt", 2, 0, 1) { }
 
-    public override bool ExecuteAction(Actor source, World world, List<Vector2> target, ElementalSpectra spectra)
+    public override bool ExecuteAction(Actor source, List<Vector2> targets, World world, TurnOrder turnOrder, ElementalSpectra spectra)
     {
         // Tile startTile = world.GetTile(source.Coordinates);
         // Tile endTile = world.GetTile(target[0]);

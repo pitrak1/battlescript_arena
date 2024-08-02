@@ -41,11 +41,11 @@ public abstract partial class Ability : Node
     }
 
 
-    public bool Execute(Actor source, World world, List<Vector2> target, ElementalSpectra spectra)
+    public bool Execute(Actor source, List<Vector2> targets, World world, TurnOrder turnOrder, ElementalSpectra spectra)
     {
         if (CurrentUsesPerTurn == 0 || CurrentCooldown > 0) return false;
 
-        bool result = this.ExecuteAction(source, world, target, spectra);
+        bool result = this.ExecuteAction(source, targets, world, turnOrder, spectra);
 
         if (result)
         {
@@ -60,5 +60,5 @@ public abstract partial class Ability : Node
         return result;
     }
 
-    public abstract bool ExecuteAction(Actor source, World world, List<Vector2> target, ElementalSpectra spectra);
+    public abstract bool ExecuteAction(Actor source, List<Vector2> targets, World world, TurnOrder turnOrder, ElementalSpectra spectra);
 }

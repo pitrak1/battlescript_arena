@@ -20,7 +20,7 @@ public partial class BattleManager : Node2D
 	private AbilitySelectStates abilitySelectState = AbilitySelectStates.None;
 	private List<Vector2> selectedCoords = new List<Vector2>();
 	private Actor selectedActor;
-	private string selectedAbility;
+	private string selectedAction;
 
 	public override void _Ready()
 	{
@@ -51,7 +51,7 @@ public partial class BattleManager : Node2D
 			abilitySelectState = AbilitySelectStates.None;
 			selectedCoords = new List<Vector2>();
 			selectedActor = null;
-			selectedAbility = null;
+			selectedAction = null;
 
 			abilityButtons.HideConfirmButtons();
 			world.ClearHighlights();
@@ -104,7 +104,7 @@ public partial class BattleManager : Node2D
 			{
 				abilitySelectState = AbilitySelectStates.AbilitySelected;
 				selectedCoords = new List<Vector2>();
-				selectedAbility = action;
+				selectedAction = action;
 				// We want to evaluate targets and show the confirm button in case the ability has
 				// 0 expected targets
 				evaluateNumberOfTargets();
@@ -117,25 +117,25 @@ public partial class BattleManager : Node2D
 		// if the ability has enough targets selected, show confirmation button
 		int expectedTargetCount = selectedActor
 			.Abilities
-			.Find(ab => ab.InputAction == selectedAbility)
+			.Find(ab => ab.InputAction == selectedAction)
 			.NumberOfTargets;
 
 		if (expectedTargetCount <= selectedCoords.Count)
 		{
 			abilitySelectState = AbilitySelectStates.Confirm;
 			Dictionary<string, int> keyMap = new Dictionary<string, int>() { { "Q", 0 }, { "W", 1 }, { "E", 2 } };
-			abilityButtons.ShowConfirmButton(keyMap[selectedAbility]);
+			abilityButtons.ShowConfirmButton(keyMap[selectedAction]);
 		}
 	}
 
 	private void _onAbilityConfirmButtonClicked(string action)
 	{
 		// If the confirm is clicked, we want to keep the actor selected, but remove everythign else
-		// world.ExecuteAbility(SelectedActor, SelectedAbility, SelectedCoords, spectrum);
+		executeAbility();
 		abilitySelectState = AbilitySelectStates.ActorSelected;
 		abilityButtons.HideConfirmButtons();
 		selectedCoords = new List<Vector2>();
-		selectedAbility = null;
+		selectedAction = null;
 
 		world.ClearHighlights();
 		world.HighlightTile(selectedActor.Coordinates);
@@ -144,5 +144,12 @@ public partial class BattleManager : Node2D
 	private void _onEndTurnButtonClicked()
 	{
 		turnOrder.GoToNextActor();
+	}
+
+	private void executeAbility()
+	{
+		Dictionary<string, int> actionMap = new Dictionary<string, int>() { { "Q", 0 }, { "W", 1 }, { "E", 2 } };
+		Ability selectedAbility = selectedActor.Abilities[actionMap[selectedAction]];
+		selectedAbility.Execute(selectedActor, selectedCoords, world, turnOrder, elementalSpectra);
 	}
 }

@@ -6,12 +6,15 @@ public partial class MoveAbility : Ability
 {
     public MoveAbility(string inputAction) : base(inputAction, "move", "Move", 2, 1, 1) { }
 
-    public override bool ExecuteAction(Actor source, World world, List<Vector2> target, ElementalSpectra spectra)
+    public override bool ExecuteAction(Actor source, List<Vector2> targets, World world, TurnOrder turnOrder, ElementalSpectra spectra)
     {
-        // Tile startTile = world.GetTile(source.Coordinates);
-        // Tile endTile = world.GetTile(target[0]);
-        // Actor actor = startTile.RemoveActor();
-        // endTile.PlaceActor(actor);
+        Tile startTile = world.GetTileAtCoordinates(source.Coordinates);
+        Tile endTile = world.GetTileAtCoordinates(targets[0]);
+
+        startTile.CurrentActor = null;
+        endTile.CurrentActor = source;
+        source.Coordinates = targets[0];
+
         return true;
     }
 }
