@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public partial class MoveAbility : Ability
 {
-    public MoveAbility(string inputAction) : base(inputAction, "move", "Move", 2, 1, 1) { }
+    public MoveAbility(string inputAction) : base(inputAction, "move", "Move", "res://assets/move.jpg", 2, 1, 1) { }
 
     public override bool ExecuteAction(Actor source, List<Vector2> targets, World world, TurnOrder turnOrder, ElementalSpectra spectra)
     {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public partial class ThrowDirtAbility : Ability
 {
-    public ThrowDirtAbility(string inputAction) : base(inputAction, "throwDirt", "Throw Dirt", 2, 0, 1) { }
+    public ThrowDirtAbility(string inputAction) : base(inputAction, "throwDirt", "Throw Dirt", "res://assets/throw_dirt.jpg", 2, 0, 1) { }
 
     public override bool ExecuteAction(Actor source, List<Vector2> targets, World world, TurnOrder turnOrder, ElementalSpectra spectra)
     {

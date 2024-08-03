@@ -11,7 +11,7 @@ public abstract partial class Effect : Node
     public Actor actor;
 
 
-    public Effect(string key, string displayName, int duration, Actor a)
+    public Effect(string key, string displayName, string iconAsset, int duration, Actor a)
     {
         Key = key;
         DisplayName = displayName;

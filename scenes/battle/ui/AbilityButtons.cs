@@ -4,54 +4,56 @@ using System.Collections.Generic;
 
 public partial class AbilityButtons : Control
 {
-    private Vector2 basePosition;
+    private List<AbilityButton> abilityButtons = new List<AbilityButton>();
+    private List<ConfirmButton> confirmButtons = new List<ConfirmButton>();
+
     public override void _Ready()
     {
-        ClearAbilities();
-        Vector2 viewportSize = GetNode<Control>("AbilityButton1").GetViewportRect().Size;
-        basePosition = new Vector2(viewportSize.X / 2 - 40, 0);
+        for (int i = 0; i < 5; i++)
+        {
+            AbilityButton abilityButton = GetNode<AbilityButton>("AbilityButton" + (i + 1));
+            abilityButtons.Add(abilityButton);
+            abilityButton.Hide();
+        }
+
+        for (int i = 0; i < 5; i++)
+        {
+            ConfirmButton confirmButton = GetNode<ConfirmButton>("ConfirmButton" + (i + 1));
+            confirmButtons.Add(confirmButton);
+            confirmButton.Hide();
+        }
     }
 
     public void SetAbilities(List<Ability> abilities)
     {
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < abilities.Count; i++)
         {
-            AbilityButton abilityButton = GetNode<AbilityButton>("AbilityButton" + (i + 1));
-            if (i < abilities.Count)
-            {
-                int xOffset = ((abilities.Count - 1) * -50) + 100 * i;
-                abilityButton.Position = basePosition + new Vector2(xOffset, 0);
-                abilityButton.Setup(abilities[i]);
-                abilityButton.Show();
-            }
-            else
-            {
-                abilityButton.Hide();
-            }
+            abilityButtons[i].Setup(abilities[i]);
+            abilityButtons[i].Show();
+
+            confirmButtons[i].Setup(abilities[i]);
         }
     }
 
     public void ClearAbilities()
     {
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < abilityButtons.Count; i++)
         {
-            Control abilityButton = GetNode<Control>("AbilityButton" + (i + 1));
-            abilityButton.Hide();
+            abilityButtons[i].Hide();
+            confirmButtons[i].Hide();
         }
     }
 
     public void ShowConfirmButton(int index)
     {
-        AbilityButton abilityButton = GetNode<AbilityButton>("AbilityButton" + (index + 1));
-        abilityButton.ShowConfirmButton();
+        confirmButtons[index].Show();
     }
 
     public void HideConfirmButtons()
     {
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < confirmButtons.Count; i++)
         {
-            AbilityButton abilityButton = GetNode<AbilityButton>("AbilityButton" + (i + 1));
-            abilityButton.HideConfirmButton();
+            confirmButtons[i].Hide();
         }
     }
 }

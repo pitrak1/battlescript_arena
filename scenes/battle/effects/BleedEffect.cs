@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public partial class BleedEffect : Effect
 {
-    public BleedEffect(Actor actor) : base("bleed", "Bleed", 3, actor) { }
+    public BleedEffect(Actor actor) : base("bleed", "Bleed", "res://assets/bleed.jpg", 3, actor) { }
 
     public override void EndTurn()
     {

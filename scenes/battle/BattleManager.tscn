@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cv5iqlevfqt37"]
+[gd_scene load_steps=14 format=3 uid="uid://cv5iqlevfqt37"]
 
 [ext_resource type="Script" path="res://scenes/battle/BattleManager.cs" id="1_ru8bg"]
 [ext_resource type="Script" path="res://scenes/battle/World.cs" id="2_61mb2"]
@@ -8,8 +8,11 @@
 [ext_resource type="Texture2D" uid="uid://b6gl7hmu2opcq" path="res://assets/elemental_spectrum.png" id="7_vqwmy"]
 [ext_resource type="Texture2D" uid="uid://m5dawu0hvw4w" path="res://assets/spectrum_highlight.png" id="8_fhllv"]
 [ext_resource type="Texture2D" uid="uid://bo8wxbxeiur7b" path="res://assets/spectrum_tick.png" id="9_vtbxv"]
+[ext_resource type="Texture2D" uid="uid://bsnjkrp04yd4a" path="res://assets/confirm.jpg" id="10_8m03x"]
 [ext_resource type="Script" path="res://scenes/battle/ui/AbilityButtons.cs" id="10_t10x1"]
-[ext_resource type="PackedScene" uid="uid://d1g0bnd6eajo8" path="res://scenes/battle/ui/AbilityButton.tscn" id="11_g7ogx"]
+[ext_resource type="Texture2D" uid="uid://c6fy1xvqi3bdm" path="res://assets/bleed.jpg" id="11_b1dqj"]
+[ext_resource type="Script" path="res://scenes/battle/ui/ConfirmButton.cs" id="12_3m6w3"]
+[ext_resource type="Script" path="res://scenes/battle/ui/AbilityButton.cs" id="13_d1cvl"]
 
 [node name="BattleManager" type="Node2D" groups=["InputReceivers"]]
 script = ExtResource("1_ru8bg")
@@ -253,51 +256,107 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("10_t10x1")
 
-[node name="AbilityButton1" parent="AbilityButtons" instance=ExtResource("11_g7ogx")]
-visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.079
-anchor_bottom = 0.0
-offset_left = 91.008
-offset_bottom = 648.0
+[node name="AbilityButton1" type="TextureButton" parent="AbilityButtons"]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 520.0
+offset_right = 416.0
+offset_bottom = 600.0
+action_mode = 0
+texture_normal = ExtResource("11_b1dqj")
+stretch_mode = 0
+script = ExtResource("13_d1cvl")
 
-[node name="AbilityButton2" parent="AbilityButtons" instance=ExtResource("11_g7ogx")]
-visible = false
-layout_mode = 1
-anchors_preset = 10
-anchor_bottom = 0.0
-offset_bottom = 648.0
-grow_vertical = 1
+[node name="ConfirmButton1" type="TextureButton" parent="AbilityButtons"]
+layout_mode = 0
+offset_left = 356.0
+offset_top = 460.0
+offset_right = 396.0
+offset_bottom = 500.0
+action_mode = 0
+texture_normal = ExtResource("10_8m03x")
+script = ExtResource("12_3m6w3")
 
-[node name="AbilityButton3" parent="AbilityButtons" instance=ExtResource("11_g7ogx")]
-visible = false
-layout_mode = 1
-anchors_preset = 10
-anchor_bottom = 0.0
-offset_bottom = 648.0
-grow_vertical = 1
+[node name="AbilityButton2" type="TextureButton" parent="AbilityButtons"]
+layout_mode = 0
+offset_left = 436.0
+offset_top = 520.0
+offset_right = 516.0
+offset_bottom = 600.0
+action_mode = 0
+texture_normal = ExtResource("11_b1dqj")
+stretch_mode = 0
+script = ExtResource("13_d1cvl")
 
-[node name="AbilityButton4" parent="AbilityButtons" instance=ExtResource("11_g7ogx")]
-visible = false
-layout_mode = 1
-anchors_preset = 10
-anchor_bottom = 0.0
-offset_bottom = 648.0
-grow_vertical = 1
+[node name="ConfirmButton2" type="TextureButton" parent="AbilityButtons"]
+layout_mode = 0
+offset_left = 456.0
+offset_top = 460.0
+offset_right = 496.0
+offset_bottom = 500.0
+action_mode = 0
+texture_normal = ExtResource("10_8m03x")
+script = ExtResource("12_3m6w3")
 
-[node name="AbilityButton5" parent="AbilityButtons" instance=ExtResource("11_g7ogx")]
-visible = false
-layout_mode = 1
-anchors_preset = 10
-anchor_bottom = 0.0
-offset_bottom = 648.0
-grow_vertical = 1
+[node name="AbilityButton3" type="TextureButton" parent="AbilityButtons"]
+layout_mode = 0
+offset_left = 536.0
+offset_top = 520.0
+offset_right = 616.0
+offset_bottom = 600.0
+action_mode = 0
+texture_normal = ExtResource("11_b1dqj")
+stretch_mode = 0
+script = ExtResource("13_d1cvl")
 
-[node name="AbilityButton6" parent="AbilityButtons" instance=ExtResource("11_g7ogx")]
-visible = false
-layout_mode = 1
-anchors_preset = 10
-anchor_bottom = 0.0
-offset_bottom = 648.0
-grow_vertical = 1
+[node name="ConfirmButton3" type="TextureButton" parent="AbilityButtons"]
+layout_mode = 0
+offset_left = 556.0
+offset_top = 460.0
+offset_right = 596.0
+offset_bottom = 500.0
+action_mode = 0
+texture_normal = ExtResource("10_8m03x")
+script = ExtResource("12_3m6w3")
+
+[node name="AbilityButton4" type="TextureButton" parent="AbilityButtons"]
+layout_mode = 0
+offset_left = 636.0
+offset_top = 520.0
+offset_right = 716.0
+offset_bottom = 600.0
+action_mode = 0
+texture_normal = ExtResource("11_b1dqj")
+stretch_mode = 0
+script = ExtResource("13_d1cvl")
+
+[node name="ConfirmButton4" type="TextureButton" parent="AbilityButtons"]
+layout_mode = 0
+offset_left = 656.0
+offset_top = 460.0
+offset_right = 696.0
+offset_bottom = 500.0
+action_mode = 0
+texture_normal = ExtResource("10_8m03x")
+script = ExtResource("12_3m6w3")
+
+[node name="AbilityButton5" type="TextureButton" parent="AbilityButtons"]
+layout_mode = 0
+offset_left = 736.0
+offset_top = 520.0
+offset_right = 816.0
+offset_bottom = 600.0
+action_mode = 0
+texture_normal = ExtResource("11_b1dqj")
+stretch_mode = 0
+script = ExtResource("13_d1cvl")
+
+[node name="ConfirmButton5" type="TextureButton" parent="AbilityButtons"]
+layout_mode = 0
+offset_left = 756.0
+offset_top = 460.0
+offset_right = 796.0
+offset_bottom = 500.0
+action_mode = 0
+texture_normal = ExtResource("10_8m03x")
+script = ExtResource("12_3m6w3")

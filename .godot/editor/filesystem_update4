@@ -65,3 +65,4 @@ res://scenes/battle/ui/AbilityButtons.tscn
 res://scenes/battle/ui/Spectrum.tscn
 res://scenes/battle/ui/ElementalSpectra.cs
 res://scenes/battle/ui/AbilityButton.tscn
+res://scenes/battle/ui/ConfirmButton.cs

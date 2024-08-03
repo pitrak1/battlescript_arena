@@ -14,11 +14,14 @@ public abstract partial class Ability : Node
     public int CurrentUsesPerTurn;
     public int CurrentCooldown;
 
+    public string IconAsset;
 
-    public Ability(string inputAction, string key, string displayName, int usesPerTurn, int cooldown, int numberOfTargets = 1)
+
+    public Ability(string inputAction, string key, string displayName, string iconAsset, int usesPerTurn, int cooldown, int numberOfTargets = 1)
     {
         Key = key;
         DisplayName = displayName;
+        IconAsset = iconAsset;
         UsesPerTurn = usesPerTurn;
         Cooldown = cooldown;
         NumberOfTargets = numberOfTargets;
