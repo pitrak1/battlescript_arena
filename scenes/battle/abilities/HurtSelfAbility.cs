@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public partial class HurtSelfAbility : Ability
 {
-    public HurtSelfAbility(string inputAction) : base(inputAction, "hurtSelf", "Hurt Self", 1, 1, 0) { }
+    public HurtSelfAbility(string inputAction) : base(inputAction, "hurtSelf", "Hurt Self", 3, 1, 0) { }
 
     public override bool ExecuteAction(Actor source, List<Vector2> targets, World world, TurnOrder turnOrder, ElementalSpectra spectra)
     {

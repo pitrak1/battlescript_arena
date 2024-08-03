@@ -11,14 +11,54 @@ public enum Elements
 
 public partial class ElementalSpectra : Control
 {
-    List<TextureRect> windEarthGauge;
-    int currentWindEarthValue;
-    List<TextureRect> fireWaterGauge;
-    int currentFireWaterValue;
+    List<TextureRect> windEarthSpectrum;
+    int windEarthValue;
+
+    public int WindPower
+    {
+        get { return -windEarthValue; }
+        set
+        {
+            windEarthValue = Math.Clamp(-value, -3, 3);
+            updateSprites();
+        }
+    }
+
+    public int EarthPower
+    {
+        get { return windEarthValue; }
+        set
+        {
+            windEarthValue = Math.Clamp(value, -3, 3);
+            updateSprites();
+        }
+    }
+    List<TextureRect> fireWaterSpectrum;
+    int fireWaterValue;
+
+    public int FirePower
+    {
+        get { return -fireWaterValue; }
+        set
+        {
+            fireWaterValue = Math.Clamp(-value, -3, 3);
+            updateSprites();
+        }
+    }
+
+    public int WaterPower
+    {
+        get { return fireWaterValue; }
+        set
+        {
+            fireWaterValue = Math.Clamp(value, -3, 3);
+            updateSprites();
+        }
+    }
 
     public override void _Ready()
     {
-        windEarthGauge = new List<TextureRect>() {
+        windEarthSpectrum = new List<TextureRect>() {
             GetNode<TextureRect>("WindHighlight"),
             GetNode<TextureRect>("WindTick2"),
             GetNode<TextureRect>("WindTick1"),
@@ -28,7 +68,7 @@ public partial class ElementalSpectra : Control
             GetNode<TextureRect>("EarthHighlight"),
         };
 
-        fireWaterGauge = new List<TextureRect>() {
+        fireWaterSpectrum = new List<TextureRect>() {
             GetNode<TextureRect>("FireHighlight"),
             GetNode<TextureRect>("FireTick2"),
             GetNode<TextureRect>("FireTick1"),
@@ -38,77 +78,21 @@ public partial class ElementalSpectra : Control
             GetNode<TextureRect>("WaterHighlight"),
         };
 
-        Reset();
-    }
-
-    public void Reset()
-    {
-        currentWindEarthValue = 3;
-        currentFireWaterValue = 3;
+        windEarthValue = 0;
+        fireWaterValue = 0;
         updateSprites();
-    }
-
-    public void IncreaseElement(Elements element, int diff = 1)
-    {
-        switch (element)
-        {
-            case Elements.Wind:
-                currentWindEarthValue = Mathf.Max(currentWindEarthValue - diff, 0);
-                break;
-            case Elements.Earth:
-                currentWindEarthValue = Mathf.Min(currentWindEarthValue + diff, 6);
-                break;
-            case Elements.Fire:
-                currentFireWaterValue = Mathf.Max(currentFireWaterValue - diff, 0);
-                break;
-            case Elements.Water:
-                currentFireWaterValue = Mathf.Min(currentFireWaterValue + diff, 6);
-                break;
-        }
-        updateSprites();
-    }
-
-    public int GetElementPower(Elements element)
-    {
-        switch (element)
-        {
-            case Elements.Wind:
-                return 3 - currentWindEarthValue;
-            case Elements.Earth:
-                return currentWindEarthValue - 3;
-            case Elements.Fire:
-                return 3 - currentFireWaterValue;
-            case Elements.Water:
-                return currentFireWaterValue - 3;
-            default:
-                return -4;
-        }
     }
 
     private void updateSprites()
     {
-        for (int i = 0; i < 7; i++)
+        for (int i = -3; i <= 3; i++)
         {
-            if (i == currentWindEarthValue)
-            {
-                windEarthGauge[i].Visible = true;
-            }
-            else
-            {
-                windEarthGauge[i].Visible = false;
-            }
+            windEarthSpectrum[i + 3].Visible = i == windEarthValue;
         }
 
-        for (int i = 0; i < 7; i++)
+        for (int i = -3; i <= 3; i++)
         {
-            if (i == currentFireWaterValue)
-            {
-                fireWaterGauge[i].Visible = true;
-            }
-            else
-            {
-                fireWaterGauge[i].Visible = false;
-            }
+            fireWaterSpectrum[i + 3].Visible = i == fireWaterValue;
         }
     }
 }

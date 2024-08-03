@@ -8,8 +8,7 @@ public partial class InvokeEarthAbility : Ability
 
     public override bool ExecuteAction(Actor source, List<Vector2> targets, World world, TurnOrder turnOrder, ElementalSpectra spectra)
     {
-        GD.Print(spectra.GetElementPower(Elements.Earth));
-        spectra.IncreaseElement(Elements.Earth);
+        spectra.EarthPower++;
         return true;
     }
 }
