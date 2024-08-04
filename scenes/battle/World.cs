@@ -42,8 +42,11 @@ public partial class World : Node2D
             }
         }
 
-        Actor wolf = AddActor(ActorTypes.Wolf, new Vector2(5, 5));
-        Actor turtle = AddActor(ActorTypes.Turtle, new Vector2(7, 7));
+        ActorTeam team1 = new ActorTeam(Colors.Red);
+        ActorTeam team2 = new ActorTeam(Colors.Blue);
+
+        Actor wolf = AddActor(ActorTypes.Wolf, new Vector2(5, 5), team1);
+        Actor turtle = AddActor(ActorTypes.Turtle, new Vector2(7, 7), team2);
         // RemoveActor(wolf);
 
     }
@@ -70,10 +73,10 @@ public partial class World : Node2D
         }
     }
 
-    public Actor AddActor(ActorTypes actorType, Vector2 coordinates)
+    public Actor AddActor(ActorTypes actorType, Vector2 coordinates, ActorTeam team)
     {
         Actor actor = actorScene.Instantiate<Actor>();
-        actor.Setup(actorType, coordinates);
+        actor.Setup(actorType, coordinates, team);
         GetTileAtCoordinates(coordinates).CurrentActor = actor;
         Actors.Add(actor);
         return actor;

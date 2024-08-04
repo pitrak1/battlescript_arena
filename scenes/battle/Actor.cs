@@ -15,6 +15,8 @@ public partial class Actor : Sprite2D
     public int Speed;
     public List<Ability> Abilities { get; private set; } = new List<Ability>();
     public List<Effect> Effects { get; private set; } = new List<Effect>();
+
+    public ActorTeam Team { get; private set; }
     private int maxHealth;
     public int MaxHealth
     {
@@ -62,10 +64,11 @@ public partial class Actor : Sprite2D
         }
     }
 
-    public void Setup(ActorTypes actorType, Vector2 coordinates)
+    public void Setup(ActorTypes actorType, Vector2 coordinates, ActorTeam team)
     {
         Type = actorType;
         Coordinates = coordinates;
+        Team = team;
     }
 
     public void AlterHealth(int healthDiff)
