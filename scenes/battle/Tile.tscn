@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cjaxyth860cbh" path="res://assets/low.png" id="1_nx51t"]
 [ext_resource type="Script" path="res://scenes/battle/Tile.cs" id="2_se7g1"]
-[ext_resource type="Texture2D" uid="uid://b5cxdmcglwjj8" path="res://assets/highlight.png" id="3_ilfqd"]
+[ext_resource type="Texture2D" path="res://assets/highlight.png" id="3_ilfqd"]
 
 [node name="Tile" type="Sprite2D"]
 position = Vector2(100, 100)

@@ -1,10 +1,9 @@
 using Godot;
 using System;
 
-public enum AbilitySelectStates
+public enum ActionStates
 {
 	None,
-	ActorSelected,
 	AbilitySelected,
 	Confirm,
 }
@@ -17,9 +16,8 @@ public partial class BattleManager : Node2D
 	private ElementalSpectra elementalSpectra;
 	private AbilityButtons abilityButtons;
 
-	private AbilitySelectStates abilitySelectState = AbilitySelectStates.None;
+	private ActionStates actionState = ActionStates.None;
 	private List<Vector2> selectedCoords = new List<Vector2>();
-	private Actor selectedActor;
 	private string selectedAction;
 
 	public override void _Ready()
@@ -30,6 +28,7 @@ public partial class BattleManager : Node2D
 		abilityButtons = GetNode<AbilityButtons>("AbilityButtons");
 
 		turnOrder.SetTurnOrder(world.Actors);
+		abilityButtons.SetAbilities(turnOrder.CurrentActor.Abilities);
 	}
 
 	public override void _Input(InputEvent @event)
@@ -48,43 +47,25 @@ public partial class BattleManager : Node2D
 		// right click is our "get out of everything and select nothing" button
 		if (Input.IsActionJustPressed("RMB"))
 		{
-			abilitySelectState = AbilitySelectStates.None;
+			actionState = ActionStates.None;
 			selectedCoords = new List<Vector2>();
-			selectedActor = null;
 			selectedAction = null;
 
 			abilityButtons.HideConfirmButtons();
 			world.ClearHighlights();
-			abilityButtons.ClearAbilities();
 		}
 	}
 
 	private void _onTileClicked(Vector2 coordinates)
 	{
-		// If we haven't selected an ability for an actor yet, we know we're not targeting for an
+		// If we haven't selected an ability yet, we know we're not targeting for an
 		// ability, we're selecting a tile
-		if (
-			abilitySelectState == AbilitySelectStates.None ||
-			abilitySelectState == AbilitySelectStates.ActorSelected
-		)
+		if (actionState == ActionStates.None)
 		{
 			world.ClearHighlights();
 			world.HighlightTile(coordinates);
-			selectedActor = world.GetActorAtCoordinates(coordinates);
-
-			// Sets or clears the ability buttons depending if an actor was on the tile selected
-			if (selectedActor is not null)
-			{
-				abilitySelectState = AbilitySelectStates.ActorSelected;
-				abilityButtons.SetAbilities(selectedActor.Abilities);
-			}
-			else
-			{
-				abilitySelectState = AbilitySelectStates.None;
-				abilityButtons.ClearAbilities();
-			}
 		}
-		else if (abilitySelectState == AbilitySelectStates.AbilitySelected)
+		else if (actionState == ActionStates.AbilitySelected)
 		{
 			// If an ability is selected, we're assuming we're targeting for that ability
 			selectedCoords.Add(coordinates);
@@ -93,16 +74,14 @@ public partial class BattleManager : Node2D
 		}
 	}
 
-
-
 	private void _onAbilityButtonClicked(string action)
 	{
-		if (abilitySelectState == AbilitySelectStates.ActorSelected)
+		if (actionState == ActionStates.None)
 		{
 			string[] validKeys = { "Q", "W", "E" };
 			if (validKeys.Contains(action))
 			{
-				abilitySelectState = AbilitySelectStates.AbilitySelected;
+				actionState = ActionStates.AbilitySelected;
 				selectedCoords = new List<Vector2>();
 				selectedAction = action;
 				// We want to evaluate targets and show the confirm button in case the ability has
@@ -115,14 +94,15 @@ public partial class BattleManager : Node2D
 	private void evaluateNumberOfTargets()
 	{
 		// if the ability has enough targets selected, show confirmation button
-		int expectedTargetCount = selectedActor
+		int expectedTargetCount = turnOrder
+			.CurrentActor
 			.Abilities
 			.Find(ab => ab.InputAction == selectedAction)
 			.NumberOfTargets;
 
 		if (expectedTargetCount <= selectedCoords.Count)
 		{
-			abilitySelectState = AbilitySelectStates.Confirm;
+			actionState = ActionStates.Confirm;
 			Dictionary<string, int> keyMap = new Dictionary<string, int>() { { "Q", 0 }, { "W", 1 }, { "E", 2 } };
 			abilityButtons.ShowConfirmButton(keyMap[selectedAction]);
 		}
@@ -132,24 +112,25 @@ public partial class BattleManager : Node2D
 	{
 		// If the confirm is clicked, we want to keep the actor selected, but remove everythign else
 		executeAbility();
-		abilitySelectState = AbilitySelectStates.ActorSelected;
+		actionState = ActionStates.None;
 		abilityButtons.HideConfirmButtons();
 		selectedCoords = new List<Vector2>();
 		selectedAction = null;
 
 		world.ClearHighlights();
-		world.HighlightTile(selectedActor.Coordinates);
+		world.HighlightTile(turnOrder.CurrentActor.Coordinates);
 	}
 
 	private void _onEndTurnButtonClicked()
 	{
 		turnOrder.GoToNextActor();
+		abilityButtons.SetAbilities(turnOrder.CurrentActor.Abilities);
 	}
 
 	private void executeAbility()
 	{
 		Dictionary<string, int> actionMap = new Dictionary<string, int>() { { "Q", 0 }, { "W", 1 }, { "E", 2 } };
-		Ability selectedAbility = selectedActor.Abilities[actionMap[selectedAction]];
-		selectedAbility.Execute(selectedActor, selectedCoords, world, turnOrder, elementalSpectra);
+		Ability selectedAbility = turnOrder.CurrentActor.Abilities[actionMap[selectedAction]];
+		selectedAbility.Execute(turnOrder.CurrentActor, selectedCoords, world, turnOrder, elementalSpectra);
 	}
 }

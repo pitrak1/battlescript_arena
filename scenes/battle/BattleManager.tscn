@@ -30,6 +30,7 @@ offset_bottom = 40.0
 script = ExtResource("4_t8sky")
 
 [node name="CurrentActor" type="TextureRect" parent="TurnOrder"]
+layout_mode = 0
 offset_left = 350.0
 offset_top = 12.0
 offset_right = 406.0
@@ -187,7 +188,6 @@ offset_bottom = 69.0
 texture = ExtResource("6_ba7yl")
 
 [node name="ElementalSpectra" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -330,10 +330,6 @@ expand_mode = 1
 [node name="AbilityButtons" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 285.0
-offset_top = 32.0
-offset_right = 325.0
-offset_bottom = 72.0
 script = ExtResource("10_t10x1")
 
 [node name="AbilityButton1" type="TextureButton" parent="AbilityButtons"]
