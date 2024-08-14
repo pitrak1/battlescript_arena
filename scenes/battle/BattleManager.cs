@@ -29,6 +29,7 @@ public partial class BattleManager : Node2D
 
 		turnOrder.SetTurnOrder(world.Actors);
 		abilityButtons.SetAbilities(turnOrder.CurrentActor.Abilities);
+		world.SetCurrentTile(turnOrder.CurrentActor.Coordinates);
 	}
 
 	public override void _Input(InputEvent @event)
@@ -52,7 +53,8 @@ public partial class BattleManager : Node2D
 			selectedAction = null;
 
 			abilityButtons.HideConfirmButtons();
-			world.ClearHighlights();
+			world.ClearSelectedTile();
+			world.ClearTargetedTiles();
 		}
 	}
 
@@ -62,14 +64,13 @@ public partial class BattleManager : Node2D
 		// ability, we're selecting a tile
 		if (actionState == ActionStates.None)
 		{
-			world.ClearHighlights();
-			world.HighlightTile(coordinates);
+			world.SetSelectedTile(coordinates);
 		}
 		else if (actionState == ActionStates.AbilitySelected)
 		{
 			// If an ability is selected, we're assuming we're targeting for that ability
 			selectedCoords.Add(coordinates);
-			world.HighlightTile(coordinates);
+			world.SetTargetedTiles(selectedCoords);
 			evaluateNumberOfTargets();
 		}
 	}
@@ -117,14 +118,14 @@ public partial class BattleManager : Node2D
 		selectedCoords = new List<Vector2>();
 		selectedAction = null;
 
-		world.ClearHighlights();
-		world.HighlightTile(turnOrder.CurrentActor.Coordinates);
+		world.ClearTargetedTiles();
 	}
 
 	private void _onEndTurnButtonClicked()
 	{
 		turnOrder.GoToNextActor();
 		abilityButtons.SetAbilities(turnOrder.CurrentActor.Abilities);
+		world.SetCurrentTile(turnOrder.CurrentActor.Coordinates);
 	}
 
 	private void executeAbility()
@@ -132,5 +133,6 @@ public partial class BattleManager : Node2D
 		Dictionary<string, int> actionMap = new Dictionary<string, int>() { { "Q", 0 }, { "W", 1 }, { "E", 2 } };
 		Ability selectedAbility = turnOrder.CurrentActor.Abilities[actionMap[selectedAction]];
 		selectedAbility.Execute(turnOrder.CurrentActor, selectedCoords, world, turnOrder, elementalSpectra);
+		world.SetCurrentTile(turnOrder.CurrentActor.Coordinates);
 	}
 }

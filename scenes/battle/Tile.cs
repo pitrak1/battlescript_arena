@@ -39,6 +39,43 @@ public partial class Tile : Sprite2D
 
     private TileTypes type;
 
+    private Sprite2D currentIndicatorSprite;
+    private bool isCurrent;
+    public bool IsCurrent
+    {
+        get { return isCurrent; }
+        set
+        {
+            isCurrent = value;
+            currentIndicatorSprite.Visible = value;
+        }
+    }
+
+    private Sprite2D targetIndicatorSprite;
+    private bool isTargeted;
+    public bool IsTargeted
+    {
+        get { return isTargeted; }
+        set
+        {
+            isTargeted = value;
+            targetIndicatorSprite.Visible = value;
+        }
+    }
+
+    private Sprite2D selectIndicatorSprite;
+    private bool isSelected;
+    public bool IsSelected
+    {
+        get { return isSelected; }
+        set
+        {
+            isSelected = value;
+            selectIndicatorSprite.Visible = value;
+        }
+    }
+
+
     private Dictionary<TileTypes, string> typeToAssetMap = new Dictionary<TileTypes, string>()
     {
         {TileTypes.High, "res://assets/high.png"},
@@ -55,6 +92,14 @@ public partial class Tile : Sprite2D
         this.Position = new Vector2((coords.X - (coords.Y * 0.5f)) * 64, coords.Y * 43) + offset;
         this.Texture = GD.Load<Texture2D>(typeToAssetMap[tileType]);
         this.type = tileType;
+
+        this.currentIndicatorSprite = GetNode<Sprite2D>("CurrentIndicatorSprite");
+        this.targetIndicatorSprite = GetNode<Sprite2D>("TargetIndicatorSprite");
+        this.selectIndicatorSprite = GetNode<Sprite2D>("SelectIndicatorSprite");
+
+        IsCurrent = false;
+        IsSelected = false;
+        IsTargeted = false;
     }
 
     public void _on_static_body_2d_input_event(Node viewport, InputEvent inputEvent, int shape_idx)
@@ -63,10 +108,5 @@ public partial class Tile : Sprite2D
         {
             GetTree().CallGroup("InputReceivers", "_onTileClicked", coordinates);
         }
-    }
-
-    public void Highlight(bool isHighlighted)
-    {
-        GetNode<Sprite2D>("HighlightSprite").Visible = isHighlighted;
     }
 }

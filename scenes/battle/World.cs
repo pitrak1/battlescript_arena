@@ -51,15 +51,7 @@ public partial class World : Node2D
 
     }
 
-    public void HighlightTile(Vector2 coordinates)
-    {
-        if (GetTileAtCoordinates(coordinates) is not null)
-        {
-            GetTileAtCoordinates(coordinates).Highlight(true);
-        }
-    }
-
-    public void ClearHighlights()
+    public void SetCurrentTile(Vector2 coordinates)
     {
         for (int y = 0; y < 9; y++)
         {
@@ -67,7 +59,48 @@ public partial class World : Node2D
             {
                 if (tiles[x, y] is not null)
                 {
-                    tiles[x, y].Highlight(false);
+                    bool isCurrentTile = coordinates.X == x && coordinates.Y == y;
+                    tiles[x, y].IsCurrent = isCurrentTile;
+                }
+            }
+        }
+    }
+
+    public void SetSelectedTile(Vector2 coordinates)
+    {
+        for (int y = 0; y < 9; y++)
+        {
+            for (int x = 0; x < 9; x++)
+            {
+                if (tiles[x, y] is not null)
+                {
+                    bool isSelectedTile = coordinates.X == x && coordinates.Y == y;
+                    tiles[x, y].IsSelected = isSelectedTile;
+                }
+            }
+        }
+    }
+
+    public void ClearSelectedTile()
+    {
+        SetSelectedTile(new Vector2(-1, -1));
+    }
+
+    public void SetTargetedTiles(List<Vector2> targets)
+    {
+        ClearTargetedTiles();
+        targets.ForEach(target => GetTileAtCoordinates(target).IsTargeted = true);
+    }
+
+    public void ClearTargetedTiles()
+    {
+        for (int y = 0; y < 9; y++)
+        {
+            for (int x = 0; x < 9; x++)
+            {
+                if (tiles[x, y] is not null)
+                {
+                    tiles[x, y].IsTargeted = false;
                 }
             }
         }
