@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cv5iqlevfqt37"]
+[gd_scene load_steps=17 format=3 uid="uid://cv5iqlevfqt37"]
 
 [ext_resource type="Script" path="res://scenes/battle/BattleManager.cs" id="1_ru8bg"]
 [ext_resource type="Script" path="res://scenes/battle/World.cs" id="2_61mb2"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ny1vlg54gvcp" path="res://assets/wolf.jpeg" id="5_ij6sd"]
 [ext_resource type="Texture2D" uid="uid://c6d03qt7pfp12" path="res://assets/icon_highlight.png" id="5_pcw3j"]
 [ext_resource type="Texture2D" uid="uid://urvc210b5jt0" path="res://assets/arrow.png" id="6_ba7yl"]
+[ext_resource type="Texture2D" uid="uid://b4mqu2bsxyqiv" path="res://assets/end_turn_button_highlight.png" id="6_gmvll"]
 [ext_resource type="Script" path="res://scenes/battle/ui/ElementalSpectra.cs" id="6_nfy0g"]
 [ext_resource type="Texture2D" uid="uid://b6gl7hmu2opcq" path="res://assets/elemental_spectrum.png" id="7_vqwmy"]
 [ext_resource type="Texture2D" uid="uid://m5dawu0hvw4w" path="res://assets/spectrum_highlight.png" id="8_fhllv"]
@@ -178,6 +179,21 @@ offset_top = 110.0
 offset_right = 744.0
 offset_bottom = 150.0
 text = "End Turn"
+
+[node name="Highlight" type="TextureRect" parent="TurnOrder/EndTurnButton"]
+layout_mode = 0
+offset_right = 336.0
+offset_bottom = 40.0
+texture = ExtResource("6_gmvll")
+
+[node name="ActionPointsLabel" type="Label" parent="TurnOrder"]
+layout_mode = 0
+offset_left = 501.0
+offset_top = 150.0
+offset_right = 651.0
+offset_bottom = 180.0
+text = "0 Action Points Left"
+horizontal_alignment = 1
 
 [node name="Arrow" type="TextureRect" parent="TurnOrder"]
 layout_mode = 0

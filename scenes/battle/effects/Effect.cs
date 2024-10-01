@@ -6,33 +6,39 @@ public abstract partial class Effect : Node
 {
     public string Key;
     public string DisplayName;
-    public int Duration;
-    public int CurrentDuration;
-    public Actor actor;
+    public int BaseDuration;
+    public int RemainingDuration;
 
-
-    public Effect(string key, string displayName, string iconAsset, int duration, Actor a)
+    public Effect(string key, string displayName, string iconAsset, int duration)
     {
         Key = key;
         DisplayName = displayName;
-        Duration = duration;
-        actor = a;
-
-        CurrentDuration = Duration;
+        BaseDuration = duration;
+        RemainingDuration = BaseDuration;
     }
 
-    public virtual void EndTurn()
-    {
-        CurrentDuration = Mathf.Max(CurrentDuration - 1, 0);
+    public virtual bool OnTurnEnd(
+        World world,
+        TurnOrder turnOrder,
+        ElementalSpectra elementalSpectra
+    ) {
+        return false;
     }
 
-    public void Reset()
-    {
-        CurrentDuration = Duration;
+    public virtual bool OnTurnStart(
+        World world, 
+        TurnOrder turnOrder, 
+        ElementalSpectra elementalSpectra
+    ) { 
+        return false; 
     }
 
-    public virtual bool AbilityExecuted(Actor source, World world, List<Vector2> target, ElementalSpectra spectra)
-    {
-        return true;
+    protected bool DecreaseAndRemoveIfNecessary(
+        World world, 
+        TurnOrder turnOrder, 
+        ElementalSpectra elementalSpectra
+    ) {
+        RemainingDuration = Mathf.Max(RemainingDuration - 1, 0);
+        return RemainingDuration <= 0;
     }
 }

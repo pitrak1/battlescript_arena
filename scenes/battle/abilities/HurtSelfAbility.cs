@@ -4,11 +4,19 @@ using System.Collections.Generic;
 
 public partial class HurtSelfAbility : Ability
 {
-    public HurtSelfAbility(string inputAction) : base(inputAction, "hurtSelf", "Hurt Self", "res://assets/hurt_self.jpg", 3, 1, 0) { }
+    public HurtSelfAbility(string inputAction) : base(
+        "hurtSelf", 
+        "Hurt Self",
+        inputAction,
+        "res://assets/hurt_self.jpg", 
+        3, 
+        1,
+        0,
+        1
+    ) { }
 
-    public override bool ExecuteAction(Actor source, List<Vector2> targets, World world, TurnOrder turnOrder, ElementalSpectra spectra)
+    public override void Execute(AbilityExecution execution)
     {
-        source.AlterHealth(-1);
-        return true;
+        execution.BaseDamage = 1;
     }
 }

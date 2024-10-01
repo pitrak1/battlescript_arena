@@ -1,8 +1,8 @@
 TextureRect
+Label
 TextureButton
 Button
 Control
-Label
 Sprite2D
 Node2D
 ParallaxBackground

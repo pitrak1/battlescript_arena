@@ -15,12 +15,20 @@ public partial class TurnOrder : Control
     private List<TextureRect> actorTextures = new List<TextureRect>();
     private List<TextureRect> actorHighlightTextures = new List<TextureRect>();
 
+    private Label actionPointsLabel;
+    private Button endTurnButton;
+    private TextureRect endTurnButtonHighlightTexture;
+
     public override void _Ready()
-    {
-        GetNode<Button>("EndTurnButton").Pressed += this.onEndTurnButtonClicked;
+    {   
+        endTurnButton = GetNode<Button>("EndTurnButton");
+        endTurnButton.Pressed += this.onEndTurnButtonClicked;
+        endTurnButtonHighlightTexture = GetNode<TextureRect>("EndTurnButton/Highlight");
+        endTurnButtonHighlightTexture.Visible = false;
 
         currentActorTexture = GetNode<TextureRect>("CurrentActor");
         currentActorHighlightTexture = GetNode<TextureRect>("CurrentActor/Highlight");
+        actionPointsLabel = GetNode<Label>("ActionPointsLabel");
 
         for (int i = 0; i < 8; i++)
         {
@@ -32,6 +40,7 @@ public partial class TurnOrder : Control
     private void onEndTurnButtonClicked()
     {
         GetTree().CallGroup("InputReceivers", "_onEndTurnButtonClicked");
+        endTurnButtonHighlightTexture.Visible = false;
     }
 
     public void SetTurnOrder(List<Actor> actors)
@@ -71,5 +80,15 @@ public partial class TurnOrder : Control
         CurrentActor = CurrentTurnOrder[0];
         CurrentTurnOrder.RemoveAt(0);
         updateDisplay();
+    }
+
+    public void SetActionPoints(int value) {
+        if (value <= 0) {
+            actionPointsLabel.Text = "No Action Points Left";
+            endTurnButtonHighlightTexture.Visible = true;
+        } else {
+            actionPointsLabel.Text = value + " Action Points Left";
+            endTurnButtonHighlightTexture.Visible = false;
+        }
     }
 }

@@ -17,8 +17,10 @@ public partial class BattleManager : Node2D
 	private AbilityButtons abilityButtons;
 
 	private ActionStates actionState = ActionStates.None;
-	private List<Vector2> selectedCoords = new List<Vector2>();
+	private List<Vector2> selectedTargets = new List<Vector2>();
 	private string selectedAction;
+
+	private int actionPointsLeft = 8;
 
 	public override void _Ready()
 	{
@@ -30,6 +32,8 @@ public partial class BattleManager : Node2D
 		turnOrder.SetTurnOrder(world.Actors);
 		abilityButtons.SetAbilities(turnOrder.CurrentActor.Abilities);
 		world.SetCurrentTile(turnOrder.CurrentActor.Coordinates);
+
+		turnOrder.SetActionPoints(5);
 	}
 
 	public override void _Input(InputEvent @event)
@@ -49,7 +53,7 @@ public partial class BattleManager : Node2D
 		if (Input.IsActionJustPressed("RMB"))
 		{
 			actionState = ActionStates.None;
-			selectedCoords = new List<Vector2>();
+			selectedTargets = new List<Vector2>();
 			selectedAction = null;
 
 			abilityButtons.HideConfirmButtons();
@@ -69,8 +73,8 @@ public partial class BattleManager : Node2D
 		else if (actionState == ActionStates.AbilitySelected)
 		{
 			// If an ability is selected, we're assuming we're targeting for that ability
-			selectedCoords.Add(coordinates);
-			world.SetTargetedTiles(selectedCoords);
+			selectedTargets.Add(coordinates);
+			world.SetTargetedTiles(selectedTargets);
 			evaluateNumberOfTargets();
 		}
 	}
@@ -83,7 +87,7 @@ public partial class BattleManager : Node2D
 			if (validKeys.Contains(action))
 			{
 				actionState = ActionStates.AbilitySelected;
-				selectedCoords = new List<Vector2>();
+				selectedTargets = new List<Vector2>();
 				selectedAction = action;
 				// We want to evaluate targets and show the confirm button in case the ability has
 				// 0 expected targets
@@ -99,9 +103,9 @@ public partial class BattleManager : Node2D
 			.CurrentActor
 			.Abilities
 			.Find(ab => ab.InputAction == selectedAction)
-			.NumberOfTargets;
+			.BaseNumberOfTargets;
 
-		if (expectedTargetCount <= selectedCoords.Count)
+		if (expectedTargetCount <= selectedTargets.Count)
 		{
 			actionState = ActionStates.Confirm;
 			Dictionary<string, int> keyMap = new Dictionary<string, int>() { { "Q", 0 }, { "W", 1 }, { "E", 2 } };
@@ -112,10 +116,10 @@ public partial class BattleManager : Node2D
 	private void _onAbilityConfirmButtonClicked(string action)
 	{
 		// If the confirm is clicked, we want to keep the actor selected, but remove everythign else
-		executeAbility();
+		OnAbilityExecuted();
 		actionState = ActionStates.None;
 		abilityButtons.HideConfirmButtons();
-		selectedCoords = new List<Vector2>();
+		selectedTargets = new List<Vector2>();
 		selectedAction = null;
 
 		world.ClearTargetedTiles();
@@ -123,16 +127,101 @@ public partial class BattleManager : Node2D
 
 	private void _onEndTurnButtonClicked()
 	{
+		OnTurnEnd();
 		turnOrder.GoToNextActor();
 		abilityButtons.SetAbilities(turnOrder.CurrentActor.Abilities);
 		world.SetCurrentTile(turnOrder.CurrentActor.Coordinates);
 	}
 
-	private void executeAbility()
+	public void OnAbilityExecuted()
 	{
 		Dictionary<string, int> actionMap = new Dictionary<string, int>() { { "Q", 0 }, { "W", 1 }, { "E", 2 } };
 		Ability selectedAbility = turnOrder.CurrentActor.Abilities[actionMap[selectedAction]];
-		selectedAbility.Execute(turnOrder.CurrentActor, selectedCoords, world, turnOrder, elementalSpectra);
+		AbilityExecution execution = new AbilityExecution(
+			selectedAbility, 
+			turnOrder.CurrentActor,
+			selectedTargets,
+			world,
+			turnOrder,
+			elementalSpectra
+		);
+		execution.Execute();
+		actionPointsLeft -= selectedAbility.BaseActionPointCost;
+		turnOrder.SetActionPoints(actionPointsLeft);
 		world.SetCurrentTile(turnOrder.CurrentActor.Coordinates);
+	}
+
+	public void OnTurnEnd() 
+	{
+		foreach(Actor actor in world.Actors) {
+			List<Effect> effectsToBeRemoved = new List<Effect>();
+
+			foreach(Effect effect in actor.Effects) {
+				bool remove = effect.OnTurnEnd(world, turnOrder, elementalSpectra);
+				if (remove) { effectsToBeRemoved.Add(effect); }
+			}
+
+			foreach(Effect effectToBeRemoved in effectsToBeRemoved) {
+				actor.Effects.Remove(effectToBeRemoved);
+			}
+		}
+
+		for (int y = 0; y < 9; y++)
+        {
+            for (int x = 0; x < 9; x++)
+            {
+				Tile tile = world.GetTileAtCoordinates(new Vector2(x, y));
+                if (tile is not null)
+                {
+					List<Effect> effectsToBeRemoved = new List<Effect>();
+
+					foreach(Effect effect in tile.Effects) {
+						bool remove = effect.OnTurnEnd(world, turnOrder, elementalSpectra);
+						if (remove) { effectsToBeRemoved.Add(effect); }
+					}
+
+					foreach(Effect effectToBeRemoved in effectsToBeRemoved) {
+						tile.Effects.Remove(effectToBeRemoved);
+					}
+                }
+            }
+        }
+	}
+
+	public void OnTurnStart() 
+	{
+		foreach(Actor actor in world.Actors) {
+			List<Effect> effectsToBeRemoved = new List<Effect>();
+
+			foreach(Effect effect in actor.Effects) {
+				bool remove = effect.OnTurnStart(world, turnOrder, elementalSpectra);
+				if (remove) { effectsToBeRemoved.Add(effect); }
+			}
+
+			foreach(Effect effectToBeRemoved in effectsToBeRemoved) {
+				actor.Effects.Remove(effectToBeRemoved);
+			}
+		}
+
+		for (int y = 0; y < 9; y++)
+        {
+            for (int x = 0; x < 9; x++)
+            {
+				Tile tile = world.GetTileAtCoordinates(new Vector2(x, y));
+                if (tile is not null)
+                {
+					List<Effect> effectsToBeRemoved = new List<Effect>();
+
+					foreach(Effect effect in tile.Effects) {
+						bool remove = effect.OnTurnStart(world, turnOrder, elementalSpectra);
+						if (remove) { effectsToBeRemoved.Add(effect); }
+					}
+
+					foreach(Effect effectToBeRemoved in effectsToBeRemoved) {
+						tile.Effects.Remove(effectToBeRemoved);
+					}
+                }
+            }
+        }
 	}
 }

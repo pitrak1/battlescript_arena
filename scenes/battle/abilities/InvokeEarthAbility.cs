@@ -4,11 +4,19 @@ using System.Collections.Generic;
 
 public partial class InvokeEarthAbility : Ability
 {
-    public InvokeEarthAbility(string inputAction) : base(inputAction, "invokeEarth", "Invoke Earth", "res://assets/invoke_earth.jpg", 1, 1, 0) { }
+    public InvokeEarthAbility(string inputAction) : base(
+        inputAction, 
+        "invokeEarth", 
+        "Invoke Earth", 
+        "res://assets/invoke_earth.jpg", 
+        1, 
+        1, 
+        0,
+        1
+    ) { }
 
-    public override bool ExecuteAction(Actor source, List<Vector2> targets, World world, TurnOrder turnOrder, ElementalSpectra spectra)
+    public override void Execute(AbilityExecution execution)
     {
-        spectra.EarthPower++;
-        return true;
+        execution.ElementalSpectraState.EarthPower = 3;
     }
 }

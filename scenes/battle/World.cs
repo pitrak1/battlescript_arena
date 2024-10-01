@@ -46,6 +46,7 @@ public partial class World : Node2D
         ActorTeam team2 = new ActorTeam(Colors.Blue);
 
         Actor wolf = AddActor(ActorTypes.Wolf, new Vector2(5, 5), team1);
+        wolf.Effects.Add(new BleedEffect(wolf));
         Actor turtle = AddActor(ActorTypes.Turtle, new Vector2(7, 7), team2);
         // RemoveActor(wolf);
 
