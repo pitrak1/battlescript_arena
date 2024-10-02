@@ -152,16 +152,21 @@ public partial class BattleManager : Node2D
 	}
 
 	public void OnTurnEnd() 
-	{
+	{ 
 		foreach(Actor actor in world.Actors) {
-			List<Effect> effectsToBeRemoved = new List<Effect>();
+			List<ActorEffect> effectsToBeRemoved = new List<ActorEffect>();
 
-			foreach(Effect effect in actor.Effects) {
-				bool remove = effect.OnTurnEnd(world, turnOrder, elementalSpectra);
-				if (remove) { effectsToBeRemoved.Add(effect); }
+			foreach(ActorEffect effect in actor.Effects) {
+				if (actor == turnOrder.CurrentActor) {
+					bool remove = effect.OnActorTurnEnd(world, turnOrder, elementalSpectra);
+					if (remove) { effectsToBeRemoved.Add(effect); }
+				} else {
+					bool remove = effect.OnTurnEnd(world, turnOrder, elementalSpectra);
+					if (remove) { effectsToBeRemoved.Add(effect); }
+				}
 			}
 
-			foreach(Effect effectToBeRemoved in effectsToBeRemoved) {
+			foreach(ActorEffect effectToBeRemoved in effectsToBeRemoved) {
 				actor.Effects.Remove(effectToBeRemoved);
 			}
 		}
@@ -173,14 +178,14 @@ public partial class BattleManager : Node2D
 				Tile tile = world.GetTileAtCoordinates(new Vector2(x, y));
                 if (tile is not null)
                 {
-					List<Effect> effectsToBeRemoved = new List<Effect>();
+					List<TileEffect> effectsToBeRemoved = new List<TileEffect>();
 
-					foreach(Effect effect in tile.Effects) {
+					foreach(TileEffect effect in tile.Effects) {
 						bool remove = effect.OnTurnEnd(world, turnOrder, elementalSpectra);
 						if (remove) { effectsToBeRemoved.Add(effect); }
 					}
 
-					foreach(Effect effectToBeRemoved in effectsToBeRemoved) {
+					foreach(TileEffect effectToBeRemoved in effectsToBeRemoved) {
 						tile.Effects.Remove(effectToBeRemoved);
 					}
                 }
@@ -189,16 +194,21 @@ public partial class BattleManager : Node2D
 	}
 
 	public void OnTurnStart() 
-	{
+	{ 
 		foreach(Actor actor in world.Actors) {
-			List<Effect> effectsToBeRemoved = new List<Effect>();
+			List<ActorEffect> effectsToBeRemoved = new List<ActorEffect>();
 
-			foreach(Effect effect in actor.Effects) {
-				bool remove = effect.OnTurnStart(world, turnOrder, elementalSpectra);
-				if (remove) { effectsToBeRemoved.Add(effect); }
+			foreach(ActorEffect effect in actor.Effects) {
+				if (actor == turnOrder.CurrentActor) {
+					bool remove = effect.OnActorTurnStart(world, turnOrder, elementalSpectra);
+					if (remove) { effectsToBeRemoved.Add(effect); }
+				} else {
+					bool remove = effect.OnTurnStart(world, turnOrder, elementalSpectra);
+					if (remove) { effectsToBeRemoved.Add(effect); }
+				}
 			}
 
-			foreach(Effect effectToBeRemoved in effectsToBeRemoved) {
+			foreach(ActorEffect effectToBeRemoved in effectsToBeRemoved) {
 				actor.Effects.Remove(effectToBeRemoved);
 			}
 		}
@@ -210,14 +220,14 @@ public partial class BattleManager : Node2D
 				Tile tile = world.GetTileAtCoordinates(new Vector2(x, y));
                 if (tile is not null)
                 {
-					List<Effect> effectsToBeRemoved = new List<Effect>();
+					List<TileEffect> effectsToBeRemoved = new List<TileEffect>();
 
-					foreach(Effect effect in tile.Effects) {
+					foreach(TileEffect effect in tile.Effects) {
 						bool remove = effect.OnTurnStart(world, turnOrder, elementalSpectra);
 						if (remove) { effectsToBeRemoved.Add(effect); }
 					}
 
-					foreach(Effect effectToBeRemoved in effectsToBeRemoved) {
+					foreach(TileEffect effectToBeRemoved in effectsToBeRemoved) {
 						tile.Effects.Remove(effectToBeRemoved);
 					}
                 }

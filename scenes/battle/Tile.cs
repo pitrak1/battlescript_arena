@@ -37,7 +37,7 @@ public partial class Tile : Sprite2D
         }
     }
 
-    public List<Effect> Effects { get; private set; } = new List<Effect>();
+    public List<TileEffect> Effects { get; private set; } = new List<TileEffect>();
 
     private TileTypes type;
 

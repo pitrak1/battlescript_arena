@@ -20,4 +20,20 @@ public abstract partial class ActorEffect : Effect
     {
         actor = a;
     }
+
+    public virtual bool OnActorTurnStart(
+        World world, 
+        TurnOrder turnOrder, 
+        ElementalSpectra elementalSpectra
+    ) { 
+        return false; 
+    }
+
+    public virtual bool OnActorTurnEnd(
+        World world, 
+        TurnOrder turnOrder, 
+        ElementalSpectra elementalSpectra
+    ) { 
+        return false; 
+    }
 }

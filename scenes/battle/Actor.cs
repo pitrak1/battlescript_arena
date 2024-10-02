@@ -14,7 +14,7 @@ public partial class Actor : Sprite2D
     public Vector2 Coordinates;
     public int Speed;
     public List<Ability> Abilities { get; private set; } = new List<Ability>();
-    public List<Effect> Effects { get; private set; } = new List<Effect>();
+    public List<ActorEffect> Effects { get; private set; } = new List<ActorEffect>();
 
     public ActorTeam Team { get; private set; }
     private int maxHealth;
