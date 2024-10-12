@@ -4,38 +4,30 @@ using System.Collections.Generic;
 
 public partial class AbilityExecution : Node
 {
-    public Ability AbilityReference;
-    public int InProgressUsesPerTurn;
-    public int InProgressCooldown;
-    public int InProgressNumberOfTargets;
-    public int InProgressActionPointCost;
-
-    public Actor Source;
-    public List<Vector2> Targets;
-    public World WorldState;
-    public TurnOrder TurnOrderState;
-    public ElementalSpectra ElementalSpectraState;
-
+    public Vector2 Coordinates;
     public int BaseDamage = 0;
     public double DamageMultiplier = 1;
 
     public AbilityExecution(
-        Ability ability,
-        Actor source,
-        List<Vector2> targets,
-        World world,
-        TurnOrder turnOrder,
-        ElementalSpectra elementalSpectra
+        Vector2 coordinates,
+        int damage = 0,
+        double multiplier = 1
     )
     {
-        AbilityReference = ability;
-        Source = source;
-        Targets = targets;
-        WorldState = world;
-        TurnOrderState = turnOrder;
-        ElementalSpectraState = elementalSpectra;
+        Coordinates = coordinates;
+        BaseDamage = damage;
+        DamageMultiplier = multiplier;
     }
 
-    public void Execute() {
+    public AbilityExecution(Vector2 coordinates, AbilityExecution execution)
+    {
+        Coordinates = coordinates;
+        BaseDamage = execution.BaseDamage;
+        DamageMultiplier = execution.DamageMultiplier;
+    }
+
+    public void Execute(World world, TurnOrder turnOrder, ElementalSpectra elementalSpectra) {
+        Actor targetActor = world.GetActorAtCoordinates(Coordinates);
+        targetActor.AlterHealth((int)-Mathf.Floor(BaseDamage * DamageMultiplier));
     }
 }

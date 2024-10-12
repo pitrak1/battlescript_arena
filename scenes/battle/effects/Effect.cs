@@ -4,18 +4,10 @@ using System.Collections.Generic;
 
 public abstract partial class Effect : Node
 {
-    public string Key;
     public string DisplayName;
+    public string IconAsset;
     public int BaseDuration;
     public int RemainingDuration;
-
-    public Effect(string key, string displayName, string iconAsset, int duration)
-    {
-        Key = key;
-        DisplayName = displayName;
-        BaseDuration = duration;
-        RemainingDuration = BaseDuration;
-    }
 
     public virtual bool OnTurnEnd(
         World world,
@@ -31,6 +23,24 @@ public abstract partial class Effect : Node
         ElementalSpectra elementalSpectra
     ) { 
         return false; 
+    }
+
+    public virtual bool OnAbilityExecutedAsSource(
+        AbilityExecution execution,
+        World world, 
+        TurnOrder turnOrder, 
+        ElementalSpectra elementalSpectra
+    ) {
+        return false;
+    }
+
+    public virtual bool OnAbilityExecutedAsTarget(
+        AbilityExecution execution,
+        World world, 
+        TurnOrder turnOrder, 
+        ElementalSpectra elementalSpectra
+    ) {
+        return false;
     }
 
     protected bool DecreaseAndRemoveIfNecessary(

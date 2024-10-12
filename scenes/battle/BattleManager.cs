@@ -16,6 +16,8 @@ public partial class BattleManager : Node2D
 	private ElementalSpectra elementalSpectra;
 	private AbilityButtons abilityButtons;
 
+	private AbilityExecutor executor;
+
 	private ActionStates actionState = ActionStates.None;
 	private List<Vector2> selectedTargets = new List<Vector2>();
 	private string selectedAction;
@@ -28,6 +30,7 @@ public partial class BattleManager : Node2D
 		turnOrder = GetNode<TurnOrder>("TurnOrder");
 		elementalSpectra = GetNode<ElementalSpectra>("ElementalSpectra");
 		abilityButtons = GetNode<AbilityButtons>("AbilityButtons");
+		executor = new AbilityExecutor(world, turnOrder, elementalSpectra);
 
 		turnOrder.SetTurnOrder(world.Actors);
 		abilityButtons.SetAbilities(turnOrder.CurrentActor.Abilities);
@@ -137,17 +140,7 @@ public partial class BattleManager : Node2D
 	{
 		Dictionary<string, int> actionMap = new Dictionary<string, int>() { { "Q", 0 }, { "W", 1 }, { "E", 2 } };
 		Ability selectedAbility = turnOrder.CurrentActor.Abilities[actionMap[selectedAction]];
-		AbilityExecution execution = new AbilityExecution(
-			selectedAbility, 
-			turnOrder.CurrentActor,
-			selectedTargets,
-			world,
-			turnOrder,
-			elementalSpectra
-		);
-		execution.Execute();
-		actionPointsLeft -= selectedAbility.BaseActionPointCost;
-		turnOrder.SetActionPoints(actionPointsLeft);
+		executor.Execute(selectedAbility, turnOrder.CurrentActor, selectedTargets);
 		world.SetCurrentTile(turnOrder.CurrentActor.Coordinates);
 	}
 

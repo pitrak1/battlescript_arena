@@ -2,23 +2,20 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
+public enum RegisteredActorEffects {
+    Bleed,
+    IncreaseDamageGiven,
+    IncreaseDamageTaken
+}
+
 public abstract partial class ActorEffect : Effect
 {
-    public Actor actor;
+    public RegisteredActorEffects Key;
+    public Actor CurrentActor;
 
-    public ActorEffect(
-        string key, 
-        string displayName, 
-        string iconAsset, 
-        int duration, 
-        Actor a
-    ) : base(
-        key, 
-        displayName, 
-        iconAsset, 
-        duration)
+    public ActorEffect(Actor a)
     {
-        actor = a;
+        CurrentActor = a;
     }
 
     public virtual bool OnActorTurnStart(

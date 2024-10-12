@@ -46,9 +46,17 @@ public partial class World : Node2D
         ActorTeam team2 = new ActorTeam(Colors.Blue);
 
         Actor wolf = AddActor(ActorTypes.Wolf, new Vector2(5, 5), team1);
-        wolf.Effects.Add(new BleedEffect(wolf));
+        // wolf.Effects.Add(new BleedEffect(wolf));
+        wolf.Effects.Add(new IncreaseDamageTakenEffect(wolf));
         Actor turtle = AddActor(ActorTypes.Turtle, new Vector2(7, 7), team2);
+        turtle.Effects.Add(new IncreaseDamageGivenEffect(turtle));
         // RemoveActor(wolf);
+
+        Tile wolfTile = GetTileAtCoordinates(new Vector2(5, 5));
+        wolfTile.Effects.Add(new IncreaseDamageTakenTileEffect(wolfTile));
+
+        Tile turtleTile = GetTileAtCoordinates(new Vector2(7, 7));
+        turtleTile.Effects.Add(new IncreaseDamageGivenTileEffect(turtleTile));
 
     }
 

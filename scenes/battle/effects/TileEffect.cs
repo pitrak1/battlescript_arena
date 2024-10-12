@@ -2,22 +2,33 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
+public enum RegisteredTileEffects {
+    IncreaseDamageGiven,
+    IncreaseDamageTaken
+}
+
 public abstract partial class TileEffect : Effect
 {
-    public Tile tile;
+    public RegisteredTileEffects Key;
+    public Tile CurrentTile;
 
-    public TileEffect(
-        string key, 
-        string displayName, 
-        string iconAsset, 
-        int duration, 
-        Tile t
-    ) : base(
-        key, 
-        displayName, 
-        iconAsset, 
-        duration)
+    public TileEffect(Tile t)
     {
-        tile = t;
+        CurrentTile = t;
+    }
+
+    public virtual bool OnAbilityExecutedAsSource(
+        World world, 
+        TurnOrder turnOrder, 
+        ElementalSpectra elementalSpectra
+    ) {
+        return false;
+    }
+
+    public virtual bool OnAbilityExecutedAsTarget(World world, 
+        TurnOrder turnOrder, 
+        ElementalSpectra elementalSpectra
+    ) {
+        return false;
     }
 }
