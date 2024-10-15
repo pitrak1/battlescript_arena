@@ -24,8 +24,8 @@ public partial class World : Node2D
 
     public override void _Ready()
     {
-        tileScene = GD.Load<PackedScene>("res://scenes/battle/Tile.tscn");
-        actorScene = GD.Load<PackedScene>("res://scenes/battle/Actor.tscn");
+        tileScene = GD.Load<PackedScene>("res://scenes/battle/subscenes/Tile.tscn");
+        actorScene = GD.Load<PackedScene>("res://scenes/battle/subscenes/Actor.tscn");
 
         for (int y = 0; y < 9; y++)
         {

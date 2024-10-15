@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://chm71s5no3pyj"]
+
+[ext_resource type="PackedScene" uid="uid://tvgm1cvn3rgd" path="res://scenes/battle/subscenes/TurnOrder.tscn" id="1_fq3el"]
+[ext_resource type="Script" path="res://scenes/battle/Battle.cs" id="1_s68hx"]
+[ext_resource type="PackedScene" uid="uid://hwh4s7lav1t1" path="res://scenes/battle/subscenes/World.tscn" id="2_3orva"]
+[ext_resource type="PackedScene" uid="uid://b5b35gu87rnav" path="res://scenes/battle/subscenes/ElementalSpectra.tscn" id="3_h0v5g"]
+[ext_resource type="PackedScene" uid="uid://hi4qp28vehng" path="res://scenes/battle/subscenes/AbilityButtons.tscn" id="4_5kxfi"]
+
+[node name="Battle" type="Control" groups=["InputReceivers"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_s68hx")
+
+[node name="World" parent="." instance=ExtResource("2_3orva")]
+
+[node name="TurnOrder" parent="." instance=ExtResource("1_fq3el")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_vertical = 1
+
+[node name="ElementalSpectra" parent="." instance=ExtResource("3_h0v5g")]
+layout_mode = 1
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="AbilityButtons" parent="." instance=ExtResource("4_5kxfi")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+offset_right = 0.0
+offset_bottom = 0.0
+grow_vertical = 0

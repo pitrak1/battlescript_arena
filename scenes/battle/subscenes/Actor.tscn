@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://blq7xcq26gcfu"]
 
 [ext_resource type="Texture2D" uid="uid://ny1vlg54gvcp" path="res://assets/wolf.jpeg" id="1_fatkp"]
-[ext_resource type="Script" path="res://scenes/battle/Actor.cs" id="2_y6jo1"]
+[ext_resource type="Script" path="res://scenes/battle/subscenes/Actor.cs" id="2_y6jo1"]
 
 [node name="Actor" type="Sprite2D"]
 texture = ExtResource("1_fatkp")

@@ -1,0 +1,192 @@
+[gd_scene load_steps=6 format=3 uid="uid://tvgm1cvn3rgd"]
+
+[ext_resource type="Script" path="res://scenes/battle/subscenes/TurnOrder.cs" id="1_swafn"]
+[ext_resource type="Texture2D" uid="uid://ny1vlg54gvcp" path="res://assets/wolf.jpeg" id="2_md2lu"]
+[ext_resource type="Texture2D" uid="uid://c6d03qt7pfp12" path="res://assets/icon_highlight.png" id="3_aqq4b"]
+[ext_resource type="Texture2D" uid="uid://b4mqu2bsxyqiv" path="res://assets/end_turn_button_highlight.png" id="4_lrhmr"]
+[ext_resource type="Texture2D" uid="uid://urvc210b5jt0" path="res://assets/arrow.png" id="5_bhke7"]
+
+[node name="TurnOrder" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -696.0
+offset_bottom = -463.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_swafn")
+
+[node name="CurrentActor" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -216.0
+offset_top = 12.0
+offset_right = -160.0
+offset_bottom = 68.0
+texture = ExtResource("2_md2lu")
+
+[node name="Highlight" type="TextureRect" parent="CurrentActor"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_aqq4b")
+
+[node name="Actor1" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -104.0
+offset_top = 21.0
+offset_right = -64.0
+offset_bottom = 61.0
+texture = ExtResource("2_md2lu")
+expand_mode = 1
+
+[node name="Highlight" type="TextureRect" parent="Actor1"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_aqq4b")
+expand_mode = 1
+
+[node name="Actor2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -64.0
+offset_top = 21.0
+offset_right = -24.0
+offset_bottom = 61.0
+texture = ExtResource("2_md2lu")
+expand_mode = 1
+
+[node name="Highlight" type="TextureRect" parent="Actor2"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_aqq4b")
+expand_mode = 1
+
+[node name="Actor3" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -24.0
+offset_top = 21.0
+offset_right = 16.0
+offset_bottom = 61.0
+texture = ExtResource("2_md2lu")
+expand_mode = 1
+
+[node name="Highlight" type="TextureRect" parent="Actor3"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_aqq4b")
+expand_mode = 1
+
+[node name="Actor4" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 21.0
+offset_right = 56.0
+offset_bottom = 61.0
+texture = ExtResource("2_md2lu")
+expand_mode = 1
+
+[node name="Highlight" type="TextureRect" parent="Actor4"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_aqq4b")
+expand_mode = 1
+
+[node name="Actor5" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 21.0
+offset_right = 96.0
+offset_bottom = 61.0
+texture = ExtResource("2_md2lu")
+expand_mode = 1
+
+[node name="Highlight" type="TextureRect" parent="Actor5"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_aqq4b")
+expand_mode = 1
+
+[node name="Actor6" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 21.0
+offset_right = 136.0
+offset_bottom = 61.0
+texture = ExtResource("2_md2lu")
+expand_mode = 1
+
+[node name="Highlight" type="TextureRect" parent="Actor6"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_aqq4b")
+expand_mode = 1
+
+[node name="Actor7" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 21.0
+offset_right = 176.0
+offset_bottom = 61.0
+texture = ExtResource("2_md2lu")
+expand_mode = 1
+
+[node name="Highlight" type="TextureRect" parent="Actor7"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_aqq4b")
+expand_mode = 1
+
+[node name="Actor8" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 176.0
+offset_top = 21.0
+offset_right = 216.0
+offset_bottom = 61.0
+texture = ExtResource("2_md2lu")
+expand_mode = 1
+
+[node name="Highlight" type="TextureRect" parent="Actor8"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_aqq4b")
+expand_mode = 1
+
+[node name="EndTurnButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = -158.0
+offset_top = 110.0
+offset_right = 178.0
+offset_bottom = 150.0
+text = "End Turn"
+
+[node name="Highlight" type="TextureRect" parent="EndTurnButton"]
+layout_mode = 0
+offset_right = 336.0
+offset_bottom = 40.0
+texture = ExtResource("4_lrhmr")
+
+[node name="ActionPointsLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = -65.0
+offset_top = 150.0
+offset_right = 85.0
+offset_bottom = 180.0
+text = "0 Action Points Left"
+horizontal_alignment = 1
+
+[node name="Arrow" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -160.0
+offset_top = 13.0
+offset_right = -104.0
+offset_bottom = 69.0
+texture = ExtResource("5_bhke7")

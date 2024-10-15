@@ -7,7 +7,7 @@ public partial class SceneManager : Node
 
 	private Dictionary<string, string> nameToSceneMap = new Dictionary<string, string>()
 	{
-		{"Battle", "res://scenes/battle/BattleManager.tscn"}
+		{"Battle", "res://scenes/battle/Battle.tscn"}
 	};
 
 	public override void _Ready()

@@ -8,7 +8,7 @@ public enum ActionStates
 	Confirm,
 }
 
-public partial class BattleManager : Node2D
+public partial class Battle : Control
 {
 	private World world;
 
@@ -165,12 +165,12 @@ public partial class BattleManager : Node2D
 		}
 
 		for (int y = 0; y < 9; y++)
-        {
-            for (int x = 0; x < 9; x++)
-            {
+		{
+			for (int x = 0; x < 9; x++)
+			{
 				Tile tile = world.GetTileAtCoordinates(new Vector2(x, y));
-                if (tile is not null)
-                {
+				if (tile is not null)
+				{
 					List<TileEffect> effectsToBeRemoved = new List<TileEffect>();
 
 					foreach(TileEffect effect in tile.Effects) {
@@ -181,9 +181,9 @@ public partial class BattleManager : Node2D
 					foreach(TileEffect effectToBeRemoved in effectsToBeRemoved) {
 						tile.Effects.Remove(effectToBeRemoved);
 					}
-                }
-            }
-        }
+				}
+			}
+		}
 	}
 
 	public void OnTurnStart() 
@@ -207,12 +207,12 @@ public partial class BattleManager : Node2D
 		}
 
 		for (int y = 0; y < 9; y++)
-        {
-            for (int x = 0; x < 9; x++)
-            {
+		{
+			for (int x = 0; x < 9; x++)
+			{
 				Tile tile = world.GetTileAtCoordinates(new Vector2(x, y));
-                if (tile is not null)
-                {
+				if (tile is not null)
+				{
 					List<TileEffect> effectsToBeRemoved = new List<TileEffect>();
 
 					foreach(TileEffect effect in tile.Effects) {
@@ -223,8 +223,8 @@ public partial class BattleManager : Node2D
 					foreach(TileEffect effectToBeRemoved in effectsToBeRemoved) {
 						tile.Effects.Remove(effectToBeRemoved);
 					}
-                }
-            }
-        }
+				}
+			}
+		}
 	}
 }
