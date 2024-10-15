@@ -32,3 +32,5 @@ res://scenes/battle/abilities/MoveAbility.cs
 res://scenes/battle/abilities/InvokeEarthAbility.cs
 res://scenes/battle/subscenes/AbilityButtons.cs
 res://scenes/battle/subscenes/Actor.cs
+res://scenes/battle/subscenes/InfoPanel.tscn
+res://scenes/battle/subscenes/InfoPanel.cs

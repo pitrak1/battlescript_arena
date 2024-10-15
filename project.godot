@@ -15,6 +15,11 @@ run/main_scene="res://SceneManager.tscn"
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=1600
+window/size/viewport_height=700
+
 [dotnet]
 
 project/assembly_name="battlescript_arena"
