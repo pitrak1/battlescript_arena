@@ -26,10 +26,10 @@ public partial class Battle : Control
 
 	public override void _Ready()
 	{
-		world = GetNode<World>("World");
-		turnOrder = GetNode<TurnOrder>("TurnOrder");
-		elementalSpectra = GetNode<ElementalSpectra>("ElementalSpectra");
-		abilityButtons = GetNode<AbilityButtons>("AbilityButtons");
+		world = GetNode<World>("WorldAndUI/World");
+		turnOrder = GetNode<TurnOrder>("WorldAndUI/TurnOrder");
+		elementalSpectra = GetNode<ElementalSpectra>("WorldAndUI/ElementalSpectra");
+		abilityButtons = GetNode<AbilityButtons>("WorldAndUI/AbilityButtons");
 		executor = new AbilityExecutor(world, turnOrder, elementalSpectra);
 
 		turnOrder.SetTurnOrder(world.Actors);

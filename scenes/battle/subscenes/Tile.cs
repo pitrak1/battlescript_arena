@@ -106,7 +106,6 @@ public partial class Tile : Sprite2D
 
     public void _on_static_body_2d_input_event(Node viewport, InputEvent inputEvent, int shape_idx)
     {
-        GD.Print("CLICKED");
         if (Input.IsActionJustPressed("LMB"))
         {
             GetTree().CallGroup("InputReceivers", "_onTileClicked", coordinates);
