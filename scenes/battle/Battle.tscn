@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://chm71s5no3pyj"]
 
-[ext_resource type="PackedScene" uid="uid://tvgm1cvn3rgd" path="res://scenes/battle/subscenes/TurnOrder.tscn" id="1_fq3el"]
+[ext_resource type="PackedScene" uid="uid://tvgm1cvn3rgd" path="res://scenes/battle/subscenes/ui/TurnOrder.tscn" id="1_fq3el"]
 [ext_resource type="Script" path="res://scenes/battle/Battle.cs" id="1_s68hx"]
 [ext_resource type="PackedScene" uid="uid://hwh4s7lav1t1" path="res://scenes/battle/subscenes/World.tscn" id="2_3orva"]
-[ext_resource type="PackedScene" uid="uid://b5b35gu87rnav" path="res://scenes/battle/subscenes/ElementalSpectra.tscn" id="3_h0v5g"]
-[ext_resource type="PackedScene" uid="uid://hi4qp28vehng" path="res://scenes/battle/subscenes/AbilityButtons.tscn" id="4_5kxfi"]
-[ext_resource type="PackedScene" uid="uid://blq7ssm381w5w" path="res://scenes/battle/subscenes/InfoPanel.tscn" id="6_gv4kq"]
+[ext_resource type="PackedScene" uid="uid://b5b35gu87rnav" path="res://scenes/battle/subscenes/ui/ElementalSpectra.tscn" id="3_h0v5g"]
+[ext_resource type="PackedScene" uid="uid://hi4qp28vehng" path="res://scenes/battle/subscenes/ui/AbilityButtons.tscn" id="4_5kxfi"]
+[ext_resource type="PackedScene" uid="uid://blq7ssm381w5w" path="res://scenes/battle/subscenes/ui/InfoPanel.tscn" id="6_gv4kq"]
 
 [node name="Battle" type="Control" groups=["InputReceivers"]]
 layout_mode = 3

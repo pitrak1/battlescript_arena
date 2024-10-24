@@ -1,0 +1,124 @@
+[gd_scene load_steps=7 format=3 uid="uid://blq7ssm381w5w"]
+
+[ext_resource type="Script" path="res://scenes/battle/subscenes/ui/InfoPanel.cs" id="1_wrxot"]
+[ext_resource type="Texture2D" uid="uid://c6fy1xvqi3bdm" path="res://assets/bleed.jpg" id="2_5r36y"]
+[ext_resource type="Texture2D" uid="uid://dqv6ui25cl4pa" path="res://assets/air.jpeg" id="3_v2jon"]
+[ext_resource type="Texture2D" uid="uid://bph4lt5xwly7m" path="res://assets/fire.jpeg" id="4_045ym"]
+[ext_resource type="Texture2D" uid="uid://mtjv0ichbr5v" path="res://assets/move.jpg" id="5_l67s3"]
+[ext_resource type="Texture2D" uid="uid://b1l17ft2w6xy0" path="res://assets/earth.jpeg" id="6_6qu8i"]
+
+[node name="InfoPanel" type="ScrollContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1200.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+script = ExtResource("1_wrxot")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(0, 1200)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_right = 392.0
+offset_bottom = 1200.0
+
+[node name="MainIconMarginContainer" type="MarginContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="MainIcon" type="TextureRect" parent="Panel/VBoxContainer/MainIconMarginContainer"]
+layout_mode = 2
+texture = ExtResource("2_5r36y")
+stretch_mode = 3
+
+[node name="Title" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "SOME TILE TYPE"
+horizontal_alignment = 1
+
+[node name="AbilityListMarginContainer" type="MarginContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="AbilityList" type="Label" parent="Panel/VBoxContainer/AbilityListMarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Abilities"
+horizontal_alignment = 1
+
+[node name="AbilitiesHFlowContainer" type="HFlowContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Panel/VBoxContainer/AbilitiesHFlowContainer"]
+layout_mode = 2
+texture = ExtResource("3_v2jon")
+
+[node name="TextureRect2" type="TextureRect" parent="Panel/VBoxContainer/AbilitiesHFlowContainer"]
+layout_mode = 2
+texture = ExtResource("4_045ym")
+
+[node name="TextureRect3" type="TextureRect" parent="Panel/VBoxContainer/AbilitiesHFlowContainer"]
+layout_mode = 2
+texture = ExtResource("5_l67s3")
+
+[node name="EffectListMarginContainer" type="MarginContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="EffectList" type="Label" parent="Panel/VBoxContainer/EffectListMarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Effects"
+horizontal_alignment = 1
+
+[node name="EffectsMarginContainer" type="MarginContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 18
+
+[node name="EffectsHFlowContainer" type="HFlowContainer" parent="Panel/VBoxContainer/EffectsMarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/VBoxContainer/EffectsMarginContainer/EffectsHFlowContainer"]
+layout_mode = 2
+texture = ExtResource("6_6qu8i")
+
+[node name="TextureRect2" type="TextureRect" parent="Panel/VBoxContainer/EffectsMarginContainer/EffectsHFlowContainer"]
+layout_mode = 2
+texture = ExtResource("6_6qu8i")
+
+[node name="TextureRect3" type="TextureRect" parent="Panel/VBoxContainer/EffectsMarginContainer/EffectsHFlowContainer"]
+layout_mode = 2
+texture = ExtResource("6_6qu8i")
+
+[node name="TextureRect4" type="TextureRect" parent="Panel/VBoxContainer/EffectsMarginContainer/EffectsHFlowContainer"]
+layout_mode = 2
+texture = ExtResource("6_6qu8i")
+
+[node name="TextureRect5" type="TextureRect" parent="Panel/VBoxContainer/EffectsMarginContainer/EffectsHFlowContainer"]
+layout_mode = 2
+texture = ExtResource("6_6qu8i")
+
+[node name="TextureRect6" type="TextureRect" parent="Panel/VBoxContainer/EffectsMarginContainer/EffectsHFlowContainer"]
+layout_mode = 2
+texture = ExtResource("6_6qu8i")
+
+[node name="TextureRect7" type="TextureRect" parent="Panel/VBoxContainer/EffectsMarginContainer/EffectsHFlowContainer"]
+layout_mode = 2
+texture = ExtResource("6_6qu8i")
+
+[node name="TextureRect8" type="TextureRect" parent="Panel/VBoxContainer/EffectsMarginContainer/EffectsHFlowContainer"]
+layout_mode = 2
+texture = ExtResource("6_6qu8i")

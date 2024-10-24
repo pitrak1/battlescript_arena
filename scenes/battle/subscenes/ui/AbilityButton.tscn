@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgysotk1mo52g"]
+
+[ext_resource type="Texture2D" uid="uid://bsnjkrp04yd4a" path="res://assets/confirm.jpg" id="1_231wx"]
+[ext_resource type="Texture2D" uid="uid://c6fy1xvqi3bdm" path="res://assets/bleed.jpg" id="2_hlrmj"]
+
+[node name="AbilityButton" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1516.0
+offset_bottom = -556.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 2
+
+[node name="ConfirmTextureButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture_normal = ExtResource("1_231wx")
+stretch_mode = 5
+
+[node name="AbilityTextureButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(84, 84)
+layout_mode = 2
+texture_normal = ExtResource("2_hlrmj")
+stretch_mode = 0

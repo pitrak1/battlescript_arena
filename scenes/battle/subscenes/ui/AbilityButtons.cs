@@ -16,11 +16,11 @@ public partial class AbilityButtons : Control
     {
         for (int i = 0; i < 5; i++)
         {
-            TextureButton abilityButton = GetNode<TextureButton>("AbilityButton" + (i + 1));
+            TextureButton abilityButton = GetNode<TextureButton>("HBoxContainer/AbilityButton" + (i + 1) + "/AbilityTextureButton");
             abilityButtons.Add(abilityButton);
             abilityButton.Hide();
 
-            TextureButton confirmButton = GetNode<TextureButton>("ConfirmButton" + (i + 1));
+            TextureButton confirmButton = GetNode<TextureButton>("HBoxContainer/AbilityButton" + (i + 1) + "/ConfirmTextureButton");
             confirmButtons.Add(confirmButton);
             confirmButton.Hide();
 
@@ -31,29 +31,36 @@ public partial class AbilityButtons : Control
 
     public void SetAbilities(List<Ability> abilities)
     {
+        ClearAbilities();
+
         for (int i = 0; i < abilities.Count; i++)
         {
-            abilityButtons[i].TextureNormal = GD.Load<Texture2D>(abilities[i].IconAsset);
-            abilityButtons[i].Show();
-
-            // Remove the existing handler if present, store our new one, and connect it
-            if (abilityHandlers[i] is not null) {
-                abilityButtons[i].Pressed -= abilityHandlers[i];
-            }
-
-            Action abilityHandler = () => _onAbilityButtonPressed(abilities[i].InputAction);
-            abilityButtons[i].Pressed += abilityHandler;
-            abilityHandlers[i] = abilityHandler;
-
-            // Remove the existing handler if present, store our new one, and connect it
-            if (confirmHandlers[i] is not null) {
-                confirmButtons[i].Pressed -= confirmHandlers[i];
-            }
-
-            Action confirmHandler = () => _onConfirmButtonPressed(abilities[i].InputAction);
-            confirmButtons[i].Pressed += confirmHandler;
-            confirmHandlers[i] = confirmHandler;
+            setAbility(abilities[i], i);
         }
+    }
+
+    private void setAbility(Ability ability, int index)
+    {
+        abilityButtons[index].TextureNormal = GD.Load<Texture2D>(ability.IconAsset);
+        abilityButtons[index].Show();
+
+        // Remove the existing handler if present, store our new one, and connect it
+        if (abilityHandlers[index] is not null) {
+            abilityButtons[index].Pressed -= abilityHandlers[index];
+        }
+
+        Action abilityHandler = () => _onAbilityButtonPressed(ability.InputAction);
+        abilityButtons[index].Pressed += abilityHandler;
+        abilityHandlers[index] = abilityHandler;
+
+        // Remove the existing handler if present, store our new one, and connect it
+        if (confirmHandlers[index] is not null) {
+            confirmButtons[index].Pressed -= confirmHandlers[index];
+        }
+
+        Action confirmHandler = () => _onConfirmButtonPressed(ability.InputAction);
+        confirmButtons[index].Pressed += confirmHandler;
+        confirmHandlers[index] = confirmHandler;
     }
 
     public void ClearAbilities()
@@ -67,7 +74,10 @@ public partial class AbilityButtons : Control
 
     public void ShowConfirmButton(int index)
     {
-        confirmButtons[index].Show();
+        if (index >= 0)
+        {
+            confirmButtons[index].Show();
+        }
     }
 
     public void HideConfirmButtons()

@@ -48,7 +48,10 @@ public partial class AbilityExecutor : Node
 
             Tile targetTile = world.GetTileAtCoordinates(targetExecution.Coordinates);
             applyTargetTileEffects(targetTile, targetExecution);
-            applyTargetActorEffects(targetTile.CurrentActor, targetExecution);
+            if (targetTile.CurrentActor is not null) 
+            {
+                applyTargetActorEffects(targetTile.CurrentActor, targetExecution);
+            }
             targetExecution.Execute(world, turnOrder, elementalSpectra);
 
             GD.Print("TargetAbilityDamage: " + targetExecution.BaseDamage);
@@ -110,5 +113,89 @@ public partial class AbilityExecutor : Node
         foreach(ActorEffect effectToBeRemoved in effectsToBeRemoved) {
             actor.Effects.Remove(effectToBeRemoved);
         }
+    }
+
+    public void OnTurnEnd()
+    {
+        foreach(Actor actor in world.Actors) {
+			List<ActorEffect> effectsToBeRemoved = new List<ActorEffect>();
+
+			foreach(ActorEffect effect in actor.Effects) {
+				if (actor == turnOrder.CurrentActor) {
+					bool remove = effect.OnActorTurnEnd(world, turnOrder, elementalSpectra);
+					if (remove) { effectsToBeRemoved.Add(effect); }
+				} else {
+					bool remove = effect.OnTurnEnd(world, turnOrder, elementalSpectra);
+					if (remove) { effectsToBeRemoved.Add(effect); }
+				}
+			}
+
+			foreach(ActorEffect effectToBeRemoved in effectsToBeRemoved) {
+				actor.Effects.Remove(effectToBeRemoved);
+			}
+		}
+
+		for (int y = 0; y < 9; y++)
+		{
+			for (int x = 0; x < 9; x++)
+			{
+				Tile tile = world.GetTileAtCoordinates(new Vector2(x, y));
+				if (tile is not null)
+				{
+					List<TileEffect> effectsToBeRemoved = new List<TileEffect>();
+
+					foreach(TileEffect effect in tile.Effects) {
+						bool remove = effect.OnTurnEnd(world, turnOrder, elementalSpectra);
+						if (remove) { effectsToBeRemoved.Add(effect); }
+					}
+
+					foreach(TileEffect effectToBeRemoved in effectsToBeRemoved) {
+						tile.Effects.Remove(effectToBeRemoved);
+					}
+				}
+			}
+		}
+    }
+
+    public void OnTurnStart()
+    {
+        foreach(Actor actor in world.Actors) {
+			List<ActorEffect> effectsToBeRemoved = new List<ActorEffect>();
+
+			foreach(ActorEffect effect in actor.Effects) {
+				if (actor == turnOrder.CurrentActor) {
+					bool remove = effect.OnActorTurnStart(world, turnOrder, elementalSpectra);
+					if (remove) { effectsToBeRemoved.Add(effect); }
+				} else {
+					bool remove = effect.OnTurnStart(world, turnOrder, elementalSpectra);
+					if (remove) { effectsToBeRemoved.Add(effect); }
+				}
+			}
+
+			foreach(ActorEffect effectToBeRemoved in effectsToBeRemoved) {
+				actor.Effects.Remove(effectToBeRemoved);
+			}
+		}
+
+		for (int y = 0; y < 9; y++)
+		{
+			for (int x = 0; x < 9; x++)
+			{
+				Tile tile = world.GetTileAtCoordinates(new Vector2(x, y));
+				if (tile is not null)
+				{
+					List<TileEffect> effectsToBeRemoved = new List<TileEffect>();
+
+					foreach(TileEffect effect in tile.Effects) {
+						bool remove = effect.OnTurnStart(world, turnOrder, elementalSpectra);
+						if (remove) { effectsToBeRemoved.Add(effect); }
+					}
+
+					foreach(TileEffect effectToBeRemoved in effectsToBeRemoved) {
+						tile.Effects.Remove(effectToBeRemoved);
+					}
+				}
+			}
+		}
     }
 }

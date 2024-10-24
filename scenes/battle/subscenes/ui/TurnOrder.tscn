@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://tvgm1cvn3rgd"]
 
-[ext_resource type="Script" path="res://scenes/battle/subscenes/TurnOrder.cs" id="1_swafn"]
+[ext_resource type="Script" path="res://scenes/battle/subscenes/ui/TurnOrder.cs" id="1_swafn"]
 [ext_resource type="Texture2D" uid="uid://ny1vlg54gvcp" path="res://assets/wolf.jpeg" id="2_md2lu"]
 [ext_resource type="Texture2D" uid="uid://c6d03qt7pfp12" path="res://assets/icon_highlight.png" id="3_aqq4b"]
 [ext_resource type="Texture2D" uid="uid://b4mqu2bsxyqiv" path="res://assets/end_turn_button_highlight.png" id="4_lrhmr"]

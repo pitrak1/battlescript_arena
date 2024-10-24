@@ -34,3 +34,12 @@ res://scenes/battle/subscenes/AbilityButtons.cs
 res://scenes/battle/subscenes/Actor.cs
 res://scenes/battle/subscenes/InfoPanel.tscn
 res://scenes/battle/subscenes/InfoPanel.cs
+res://scenes/battle/subscenes/ui/InfoPanel.tscn
+res://scenes/battle/subscenes/ui/TurnOrder.tscn
+res://scenes/battle/subscenes/ui/ElementalSpectra.tscn
+res://scenes/battle/subscenes/ui/AbilityButtons.tscn
+res://scenes/battle/subscenes/ui/AbilityButtons.cs
+res://scenes/battle/subscenes/ui/TurnOrder.cs
+res://scenes/battle/subscenes/ui/InfoPanel.cs
+res://scenes/battle/subscenes/ui/ElementalSpectra.cs
+res://scenes/battle/subscenes/ui/AbilityButton.tscn
